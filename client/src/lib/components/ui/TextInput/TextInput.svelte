@@ -7,12 +7,17 @@
 		color: var(--header-text);
 		border: 1.5px solid var(--border);
 		border-radius: 5px;
-		font-family: var(--body-fonmt);
-		background-color: var(--body-background);
+		font-family: var(--body-font);
+		background-color: var(--alt-background);
 		width: 100%;
 		box-sizing: border-box;
 		resize: none;
 		transition: all 400ms;
+		font-style: normal;
+
+		&::placeholder {
+			font-style: normal;
+		}
 
 		&:focus {
 			border: 1.5px solid var(--highlight);

@@ -6,7 +6,7 @@
 @font-face {
 	font-family: "Gilroy";
 	src: url("/fonts/gilroy/Gilroy-RegularItalic.ttf");
-	font-style: italic, oblique;
+	font-style: italic;
 }
 
 @font-face {
@@ -19,7 +19,7 @@
 	font-family: "Gilroy";
 	src: url("/fonts/gilroy/Gilroy-SemiBoldItalic.ttf");
 	font-weight: 600;
-	font-style: italic, oblique;
+	font-style: italic;
 }
 
 @font-face {
@@ -32,28 +32,29 @@
 	font-family: "Gilroy";
 	src: url("/fonts/gilroy/Gilroy-BoldItalic.ttf");
 	font-weight: bold;
-	font-style: italic, oblique;
+	font-style: italic;
 }
 
 :root {
 	--header-font: "Gilroy", "serif";
 	--body-font: "Gilroy", "serif";
-	--secondary: #3d3d3d;
-	--secondary-hover: #5d5d5d;
+	--secondary: #7ebbcd;
+	--secondary-hover: #98bec9;
 	/* color for when the primary color is selected */
 	--secondary-alt: white;
 	--primary: #f7d57e;
 	--primary-hover: #ffecb5;
 	/* color to contrast secondary on bg */
 	--primary-alt: rgba(46, 46, 46, 1);
-	--body-background: white;
+	--body-background: #2e2e2e;
+	--alt-background: rgb(66, 66, 66);
 	--header-bg: gray;
-	--header-text: #3d3d3d;
-	--body-text: black;
+	--header-text: white;
+	--body-text: white;
 	--alternate-color: blue;
-	--highlight: rgb(255, 36, 109);
-	--highlight-hover: rgb(255, 131, 172);
-	--box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1);
+	--highlight: #ffd058;
+	--highlight-hover: #fbc230;
+	--box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.05);
 	--backdrop: rgba(100, 100, 100, 0.5);
 	--border: rgb(172, 172, 172);
 	--border-hover: rgb(120, 120, 120);
