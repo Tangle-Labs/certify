@@ -1,0 +1,20 @@
+{
+  "name": "sveltepress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "dev:server": "yarn workspace server dev",
+    "dev:client": "yarn workspace client dev",
+    "storybook": "yarn workspace client storybook"
+  },
+  "devDependencies": {
+    "husky": "^8.0.2"
+  }
+}
