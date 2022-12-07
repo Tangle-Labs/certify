@@ -3,7 +3,6 @@ version: "3.3"
 services:
     postgres:
         image: postgres
-
         environment:
             - POSTGRES_DB=${DB_NAME}
             - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -14,7 +13,7 @@ services:
         command: "-c logging_collector=on"
 
     api:
-        container_name: api
+        container_name: identity-api
         build:
             context: ./
             dockerfile: Dockerfile.server
@@ -31,7 +30,7 @@ services:
             - ${PORT}:${PORT}
 
     client:
-        container_name: client
+        container_name: certify-client
         build:
             context: ./
             dockerfile: Dockerfile.client
@@ -45,7 +44,7 @@ services:
             - 5173:5173
 
     storybook:
-        container_name: storybook
+        container_name: certify-storybook
         build:
             context: ./
             dockerfile: Dockerfile.storybook
@@ -58,7 +57,7 @@ services:
 
     prometheus:
         image: prom/prometheus:latest
-        container_name: prometheus
+        container_name: identity-api-prometheus
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro
@@ -72,7 +71,7 @@ services:
 
     grafana:
         image: grafana/grafana:latest
-        container_name: grafana
+        container_name: identity-api-grafana
         volumes:
             - /etc/localtime:/etc/localtime:ro
             - /etc/timezone:/etc/timezone:ro

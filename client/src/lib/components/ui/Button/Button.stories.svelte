@@ -5,7 +5,7 @@
 	const args = {
 		variant: "primary",
 		size: "medium",
-		label: "hi button",
+		label: "Create Organisation",
 		onClick: () => null
 	};
 

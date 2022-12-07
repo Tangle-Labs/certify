@@ -20,5 +20,6 @@ module.exports = {
 	},
 	features: {
 		storyStoreV7: false
-	}
+	},
+	staticDirs: ["../static"]
 };

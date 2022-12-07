@@ -1,12 +1,13 @@
 <style lang="scss">
 	.button {
 		background-color: var(--primary);
-		padding: 8px 16px;
+		padding: 10px 30px;
 		color: var(--primary-alt);
 		border: 0;
 		transition: all 0.5s;
-		border-radius: 5px;
+		border-radius: 30px;
 		font-size: 1rem;
+		font-weight: 600;
 		outline: none;
 
 		&:hover {
@@ -26,7 +27,7 @@
 
 	.small {
 		font-size: 0.8rem;
-		padding: 6px 12px;
+		padding: 8px 24px;
 	}
 
 	.circular {
@@ -41,7 +42,7 @@
 
 	.large {
 		font-size: 1.2rem;
-		padding: 10px 20px;
+		padding: 12px 36px;
 	}
 </style>
 
