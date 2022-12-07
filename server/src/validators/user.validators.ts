@@ -5,9 +5,13 @@
  *    CreateUserDto:
  *      type: object
  *      required:
+ *        - name
  *        - email
  *        - password
  *      properties:
+ *        name:
+ *          type: string
+ *          default: Jane Doe
  *        email:
  *          type: string
  *          default: jane.doe@example.com
@@ -30,10 +34,10 @@
  *
  *    UpdateUserDto:
  *      type: object
- *      required:
- *        - email
- *        - password
  *      properties:
+ *        name:
+ *          type: string
+ *          default: Janice Doe
  *        email:
  *          type: string
  *          default: janice.doe@example.com
@@ -46,6 +50,8 @@
  *      properties:
  *        id:
  *          type: string
+ *        name:
+ *          type: string
  *        email:
  *          type: string
  *        createdAt:
@@ -55,6 +61,21 @@
  */
 
 export const CreateUserDto = {
+	fields: {
+		name: function (name: string) {
+			return name;
+		},
+		email: function (email: string) {
+			return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+		},
+		password: function (password: string) {
+			return password;
+		}
+	},
+	mandatory: ["name", "email", "password"]
+};
+
+export const LoginUserDto = {
 	fields: {
 		email: function (email: string) {
 			return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
@@ -68,6 +89,9 @@ export const CreateUserDto = {
 
 export const UpdateUserDto = {
 	fields: {
+		name: function (name: string) {
+			return name;
+		},
 		email: function (email: string) {
 			return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
 		},

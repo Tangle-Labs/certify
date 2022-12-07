@@ -14,6 +14,7 @@ export class UserModel extends Model<
 > {
 	declare id: CreationOptional<string>;
 	declare password: string;
+	declare name: string;
 	declare email: string;
 	declare isSuperUser: CreationOptional<boolean>;
 
@@ -30,6 +31,10 @@ export const userModel = (db: Sequelize) => {
 				primaryKey: true,
 				defaultValue: DataTypes.UUIDV4,
 				unique: true,
+				allowNull: false
+			},
+			name: {
+				type: DataTypes.STRING,
 				allowNull: false
 			},
 			email: {
