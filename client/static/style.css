@@ -87,6 +87,16 @@ h6 {
 	margin: 0;
 }
 
+a {
+	text-decoration: none;
+	color: var(--primary);
+	transition: all 0.4s;
+}
+
+a:hover {
+	color: var(--primary-hover);
+}
+
 body {
 	background: url("/imgs/Background.svg");
 	background-repeat: no-repeat;
