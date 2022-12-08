@@ -6,8 +6,8 @@
 	"plugins": ["prettier-plugin-svelte"],
 	"pluginSearchDirs": ["."],
 	"svelteSortOrder": "options-styles-scripts-markup",
-	"svelteStrictMode": true,
+	"svelteStrictMode": false,
 	"svelteBracketNewLine": false,
-	"svelteAllowShorthand": false,
+	"svelteAllowShorthand": true,
 	"svelteIndentScriptAndStyle": true
 }

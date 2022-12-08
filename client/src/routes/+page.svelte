@@ -9,4 +9,4 @@
 
 <h1>Welcome to SveltePress!</h1>
 
-<Button label="login" variant="primary" onClick="{goToLogin}" />
+<Button label="login" variant="primary" onClick={goToLogin} />

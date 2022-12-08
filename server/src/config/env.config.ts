@@ -6,6 +6,10 @@ dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
 export const {
 	PORT,
 	METRICS_PORT,
+	IDENTITY_PATH,
+	STRONGHOLD_SECRET,
+	IDENTITY_MANAGER_ALIAS,
+	IDENTITY_DB_URI,
 	DB_PORT,
 	DB_HOST,
 	DB_NAME,

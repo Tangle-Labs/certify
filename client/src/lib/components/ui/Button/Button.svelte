@@ -9,6 +9,7 @@
 		font-size: 1rem;
 		font-weight: 600;
 		outline: none;
+		width: 100%;
 
 		&:hover {
 			cursor: pointer;
@@ -55,9 +56,9 @@
 
 <button
 	class="button"
-	class:alternative="{variant === 'secondary'}"
-	class:large="{size === 'large'}"
-	class:small="{size === 'small'}"
-	class:circular="{size === 'circular'}"
-	on:click="{onClick}">{label}</button
+	class:alternative={variant === "secondary"}
+	class:large={size === "large"}
+	class:small={size === "small"}
+	class:circular={size === "circular"}
+	on:click={onClick}>{label}</button
 >

@@ -13,8 +13,8 @@
 
 <Card>
 	<h1>Register</h1>
-	<TextInput bind:value="{email}" placeholder="severus@hogwarts.edu" variant="email" />
-	<TextInput bind:value="{password}" variant="password" placeholder="password" />
-	<Button onClick="{onClick}" label="REGISTER" />
+	<TextInput bind:value={email} placeholder="severus@hogwarts.edu" variant="email" />
+	<TextInput bind:value={password} variant="password" placeholder="password" />
+	<Button {onClick} label="REGISTER" />
 	<p>Already a user, <a href="/login">Login</a> instead</p>
 </Card>

@@ -5,11 +5,12 @@
 	let value: string;
 </script>
 
-<Meta title="TextInput" component="{TextInput}" />
+<Meta title="TextInput" component={TextInput} />
 
 <Template let:args>
-	<TextInput bind:value="{value}" placeholder="severus@hogwarts.edu" {...args} />
+	<TextInput bind:value placeholder="severus@hogwarts.edu" {...args} />
 </Template>
 
 <Story name="TextInput" />
-<Story name="TextArea" args="{{ variant: 'textarea' }}" />
+<Story name="With Label" args={{ label: "Email Address" }} />
+<Story name="TextArea" args={{ variant: "textarea" }} />

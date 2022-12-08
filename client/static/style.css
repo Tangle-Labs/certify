@@ -35,6 +35,11 @@
 	font-style: italic;
 }
 
+* {
+	padding: 0;
+	margin: 0;
+}
+
 :root {
 	--header-font: "Gilroy", "serif";
 	--body-font: "Gilroy", "serif";
@@ -49,7 +54,8 @@
 	--body-background: #2e2e2e;
 	--alt-background: rgb(66, 66, 66);
 	--header-bg: gray;
-	--header-text: white;
+	--header-text: rgb(255, 255, 255);
+	--label-text: rgb(197, 197, 197);
 	--body-text: white;
 	--alternate-color: blue;
 	--highlight: #ffd058;
@@ -58,6 +64,12 @@
 	--backdrop: rgba(100, 100, 100, 0.5);
 	--border: rgb(172, 172, 172);
 	--border-hover: rgb(120, 120, 120);
+	--error-background: rgba(255, 70, 70, 0.399);
+}
+
+body {
+	background: var(--body-background);
+	min-height: 100vh;
 }
 
 h1,

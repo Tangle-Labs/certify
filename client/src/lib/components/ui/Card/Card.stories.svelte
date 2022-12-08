@@ -3,7 +3,7 @@
 	import Card from "./Card.svelte";
 </script>
 
-<Meta title="Card" component="{Card}" />
+<Meta title="Card" component={Card} />
 
 <Template>
 	<Card><h1>Hey there, please consider investing in DOGE</h1></Card>

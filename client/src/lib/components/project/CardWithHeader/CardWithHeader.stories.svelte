@@ -3,7 +3,7 @@
 	import CardWithHeader from "./CardWithHeader.svelte";
 </script>
 
-<Meta title="Card With Header" component="{CardWithHeader}" />
+<Meta title="Card With Header" component={CardWithHeader} />
 
 <Template>
 	<CardWithHeader header="Create DID">

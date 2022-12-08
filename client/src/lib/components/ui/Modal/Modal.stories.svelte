@@ -10,11 +10,11 @@
 	}
 </script>
 
-<Meta title="Modal" component="{Modal}" />
+<Meta title="Modal" component={Modal} />
 
 <Template>
-	<Button label="show modal" onClick="{() => setIsOpen(true)}" />
-	<Modal isOpen="{isOpen}" setIsOpen="{setIsOpen}">
+	<Button label="show modal" onClick={() => setIsOpen(true)} />
+	<Modal {isOpen} {setIsOpen}>
 		<h1 slot="header">A very normal title</h1>
 		<div class="modal-body">
 			<p>
@@ -28,7 +28,7 @@
 				praesentium magnam assumenda consequuntur. Dolore?
 			</p>
 		</div>
-		<Button label="Okay Bro 👍🏻" onClick="{() => setIsOpen(false)}" />
+		<Button label="Okay Bro 👍🏻" onClick={() => setIsOpen(false)} />
 	</Modal>
 </Template>
 
