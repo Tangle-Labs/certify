@@ -35,21 +35,25 @@
 
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
+	import { axios} from '$lib/utils/axios.utils'
 	import Step1 from "./steps/step1.svelte";
 	import Step2 from "./steps/step2.svelte";
+	import Step3 from "./steps/step3.svelte";
 
 	const stepHeaders: Record<number, string> = {
 		1: "Create Organization",
-		2: "Create Password"
+		2: "Create Password",
+		3: "Creating Identity"
 	};
 
-	let step = 1;
+	let step = 3;
 	let error: string | null = null;
 	let orgName: string;
 	let orgEmail: string;
 	let confirmEmail: string;
 	let password: string;
 	let confirmPassword: string;
+	let didInfo: Record<string, unknown>;
 
 	const stepOneHandler = () => {
 		if (orgEmail && orgName && confirmEmail) {
@@ -65,8 +69,22 @@
 	};
 
 	const stepTwoHandler = async () => {
-		console.log(null);
+		if (password && password === confirmPassword) {
+			step++;
+			const { data } = await axios.post("/admin/setup", {
+				orgName, 
+				orgEmail,
+				password, 
+			});
+			didInfo = data;
+		}
 	};
+
+	const stepThreeHandler = async () => {
+		step++;
+	}
+
+
 </script>
 
 <div class="container">
@@ -82,6 +100,8 @@
 					<Step1 bind:orgName bind:orgEmail bind:confirmEmail stepHandler={stepOneHandler} />
 				{:else if step === 2}
 					<Step2 bind:password bind:confirmPassword stepHandler={stepTwoHandler} />
+				{:else if step === 3}
+					<Step3 stepHandler={() => {}} />
 				{/if}
 			</div>
 		</CardWithHeader>
