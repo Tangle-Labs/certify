@@ -23,6 +23,20 @@
 		.form {
 			width: 70%;
 			padding: 30px 15%;
+
+			.back {
+				text-align: center;
+				font-weight: bold;
+				font-size: 1.225rem;
+				transition: all 0.4s;
+				transform: translateY(-10px);
+				color: var(--alt-background);
+
+				&:hover {
+					cursor: pointer;
+					color: var(--label-text);
+				}
+			}
 		}
 	}
 
@@ -105,6 +119,18 @@
 					<Step2 bind:password bind:confirmPassword stepHandler={stepTwoHandler} />
 				{:else if step === 3}
 					<Step3 {didInfo} bind:isDisabled stepHandler={stepThreeHandler} />
+				{/if}
+				{#if step === 2}
+					<div class="back-block">
+						<div
+							class="back"
+							on:click={() => {
+								step--;
+							}}
+						>
+							Back
+						</div>
+					</div>
 				{/if}
 			</div>
 		</CardWithHeader>

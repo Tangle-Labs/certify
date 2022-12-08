@@ -70,9 +70,8 @@
 	--error-background: rgba(255, 70, 70, 0.399);
 }
 
-body {
+html {
 	background: var(--body-background);
-	min-height: 100vh;
 }
 
 h1,
@@ -89,7 +88,13 @@ h6 {
 }
 
 body {
+	background: url("/imgs/Background.svg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	background-size: cover;
 	font-family: var(--body-font);
 	font-weight: 400;
 	color: var(--body-text);
+	min-height: 100vh;
 }
