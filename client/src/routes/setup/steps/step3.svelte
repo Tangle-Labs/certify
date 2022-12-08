@@ -55,7 +55,7 @@
 
 <div class="form">
 	<div class="logo-block">
-		<img src="/imgs/certify.svg" class="logo" />
+		<img src="/imgs/certify.svg" class="logo" alt="cerify logo" />
 		<h1>CERTIFY</h1>
 
 		{#if didInfo}
