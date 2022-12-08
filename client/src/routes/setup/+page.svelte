@@ -35,7 +35,7 @@
 
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
-	import { axios} from '$lib/utils/axios.utils'
+	import { axios } from "$lib/utils/axios.utils";
 	import Step1 from "./steps/step1.svelte";
 	import Step2 from "./steps/step2.svelte";
 	import Step3 from "./steps/step3.svelte";
@@ -43,17 +43,19 @@
 	const stepHeaders: Record<number, string> = {
 		1: "Create Organization",
 		2: "Create Password",
-		3: "Creating Identity"
+		3: "Creating Identity",
+		4: "Continue to Login"
 	};
 
-	let step = 3;
+	let step = 1;
 	let error: string | null = null;
 	let orgName: string;
 	let orgEmail: string;
 	let confirmEmail: string;
 	let password: string;
 	let confirmPassword: string;
-	let didInfo: Record<string, unknown>;
+	let didInfo: Record<string, any>;
+	let isDisabled: boolean = true;
 
 	const stepOneHandler = () => {
 		if (orgEmail && orgName && confirmEmail) {
@@ -72,19 +74,20 @@
 		if (password && password === confirmPassword) {
 			step++;
 			const { data } = await axios.post("/admin/setup", {
-				orgName, 
+				orgName,
 				orgEmail,
-				password, 
+				password
 			});
 			didInfo = data;
+			isDisabled = false;
+		} else {
+			error = "Error: Passwords must match!"
 		}
 	};
 
 	const stepThreeHandler = async () => {
-		step++;
-	}
-
-
+		window.location.href = "/login"
+	};
 </script>
 
 <div class="container">
@@ -101,7 +104,7 @@
 				{:else if step === 2}
 					<Step2 bind:password bind:confirmPassword stepHandler={stepTwoHandler} />
 				{:else if step === 3}
-					<Step3 stepHandler={() => {}} />
+					<Step3 {didInfo} bind:isDisabled stepHandler={stepThreeHandler}/>
 				{/if}
 			</div>
 		</CardWithHeader>

@@ -1,6 +1,7 @@
 import { ALLOWED_ORIGINS } from "@/config";
 
 const origin = ALLOWED_ORIGINS.split(",").map((e) => e.trim());
+console.log(origin);
 
 export const corsConfig = {
 	origin,

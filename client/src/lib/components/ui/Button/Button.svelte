@@ -41,6 +41,15 @@
 		text-transform: uppercase;
 	}
 
+	.disabled {
+		background: var(--alt-background);
+
+		&:hover {
+			cursor: default;
+			background: var(--alt-background);
+		}
+	}
+
 	.large {
 		font-size: 1.2rem;
 		padding: 12px 36px;
@@ -52,13 +61,16 @@
 	export let label: string;
 	export let onClick: (...args: any[]) => void;
 	export let size: "large" | "medium" | "small" | "circular" = "medium";
+	export let isDisabled: boolean = false;
 </script>
 
 <button
+	disabled={isDisabled}
 	class="button"
 	class:alternative={variant === "secondary"}
 	class:large={size === "large"}
 	class:small={size === "small"}
 	class:circular={size === "circular"}
+	class:disabled={isDisabled}
 	on:click={onClick}>{label}</button
 >

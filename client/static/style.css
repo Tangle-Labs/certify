@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+
 @font-face {
 	font-family: "Gilroy";
 	src: url("/fonts/gilroy/Gilroy-Regular.ttf");
@@ -43,6 +45,7 @@
 :root {
 	--header-font: "Gilroy", "serif";
 	--body-font: "Gilroy", "serif";
+	--monospace-font: "Roboto Mono", "monospace";
 	--secondary: #7ebbcd;
 	--secondary-hover: #98bec9;
 	/* color for when the primary color is selected */
