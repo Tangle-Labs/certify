@@ -61,7 +61,7 @@
 	export let label: string;
 	export let onClick: (...args: any[]) => void;
 	export let size: "large" | "medium" | "small" | "circular" = "medium";
-	export let isDisabled: boolean = false;
+	export let isDisabled = false;
 </script>
 
 <button

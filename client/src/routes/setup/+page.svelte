@@ -55,7 +55,7 @@
 	let password: string;
 	let confirmPassword: string;
 	let didInfo: Record<string, any>;
-	let isDisabled: boolean = true;
+	let isDisabled = true;
 
 	const stepOneHandler = () => {
 		if (orgEmail && orgName && confirmEmail) {
@@ -81,12 +81,12 @@
 			didInfo = data;
 			isDisabled = false;
 		} else {
-			error = "Error: Passwords must match!"
+			error = "Error: Passwords must match!";
 		}
 	};
 
 	const stepThreeHandler = async () => {
-		window.location.href = "/login"
+		window.location.href = "/login";
 	};
 </script>
 
@@ -104,7 +104,7 @@
 				{:else if step === 2}
 					<Step2 bind:password bind:confirmPassword stepHandler={stepTwoHandler} />
 				{:else if step === 3}
-					<Step3 {didInfo} bind:isDisabled stepHandler={stepThreeHandler}/>
+					<Step3 {didInfo} bind:isDisabled stepHandler={stepThreeHandler} />
 				{/if}
 			</div>
 		</CardWithHeader>

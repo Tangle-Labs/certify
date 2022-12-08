@@ -18,17 +18,17 @@
 			}
 		}
 
-        .did {
-            background-color: var(--alt-background);
-            padding: 10px;
-            box-sizing: border-box;
-            width: 100%;
-            margin: 20px 0;
-            border-radius: 5px;
-            word-break: break-all;
-            font-family: var(--monospace-font);
-            color: var(--label-text);
-        }
+		.did {
+			background-color: var(--alt-background);
+			padding: 10px;
+			box-sizing: border-box;
+			width: 100%;
+			margin: 20px 0;
+			border-radius: 5px;
+			word-break: break-all;
+			font-family: var(--monospace-font);
+			color: var(--label-text);
+		}
 
 		.loader-block {
 			display: flex;
