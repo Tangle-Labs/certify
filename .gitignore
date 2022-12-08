@@ -3,6 +3,7 @@ node_modules
 .DS_Store
 .svelte-kit
 grafana/data
+identity
 
 
 # Logs

@@ -33,6 +33,7 @@ services:
         volumes:
             - ./server:/app
             - ./logs:/app/logs
+            - ./identity:/identity
         depends_on:
             - postgres
         networks:
