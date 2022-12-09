@@ -1,7 +1,7 @@
 <style lang="scss">
 	.header {
 		background-color: var(--secondary);
-		padding: 15px;
+		padding: 30px;
 		text-align: center;
 	}
 </style>

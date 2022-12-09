@@ -12,6 +12,17 @@ services:
             - core-db:/var/lib/postgresql/data
         command: "-c logging_collector=on"
 
+    mongodb: 
+        image: mongo
+        restart: always
+        volumes:
+            - identity-db:/data/db
+        networks:
+            - appnet
+        command:
+            - '--logpath'
+            - '/var/log/mongodb/mongod.log'
+
     api:
         container_name: identity-api
         build:
@@ -22,6 +33,7 @@ services:
         volumes:
             - ./server:/app
             - ./logs:/app/logs
+            - ./identity:/identity
         depends_on:
             - postgres
         networks:
@@ -87,6 +99,7 @@ services:
 
 volumes:
     core-db:
+    identity-db:
 
 networks:
     appnet:

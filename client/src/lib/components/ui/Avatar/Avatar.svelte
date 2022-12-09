@@ -43,13 +43,13 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="avatar" on:click="{onClick}">
+<div class="avatar" on:click={onClick}>
 	<img
-		src="{image}"
+		src={image}
 		alt="user avatar"
 		class="avatar-img"
-		class:large="{variant === 'large'}"
-		class:small="{variant === 'small'}"
+		class:large={variant === "large"}
+		class:small={variant === "small"}
 	/>
 	{#if text}
 		<div class="accompanying-text">{text}</div>

@@ -55,13 +55,13 @@
 
 {#if isOpen}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="backdrop" on:click="{() => setIsOpen(false)}" transition:fade></div>
-	<div class="modal" transition:fly="{{ y: 50, duration: 400 }}">
+	<div class="backdrop" on:click={() => setIsOpen(false)} transition:fade />
+	<div class="modal" transition:fly={{ y: 50, duration: 400 }}>
 		<Card>
 			<div class="modal-content">
 				<slot name="buttons">
 					<div class="close-button">
-						<Button label="x" size="circular" onClick="{() => setIsOpen(false)}" />
+						<Button label="x" size="circular" onClick={() => setIsOpen(false)} />
 					</div>
 				</slot>
 				<div class="modal-header">

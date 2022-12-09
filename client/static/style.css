@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+
 @font-face {
 	font-family: "Gilroy";
 	src: url("/fonts/gilroy/Gilroy-Regular.ttf");
@@ -35,11 +37,19 @@
 	font-style: italic;
 }
 
+* {
+	padding: 0;
+	margin: 0;
+}
+
 :root {
 	--header-font: "Gilroy", "serif";
 	--body-font: "Gilroy", "serif";
-	--secondary: #7ebbcd;
+	--monospace-font: "Roboto Mono", "monospace";
+	--secondary: rgb(126, 187, 205);
 	--secondary-hover: #98bec9;
+	--table-header: rgba(126, 187, 205, 0.25);
+	--table-header-hover: rgba(126, 187, 205, 0.6);
 	/* color for when the primary color is selected */
 	--secondary-alt: white;
 	--primary: #f7d57e;
@@ -49,7 +59,8 @@
 	--body-background: #2e2e2e;
 	--alt-background: rgb(66, 66, 66);
 	--header-bg: gray;
-	--header-text: white;
+	--header-text: rgb(255, 255, 255);
+	--label-text: rgb(197, 197, 197);
 	--body-text: white;
 	--alternate-color: blue;
 	--highlight: #ffd058;
@@ -58,6 +69,11 @@
 	--backdrop: rgba(100, 100, 100, 0.5);
 	--border: rgb(172, 172, 172);
 	--border-hover: rgb(120, 120, 120);
+	--error-background: rgba(255, 70, 70, 0.399);
+}
+
+html {
+	background: var(--body-background);
 }
 
 h1,
@@ -73,8 +89,24 @@ h6 {
 	margin: 0;
 }
 
+a {
+	text-decoration: none;
+	color: var(--primary);
+	transition: all 0.4s;
+}
+
+a:hover {
+	color: var(--primary-hover);
+}
+
 body {
+	background: url("/imgs/Background.svg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+	background-size: cover;
 	font-family: var(--body-font);
 	font-weight: 400;
 	color: var(--body-text);
+	min-height: 100vh;
 }
