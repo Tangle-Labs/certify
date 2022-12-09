@@ -13,14 +13,14 @@
 			align-content: center;
 
 			.logo {
-				height: 3.2rem;
+				height: 50px;
 			}
 
 			h1 {
 				padding: 0 15px;
 				color: var(--alt-background);
 				font-weight: 400;
-				font-size: 2rem;
+				font-size: 32px;
 				letter-spacing: 0.5rem;
 				margin: 0;
 			}

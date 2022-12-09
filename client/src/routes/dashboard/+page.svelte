@@ -3,15 +3,12 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
-		width: 100vw;
-		position: absolute;
+		height: 100%;
+		width: 100%;
 	}
 </style>
 
 <script lang="ts">
-	import Avatar from "$lib/components/ui/Avatar/Avatar.svelte";
-	import Button from "$lib/components/ui/Button/Button.svelte";
 	import { axios } from "$lib/utils/axios.utils";
 
 	async function loadPage() {

@@ -46,8 +46,10 @@
 	--header-font: "Gilroy", "serif";
 	--body-font: "Gilroy", "serif";
 	--monospace-font: "Roboto Mono", "monospace";
-	--secondary: #7ebbcd;
+	--secondary: rgb(126, 187, 205);
 	--secondary-hover: #98bec9;
+	--table-header: rgba(126, 187, 205, 0.25);
+	--table-header-hover: rgba(126, 187, 205, 0.6);
 	/* color for when the primary color is selected */
 	--secondary-alt: white;
 	--primary: #f7d57e;
