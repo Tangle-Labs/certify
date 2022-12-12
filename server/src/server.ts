@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { METRICS_PORT, PORT } from "@/config";
 import { Logger, initRestMetrics, initMetricsServer } from "@/utils";
 import { db } from "@/models";
@@ -8,6 +9,7 @@ import { AppInterceptor, ExpressErrorHandler, corsConfig, userDeserializer } fro
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(userDeserializer);
 app.use(cors(corsConfig));
