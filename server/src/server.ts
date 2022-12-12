@@ -4,11 +4,12 @@ import { METRICS_PORT, PORT } from "@/config";
 import { Logger, initRestMetrics, initMetricsServer } from "@/utils";
 import { db } from "@/models";
 import { router } from "@/routers";
-import { AppInterceptor, ExpressErrorHandler, corsConfig } from "@/middleware";
+import { AppInterceptor, ExpressErrorHandler, corsConfig, userDeserializer } from "@/middleware";
 
 const app = express();
 
 app.use(express.json());
+app.use(userDeserializer);
 app.use(cors(corsConfig));
 app.use(initRestMetrics);
 
