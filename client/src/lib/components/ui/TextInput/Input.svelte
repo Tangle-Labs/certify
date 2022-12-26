@@ -6,7 +6,8 @@
 		}
 
 		.text-input,
-		.text-input-block {
+		.text-input-block,
+		.dropdown {
 			padding: 10px 16px;
 			outline: none;
 			font-size: 1rem;
@@ -33,19 +34,31 @@
 				border: 1.5px solid var(--highlight-hover);
 			}
 		}
+
+		.dropdown-backdrop {
+			width: 100%;
+			background-color: var(--alt-background);
+			border-radius: 5px;
+.dropdown {
+			appearance: none;
+			background: url("/imgs/ChevronDown.svg") no-repeat center / contain;
+			background-size: 20px;
+			background-position: calc(100% - 10px);
+		}
+		}
+
+		
 	}
 </style>
 
 <script lang="ts">
 	import type { InputVariants } from "./Input.types";
 
-
 	export let value: string;
 	export let variant: InputVariants = "textbox";
 	export let placeholder: string;
 	export let label: string | null = null;
 	export let onChange: (...args: any[]) => any = () => null;
-	export let selected: string | null = variant === "dropdown" ? "" : null;	
 </script>
 
 <div class="input-block">
@@ -60,10 +73,11 @@
 		<input type="email" bind:value {placeholder} class="text-input" on:change={onChange} />
 	{:else if variant === "textarea"}
 		<textarea bind:value {placeholder} rows="10" class="text-input-block" on:change={onChange} />
-	{:else if variant === "dropdown"} 
-		<select bind:value={selected}>
+	{:else if variant === "dropdown"}
+		<div class="dropdown-backdrop">
+		<select bind:value class="dropdown">
 			<slot />
 		</select>
-	{/if}
-
+		</div>
+{/if}
 </div>
