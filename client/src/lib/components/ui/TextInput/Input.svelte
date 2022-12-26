@@ -37,10 +37,15 @@
 </style>
 
 <script lang="ts">
+	import type { InputVariants } from "./Input.types";
+
+
 	export let value: string;
-	export let variant: "textarea" | "textbox" | "password" | "email" = "textbox";
+	export let variant: InputVariants = "textbox";
 	export let placeholder: string;
 	export let label: string | null = null;
+	export let onChange: (...args: any[]) => any = () => null;
+	export let selected: string | null = variant === "dropdown" ? "" : null;	
 </script>
 
 <div class="input-block">
@@ -48,12 +53,17 @@
 		<div class="label">{label}</div>
 	{/if}
 	{#if variant === "textbox"}
-		<input type="text" bind:value {placeholder} class="text-input" />
+		<input type="text" bind:value {placeholder} class="text-input" on:change={onChange} />
 	{:else if variant === "password"}
-		<input type="password" bind:value {placeholder} class="text-input" />
+		<input type="password" bind:value {placeholder} class="text-input" on:change={onChange} />
 	{:else if variant === "email"}
-		<input type="email" bind:value {placeholder} class="text-input" />
+		<input type="email" bind:value {placeholder} class="text-input" on:change={onChange} />
 	{:else if variant === "textarea"}
-		<textarea bind:value {placeholder} rows="10" class="text-input-block" />
+		<textarea bind:value {placeholder} rows="10" class="text-input-block" on:change={onChange} />
+	{:else if variant === "dropdown"} 
+		<select bind:value={selected}>
+			<slot />
+		</select>
 	{/if}
+
 </div>

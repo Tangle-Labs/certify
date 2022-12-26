@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { Meta, Template, Story } from "@storybook/addon-svelte-csf";
-	import TextInput from "./TextInput.svelte";
+	import Input from "./Input.svelte";
 
 	let value: string;
 </script>
 
-<Meta title="TextInput" component={TextInput} />
+<Meta title="Input" component={Input} />
 
 <Template let:args>
-	<TextInput bind:value placeholder="severus@hogwarts.edu" {...args} />
+	<Input bind:value placeholder="severus@hogwarts.edu" {...args} />
 </Template>
 
-<Story name="TextInput" />
+<Story name="Input" />
 <Story name="With Label" args={{ label: "Email Address" }} />
 <Story name="TextArea" args={{ variant: "textarea" }} />
