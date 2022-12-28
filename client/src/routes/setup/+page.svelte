@@ -114,9 +114,18 @@
 			{/if}
 			<div class="form">
 				{#if step === 1}
-					<Step1 bind:orgName bind:orgEmail bind:confirmEmail stepHandler={stepOneHandler} />
+					<Step1
+						bind:orgName
+						bind:orgEmail
+						bind:confirmEmail
+						stepHandler={stepOneHandler}
+					/>
 				{:else if step === 2}
-					<Step2 bind:password bind:confirmPassword stepHandler={stepTwoHandler} />
+					<Step2
+						bind:password
+						bind:confirmPassword
+						stepHandler={stepTwoHandler}
+					/>
 				{:else if step === 3}
 					<Step3 {didInfo} bind:isDisabled stepHandler={stepThreeHandler} />
 				{/if}

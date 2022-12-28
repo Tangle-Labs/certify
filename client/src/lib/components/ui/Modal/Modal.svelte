@@ -61,7 +61,11 @@
 			<div class="modal-content">
 				<slot name="buttons">
 					<div class="close-button">
-						<Button label="x" size="circular" onClick={() => setIsOpen(false)} />
+						<Button
+							label="x"
+							size="circular"
+							onClick={() => setIsOpen(false)}
+						/>
 					</div>
 				</slot>
 				<div class="modal-header">

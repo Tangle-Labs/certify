@@ -1,13 +1,18 @@
 <style lang="scss">
 	.input-block {
+		.combo-input-block {
+			display: flex;
+			width: 100%;
+		}
+
 		.label {
 			color: var(--label-text);
 			padding: 5px 0px;
 		}
 
 		.text-input,
-		.text-input-block,
 		.dropdown {
+			appearance: none;
 			padding: 10px 16px;
 			outline: none;
 			font-size: 1rem;
@@ -16,11 +21,11 @@
 			border-radius: 5px;
 			font-family: var(--body-font);
 			background-color: var(--alt-background);
-			width: 100%;
 			box-sizing: border-box;
 			resize: none;
 			transition: all 400ms;
 			font-style: normal;
+			width: 100%;
 
 			&::placeholder {
 				font-style: normal;
@@ -35,10 +40,19 @@
 			}
 		}
 
+		.text-input {
+			width: 65%;
+			border-top-right-radius: 0px;
+			border-bottom-right-radius: 0px;
+			margin-right: 2px;
+		}
+
 		.dropdown-backdrop {
-			width: 100%;
+			width: 35%;
 			background-color: var(--alt-background);
 			border-radius: 5px;
+			border-top-left-radius: 0px;
+			border-bottom-left-radius: 0px;
 			.dropdown {
 				appearance: none;
 				background: url("/imgs/ChevronDown.svg") no-repeat center / contain;
@@ -50,56 +64,22 @@
 </style>
 
 <script lang="ts">
-	import type { InputVariants } from "./Input.types";
-
-	export let value: string;
-	export let variant: InputVariants = "textbox";
-	export let placeholder: string;
+	export let value: number;
+	export let unit: string;
 	export let label: string | null = null;
-	export let onChange: (...args: any[]) => any = () => null;
+	export let placeholder: string;
 </script>
 
 <div class="input-block">
 	{#if label}
 		<div class="label">{label}</div>
 	{/if}
-	{#if variant === "textbox"}
-		<input
-			type="text"
-			bind:value
-			{placeholder}
-			class="text-input"
-			on:change={onChange}
-		/>
-	{:else if variant === "password"}
-		<input
-			type="password"
-			bind:value
-			{placeholder}
-			class="text-input"
-			on:change={onChange}
-		/>
-	{:else if variant === "email"}
-		<input
-			type="email"
-			bind:value
-			{placeholder}
-			class="text-input"
-			on:change={onChange}
-		/>
-	{:else if variant === "textarea"}
-		<textarea
-			bind:value
-			{placeholder}
-			rows="10"
-			class="text-input-block"
-			on:change={onChange}
-		/>
-	{:else if variant === "dropdown"}
+	<div class="combo-input-block">
+		<input class="text-input" {placeholder} type="number" bind:value />
 		<div class="dropdown-backdrop">
-			<select bind:value class="dropdown">
+			<select bind:value={unit} class="dropdown">
 				<slot />
 			</select>
 		</div>
-	{/if}
+	</div>
 </div>

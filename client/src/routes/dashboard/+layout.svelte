@@ -53,7 +53,6 @@
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
 	import { previousPath } from "$lib/stores";
 	import type { Navigation } from "@sveltejs/kit";
-import { base } from '$app/paths'
 
 	let selected: DashboardPath = "dashboard";
 
@@ -63,21 +62,19 @@ import { base } from '$app/paths'
 		selected = !slug ? (path as DashboardPath) : (slug as DashboardPath);
 	};
 
-
-
-afterNavigate(({from}) => {
-   previousPath.update((p) => from?.url.pathname ?? p)
-}) 
+	afterNavigate(({ from }) => {
+		previousPath.update((p) => from?.url.pathname ?? p);
+	});
 
 	const goBack = () => {
-		goto($previousPath)
-	}
+		goto($previousPath);
+	};
 
 	const escapeHandler = (e: KeyboardEvent) => {
 		if (e.key === "Escape") {
-			goBack()
+			goBack();
 		}
-	}
+	};
 
 	$: watchSelected($navigating);
 </script>

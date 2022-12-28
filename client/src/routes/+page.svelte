@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui";
 
-	import { goto } from '$app/navigation';
-
-
-
+	import { goto } from "$app/navigation";
 
 	const goToLogin = () => {
 		goto("/login");

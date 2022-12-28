@@ -40,7 +40,11 @@
 	<div class="buttons">
 		<h1>Welcome!</h1>
 		<div class="hr" />
-		<NavButton label="Dashboard" isSelected={isSelected("dashboard")} redirect="/dashboard" />
+		<NavButton
+			label="Dashboard"
+			isSelected={isSelected("dashboard")}
+			redirect="/dashboard"
+		/>
 		<NavButton
 			label="Credentials"
 			isSelected={isSelected("credentials")}
@@ -56,7 +60,11 @@
 			isSelected={isSelected("organization")}
 			redirect="/dashboard/organization"
 		/>
-		<NavButton label="Staff" isSelected={isSelected("staff")} redirect="/dashboard/staff" />
+		<NavButton
+			label="Staff"
+			isSelected={isSelected("staff")}
+			redirect="/dashboard/staff"
+		/>
 		<NavButton
 			label="Settings"
 			isSelected={isSelected("settings")}
@@ -64,6 +72,10 @@
 		/>
 	</div>
 	<div class="bottom">
-		<NavButton label="Issue Credential" variant="highlight" isSelected={false} />
+		<NavButton
+			label="Issue Credential"
+			variant="highlight"
+			isSelected={false}
+		/>
 	</div>
 </div>

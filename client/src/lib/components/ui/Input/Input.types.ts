@@ -1,1 +1,6 @@
-export type InputVariants = "textarea" | "textbox" | "password" | "email" | "dropdown";
+export type InputVariants =
+	| "textarea"
+	| "textbox"
+	| "password"
+	| "email"
+	| "dropdown";

@@ -18,4 +18,7 @@
 <Story name="Input" />
 <Story name="With Label" args={{ label: "Email Address" }} />
 <Story name="TextArea" args={{ variant: "textarea" }} />
-<Story name="Dropdown" args={{ variant: "dropdown", label: "Credential Type" }} />
+<Story
+	name="Dropdown"
+	args={{ variant: "dropdown", label: "Credential Type" }}
+/>
