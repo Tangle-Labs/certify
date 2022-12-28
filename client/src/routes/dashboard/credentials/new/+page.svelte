@@ -5,7 +5,7 @@
 		.card-block {
 			padding: 35px;
 			box-sizing: content-box;
-			max-height: calc(100vh - 220px);
+			max-height: calc(100vh - 320px);
 			overflow-y: auto;
 			width: calc(65vw - 350px);
 
@@ -45,6 +45,7 @@
 
 					&:last-of-type {
 						border-bottom: none;
+						margin-bottom: 20px;
 					}
 				}
 
@@ -52,6 +53,10 @@
 					padding-bottom: 20px;
 					text-align: center;
 				}
+			}
+
+			.button-container {
+				padding: 5px 0;
 			}
 		}
 	}
