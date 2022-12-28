@@ -24,11 +24,7 @@
 
 <div class="form">
 	<div class="text-block">
-		<Input
-			label="Organization Name"
-			placeholder="Enter Organization Name"
-			bind:value={orgName}
-		/>
+		<Input label="Organization Name" placeholder="Enter Organization Name" bind:value={orgName} />
 	</div>
 	<div class="text-block">
 		<Input

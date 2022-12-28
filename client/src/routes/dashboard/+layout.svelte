@@ -47,10 +47,13 @@
 </style>
 
 <script lang="ts">
+	import { goto, afterNavigate } from "$app/navigation";
 	import { navigating } from "$app/stores";
 	import { Header, SideNav } from "$lib/components/project";
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
+	import { previousPath } from "$lib/stores";
 	import type { Navigation } from "@sveltejs/kit";
+import { base } from '$app/paths'
 
 	let selected: DashboardPath = "dashboard";
 
@@ -59,6 +62,22 @@
 		const [_, path, slug] = navigating.to.url.pathname.split("/");
 		selected = !slug ? (path as DashboardPath) : (slug as DashboardPath);
 	};
+
+
+
+afterNavigate(({from}) => {
+   previousPath.update((p) => from?.url.pathname ?? p)
+}) 
+
+	const goBack = () => {
+		goto($previousPath)
+	}
+
+	const escapeHandler = (e: KeyboardEvent) => {
+		if (e.key === "Escape") {
+			goBack()
+		}
+	}
 
 	$: watchSelected($navigating);
 </script>
@@ -70,12 +89,12 @@
 	<SideNav bind:selected />
 	<div class="body-content">
 		<div class="bread-crumb">
-			<a href="/dashboard">
+			<div on:click={goBack} on:keydown={escapeHandler}>
 				<div class="back-group">
 					<img class="back-icon" src="/imgs/back-arrow.svg" alt="back" />
 					<div class="crumb">{selected}</div>
 				</div>
-			</a>
+			</div>
 		</div>
 		<div class="body-slot">
 			<slot />

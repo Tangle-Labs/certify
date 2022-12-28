@@ -73,12 +73,7 @@
 				/>
 			</div>
 			<div class="text-block">
-				<Input
-					label="Password"
-					bind:value={password}
-					variant="password"
-					placeholder="password"
-				/>
+				<Input label="Password" bind:value={password} variant="password" placeholder="password" />
 			</div>
 			<div class="button-block">
 				<Button {onClick} label="Login" size="large" />
