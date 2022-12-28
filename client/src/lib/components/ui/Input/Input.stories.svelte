@@ -8,7 +8,7 @@
 <Meta title="Input" component={Input} />
 
 <Template let:args>
-	<Input bind:value placeholder="severus@hogwarts.edu" {...args}> 
+	<Input bind:value placeholder="severus@hogwarts.edu" {...args}>
 		<option disabled={true}>select an option</option>
 		<option value="doggers">License</option>
 		<option value="doggers">Certificate</option>

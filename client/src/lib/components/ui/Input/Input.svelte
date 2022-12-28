@@ -39,15 +39,13 @@
 			width: 100%;
 			background-color: var(--alt-background);
 			border-radius: 5px;
-.dropdown {
-			appearance: none;
-			background: url("/imgs/ChevronDown.svg") no-repeat center / contain;
-			background-size: 20px;
-			background-position: calc(100% - 10px);
+			.dropdown {
+				appearance: none;
+				background: url("/imgs/ChevronDown.svg") no-repeat center / contain;
+				background-size: 20px;
+				background-position: calc(100% - 10px);
+			}
 		}
-		}
-
-		
 	}
 </style>
 
@@ -75,9 +73,9 @@
 		<textarea bind:value {placeholder} rows="10" class="text-input-block" on:change={onChange} />
 	{:else if variant === "dropdown"}
 		<div class="dropdown-backdrop">
-		<select bind:value class="dropdown">
-			<slot />
-		</select>
+			<select bind:value class="dropdown">
+				<slot />
+			</select>
 		</div>
-{/if}
+	{/if}
 </div>
