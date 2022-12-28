@@ -36,7 +36,7 @@
 
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
-	import { TextInput, Button } from "$lib/components/ui";
+	import { Input, Button } from "$lib/components/ui";
 	import { axios } from "$lib/utils/axios.utils";
 
 	let email: string;
@@ -65,7 +65,7 @@
 				<div class="error">{error}</div>
 			{/if}
 			<div class="text-block">
-				<TextInput
+				<Input
 					label="Email Address"
 					bind:value={email}
 					placeholder="severus@hogwarts.edu"
@@ -73,7 +73,7 @@
 				/>
 			</div>
 			<div class="text-block">
-				<TextInput
+				<Input
 					label="Password"
 					bind:value={password}
 					variant="password"
