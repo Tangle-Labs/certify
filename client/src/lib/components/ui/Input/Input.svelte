@@ -1,5 +1,7 @@
 <style lang="scss">
 	.input-block {
+		width: 100%;
+		box-sizing: border-box;
 		.label {
 			color: var(--label-text);
 			padding: 5px 0px;
@@ -17,10 +19,10 @@
 			font-family: var(--body-font);
 			background-color: var(--alt-background);
 			width: 100%;
-			box-sizing: border-box;
 			resize: none;
 			transition: all 400ms;
 			font-style: normal;
+			box-sizing: border-box;
 
 			&::placeholder {
 				font-style: normal;
@@ -44,6 +46,7 @@
 				background: url("/imgs/ChevronDown.svg") no-repeat center / contain;
 				background-size: 20px;
 				background-position: calc(100% - 10px);
+				box-sizing: border-box;
 			}
 		}
 	}
@@ -54,7 +57,7 @@
 
 	export let value: string;
 	export let variant: InputVariants = "textbox";
-	export let placeholder: string;
+	export let placeholder = "";
 	export let label: string | null = null;
 	export let onChange: (...args: any[]) => any = () => null;
 </script>

@@ -3,4 +3,5 @@ export type InputVariants =
 	| "textbox"
 	| "password"
 	| "email"
-	| "dropdown";
+	| "dropdown"
+	| "number";

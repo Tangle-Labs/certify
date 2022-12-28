@@ -1,5 +1,7 @@
 <style lang="scss">
 	.input-block {
+		width: 100%;
+
 		.combo-input-block {
 			display: flex;
 			width: 100%;

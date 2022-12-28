@@ -9,10 +9,10 @@
 			box-sizing: border-box;
 
 			.body-slot {
-				padding-top: 40px;
+				margin-top: 40px;
 				width: 100%;
 				height: calc(100vh - 220px);
-				overflow: hidden;
+				border-radius: 5px;
 			}
 
 			.bread-crumb {
