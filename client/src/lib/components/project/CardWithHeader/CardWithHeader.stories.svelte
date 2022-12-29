@@ -8,14 +8,16 @@
 <Template>
 	<CardWithHeader header="Create DID">
 		<p>
-			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex natus aspernatur quo esse
-			eveniet. Iusto consectetur sequi recusandae, blanditiis cupiditate iure a provident culpa
-			veniam vel libero, dolore quidem tempora?
+			Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex natus
+			aspernatur quo esse eveniet. Iusto consectetur sequi recusandae,
+			blanditiis cupiditate iure a provident culpa veniam vel libero, dolore
+			quidem tempora?
 		</p>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ex numquam suscipit, autem
-			esse qui nostrum impedit! Ipsam accusantium reprehenderit consectetur dolorem delectus hic
-			fugiat, aut, ea ut incidunt sapiente!
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ex
+			numquam suscipit, autem esse qui nostrum impedit! Ipsam accusantium
+			reprehenderit consectetur dolorem delectus hic fugiat, aut, ea ut incidunt
+			sapiente!
 		</p>
 	</CardWithHeader>
 </Template>

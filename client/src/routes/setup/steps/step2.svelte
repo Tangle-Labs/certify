@@ -13,7 +13,7 @@
 </style>
 
 <script lang="ts">
-	import { Button, TextInput } from "$lib/components/ui";
+	import { Button, Input } from "$lib/components/ui";
 
 	export let password: string;
 	export let confirmPassword: string;
@@ -22,7 +22,7 @@
 
 <div class="form">
 	<div class="text-block">
-		<TextInput
+		<Input
 			label="Enter Password"
 			variant={"password"}
 			placeholder="Enter Password"
@@ -30,7 +30,7 @@
 		/>
 	</div>
 	<div class="text-block">
-		<TextInput
+		<Input
 			label="Confirm Password"
 			variant={"password"}
 			placeholder="Enter Organization Email"

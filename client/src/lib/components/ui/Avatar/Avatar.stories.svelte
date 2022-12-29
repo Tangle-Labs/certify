@@ -12,4 +12,7 @@
 <Story name="Avatar" />
 <Story name="Large" args={{ variant: "large" }} />
 <Story name="Small" args={{ variant: "small" }} />
-<Story name="With-Text" args={{ variant: "small", text: "Dogecoin Investor" }} />
+<Story
+	name="With-Text"
+	args={{ variant: "small", text: "Dogecoin Investor" }}
+/>

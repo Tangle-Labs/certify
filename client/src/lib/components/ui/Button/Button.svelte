@@ -26,6 +26,15 @@
 		}
 	}
 
+	.tertiary {
+		background-color: var(--body-bg);
+		color: var(--label-text);
+		&:hover {
+			background-color: var(--alt-background);
+			color: var(--body-alt);
+		}
+	}
+
 	.small {
 		font-size: 0.8rem;
 		padding: 8px 24px;
@@ -57,7 +66,7 @@
 </style>
 
 <script lang="ts">
-	export let variant: "primary" | "secondary" = "primary";
+	export let variant: "primary" | "secondary" | "tertiary" = "primary";
 	export let label: string;
 	export let onClick: (...args: any[]) => void;
 	export let size: "large" | "medium" | "small" | "circular" = "medium";
@@ -68,6 +77,7 @@
 	disabled={isDisabled}
 	class="button"
 	class:alternative={variant === "secondary"}
+	class:tertiary={variant === "tertiary"}
 	class:large={size === "large"}
 	class:small={size === "small"}
 	class:circular={size === "circular"}

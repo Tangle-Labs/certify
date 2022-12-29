@@ -1,5 +1,6 @@
 export const sanitizeObject = (obj: object | Array<object>, filterKeys: string[]) => {
 	const result = Array.isArray(obj) ? [] : {};
+	obj = JSON.parse(JSON.stringify(obj));
 
 	for (const key of Object.keys(obj)) {
 		if (!filterKeys.includes(key)) {

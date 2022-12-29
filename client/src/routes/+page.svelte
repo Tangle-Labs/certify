@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Button } from "$lib/components/ui";
-	import { redirect } from "@sveltejs/kit";
+
+	import { goto } from "$app/navigation";
 
 	const goToLogin = () => {
-		window.location.pathname = "/login";
+		goto("/login");
 	};
 </script>
 

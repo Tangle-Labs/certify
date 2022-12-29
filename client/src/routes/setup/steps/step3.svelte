@@ -74,6 +74,11 @@
 	</div>
 
 	<div class="button-block">
-		<Button size="large" bind:isDisabled onClick={stepHandler} label="Continue to Login" />
+		<Button
+			size="large"
+			bind:isDisabled
+			onClick={stepHandler}
+			label="Continue to Login"
+		/>
 	</div>
 </div>

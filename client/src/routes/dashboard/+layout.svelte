@@ -9,10 +9,10 @@
 			box-sizing: border-box;
 
 			.body-slot {
-				padding-top: 40px;
+				margin-top: 40px;
 				width: 100%;
 				height: calc(100vh - 220px);
-				overflow: hidden;
+				border-radius: 5px;
 			}
 
 			.bread-crumb {
@@ -47,20 +47,35 @@
 </style>
 
 <script lang="ts">
-	import { navigating } from "$app/stores";
+	import { goto, afterNavigate } from "$app/navigation";
 	import { Header, SideNav } from "$lib/components/project";
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
-	import type { Navigation } from "@sveltejs/kit";
+	import { previousPath } from "$lib/stores";
+	import type { NavigationTarget } from "@sveltejs/kit";
 
-	let selected: DashboardPath = "dashboard";
+	let selected: DashboardPath;
 
-	const watchSelected = (navigating: Navigation | null) => {
-		if (!(navigating && navigating.to)) return;
-		const [_, path, slug] = navigating.to.url.pathname.split("/");
-		selected = !slug ? (path as DashboardPath) : (slug as DashboardPath);
+	const getSelected = (to: NavigationTarget) => {
+		const [_, path, slug] = to.url.pathname.split("/");
+		return !slug ? (path as DashboardPath) : (slug as DashboardPath);
 	};
 
-	$: watchSelected($navigating);
+	afterNavigate(({ from, to }) => {
+		previousPath.update((p) => from?.url.pathname ?? p);
+		if (!to) return;
+		selected = getSelected(to);
+		console.log(selected);
+	});
+
+	const goBack = () => {
+		goto($previousPath);
+	};
+
+	const escapeHandler = (e: KeyboardEvent) => {
+		if (e.key === "Escape") {
+			goBack();
+		}
+	};
 </script>
 
 <div class="header">
@@ -70,12 +85,12 @@
 	<SideNav bind:selected />
 	<div class="body-content">
 		<div class="bread-crumb">
-			<a href="/dashboard">
+			<div on:click={goBack} on:keydown={escapeHandler}>
 				<div class="back-group">
 					<img class="back-icon" src="/imgs/back-arrow.svg" alt="back" />
 					<div class="crumb">{selected}</div>
 				</div>
-			</a>
+			</div>
 		</div>
 		<div class="body-slot">
 			<slot />

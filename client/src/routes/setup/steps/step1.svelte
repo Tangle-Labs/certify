@@ -13,7 +13,7 @@
 </style>
 
 <script lang="ts">
-	import { Button, TextInput } from "$lib/components/ui";
+	import { Button, Input } from "$lib/components/ui";
 
 	export let orgName: string;
 	export let orgEmail: string;
@@ -24,14 +24,14 @@
 
 <div class="form">
 	<div class="text-block">
-		<TextInput
+		<Input
 			label="Organization Name"
 			placeholder="Enter Organization Name"
 			bind:value={orgName}
 		/>
 	</div>
 	<div class="text-block">
-		<TextInput
+		<Input
 			label="Organization Email"
 			variant={"email"}
 			placeholder="Enter Organization Email"
@@ -39,7 +39,7 @@
 		/>
 	</div>
 	<div class="text-block">
-		<TextInput
+		<Input
 			label="Confirm Email"
 			variant={"email"}
 			placeholder="Confirm Email"

@@ -9,13 +9,13 @@ import { AppInterceptor, ExpressErrorHandler, corsConfig, userDeserializer } fro
 
 const app = express();
 
+app.use(AppInterceptor);
 app.use(cookieParser());
 app.use(express.json());
 app.use(userDeserializer);
 app.use(cors(corsConfig));
 app.use(initRestMetrics);
 
-app.use(AppInterceptor);
 app.use("/api", router);
 
 app.use(ExpressErrorHandler);

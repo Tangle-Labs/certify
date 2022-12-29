@@ -19,7 +19,6 @@
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"express-async-handler": "^1.2.0",
-		"express-intercept": "1.0.0",
 		"jsonwebtoken": "8.5.1",
 		"mongoose": "^6.8.0",
 		"pg": "^8.8.0",
@@ -33,8 +32,8 @@
 	},
 	"devDependencies": {
 		"@types/bcryptjs": "^2.4.2",
-		"@types/cors": "^2.8.12",
 		"@types/cookie-parser": "1.4.3",
+		"@types/cors": "^2.8.12",
 		"@types/express": "^4.17.14",
 		"@types/jsonwebtoken": "8.5.9",
 		"@types/node": "^18.11.9",

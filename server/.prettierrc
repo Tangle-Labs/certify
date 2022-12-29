@@ -5,5 +5,12 @@
 	"printWidth": 100,
 	"plugins": ["eslint-plugin-prettier"],
 	"pluginSearchDirs": ["."],
-	"overrides": [{ "files": "*.ts", "options": { "parser": "typescript" } }]
+	"overrides": [
+		{
+			"files": "*.ts",
+			"options": {
+				"parser": "typescript"
+			}
+		}
+	]
 }

@@ -943,6 +943,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cookie-parser@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/cookie-parser/-/cookie-parser-1.4.3.tgz#3a01df117c5705cf89a84c876b50c5a1fd427a21"
+  integrity sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==
+  dependencies:
+    "@types/express" "*"
+
 "@types/cors@^2.8.12":
   version "2.8.13"
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.13.tgz#b8ade22ba455a1b8cb3b5d3f35910fd204f84f94"
@@ -1237,11 +1244,6 @@ array-union@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
-
-async-request-handler@^0.8.8:
-  version "0.8.8"
-  resolved "https://registry.yarnpkg.com/async-request-handler/-/async-request-handler-0.8.8.tgz#bf8ec58dae64f905c4726aa60199d4cd01af5779"
-  integrity sha512-B2vn6+gVOWTlRGfpTSWi0Ye/oWwaQ7LFKm1NzkQQFGIQijnz4v+DopeTu4uveqoQf1xQaQP5QaZNQJnWQxs/3w==
 
 atomic-sleep@^1.0.0:
   version "1.0.0"
@@ -1737,13 +1739,6 @@ express-async-handler@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/express-async-handler/-/express-async-handler-1.2.0.tgz#ffc9896061d90f8d2e71a2d2b8668db5b0934391"
   integrity sha512-rCSVtPXRmQSW8rmik/AIb2P0op6l7r1fMW538yyvTMltCO4xQEWMmobfrIxN2V1/mVrgxB8Az3reYF6yUZw37w==
-
-express-intercept@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/express-intercept/-/express-intercept-1.0.0.tgz#073bf6170a77b153ce8d64febda126bd8344c344"
-  integrity sha512-l4PdBQvRF6LitPl9vpbCtekn5XVO4VEZSf3ckEjcKTirWo6AM0uAeZUfe/c2qcWQOpWIyAOlrXPI8pMn3lTFFw==
-  dependencies:
-    async-request-handler "^0.8.8"
 
 express@^4.18.2:
   version "4.18.2"
