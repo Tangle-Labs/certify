@@ -1,12 +1,15 @@
 import { FILTER_KEYS } from "@/config";
 import { sanitizeObject } from "@/utils";
-import { responseHandler } from "express-intercept";
+import { NextFunction, Request, Response } from "express";
 
-export const AppInterceptor = responseHandler().replaceBuffer((body, res) => {
-	const sanitizedObject = sanitizeObject(
-		JSON.parse(body.toString()),
-		FILTER_KEYS.split(",").map((e) => e.trim())
-	);
-
-	return Buffer.from(JSON.stringify(sanitizedObject));
-});
+export function AppInterceptor(req: Request, res: Response, next: NextFunction) {
+	const transmitJson = res.json;
+	res.json = function (body) {
+		const sanitizedBody = sanitizeObject(
+			body,
+			FILTER_KEYS.split(",").map((k) => k.trim())
+		);
+		return transmitJson.call(this, sanitizedBody);
+	};
+	next();
+}
