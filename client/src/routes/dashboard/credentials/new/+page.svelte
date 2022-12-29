@@ -115,7 +115,7 @@
 			duration,
 			customFields
 		});
-		console.log(data);
+		goto("/dashboard/credentials");
 	};
 </script>
 
