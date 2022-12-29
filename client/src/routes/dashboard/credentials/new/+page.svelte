@@ -66,6 +66,7 @@
 	import { Card, Input, ComboInput, Button } from "$lib/components/ui/";
 	import { CardWithHeader } from "$lib/components/project";
 	import { goto } from "$app/navigation";
+	import { axios } from "$lib/utils/axios.utils";
 
 	let name: string;
 	let referenceCode: string;
@@ -87,6 +88,34 @@
 		};
 
 		customFields = [...customFields, customField];
+	};
+
+	const getDuration = (): number => {
+		const duration =
+			durationCount *
+			(durationUnit === "days"
+				? 86400
+				: durationUnit === "weeks"
+				? 86400 * 7
+				: durationUnit === "months"
+				? 86400 * 30
+				: durationUnit === "years"
+				? 86400 * 365
+				: 1);
+
+		return duration;
+	};
+
+	const handleSubmit = async () => {
+		const duration = getDuration();
+		const { data } = await axios.post("/credentials", {
+			name,
+			referenceCode,
+			type,
+			duration,
+			customFields
+		});
+		console.log(data);
 	};
 </script>
 
@@ -116,7 +145,7 @@
 						<Input label="Credential Type" variant="dropdown" bind:value={type}>
 							<option disabled selected={true}>Select Credential Type</option>
 							<option value="certificate">Certificate</option>
-							<option value="License">License</option>
+							<option value="license">License</option>
 							<option value="ticket">Ticket</option>
 						</Input>
 					</div>
@@ -188,12 +217,7 @@
 				</div>
 
 				<div class="button-container">
-					<Button
-						label="Save Credential"
-						onClick={() => {
-							console.log(customFields);
-						}}
-					/>
+					<Button label="Save Credential" onClick={handleSubmit} />
 				</div>
 
 				<div class="button-container">
