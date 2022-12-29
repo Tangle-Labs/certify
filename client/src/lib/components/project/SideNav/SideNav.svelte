@@ -31,9 +31,16 @@
 
 	export let selected: DashboardPath;
 
-	const isSelected = (path: DashboardPath) => {
-		return path === selected;
+	const isSelected = (s: DashboardPath, path: DashboardPath) => {
+		return path === s;
 	};
+
+	$: isDashboardSelected = isSelected(selected, "dashboard");
+	$: isCredentialsSelected = isSelected(selected, "credentials");
+	$: isApplicationsSelected = isSelected(selected, "applications");
+	$: isOrganizationSelected = isSelected(selected, "organization");
+	$: isStaffSelected = isSelected(selected, "staff");
+	$: isSettingsSelected = isSelected(selected, "settings");
 </script>
 
 <div class="side-nav">
@@ -42,32 +49,32 @@
 		<div class="hr" />
 		<NavButton
 			label="Dashboard"
-			isSelected={isSelected("dashboard")}
+			isSelected={isDashboardSelected}
 			redirect="/dashboard"
 		/>
 		<NavButton
 			label="Credentials"
-			isSelected={isSelected("credentials")}
+			isSelected={isCredentialsSelected}
 			redirect="/dashboard/credentials"
 		/>
 		<NavButton
 			label="Applications"
-			isSelected={isSelected("applications")}
+			isSelected={isApplicationsSelected}
 			redirect="/dashboard/applications"
 		/>
 		<NavButton
 			label="Organization"
-			isSelected={isSelected("organization")}
+			isSelected={isOrganizationSelected}
 			redirect="/dashboard/organization"
 		/>
 		<NavButton
 			label="Staff"
-			isSelected={isSelected("staff")}
+			isSelected={isStaffSelected}
 			redirect="/dashboard/staff"
 		/>
 		<NavButton
 			label="Settings"
-			isSelected={isSelected("settings")}
+			isSelected={isSettingsSelected}
 			redirect="/dashboard/settings"
 		/>
 	</div>

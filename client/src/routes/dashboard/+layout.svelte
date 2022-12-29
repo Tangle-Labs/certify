@@ -48,22 +48,23 @@
 
 <script lang="ts">
 	import { goto, afterNavigate } from "$app/navigation";
-	import { navigating } from "$app/stores";
 	import { Header, SideNav } from "$lib/components/project";
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
 	import { previousPath } from "$lib/stores";
-	import type { Navigation } from "@sveltejs/kit";
+	import type { NavigationTarget } from "@sveltejs/kit";
 
-	let selected: DashboardPath = "dashboard";
+	let selected: DashboardPath;
 
-	const watchSelected = (navigating: Navigation | null) => {
-		if (!(navigating && navigating.to)) return;
-		const [_, path, slug] = navigating.to.url.pathname.split("/");
-		selected = !slug ? (path as DashboardPath) : (slug as DashboardPath);
+	const getSelected = (to: NavigationTarget) => {
+		const [_, path, slug] = to.url.pathname.split("/");
+		return !slug ? (path as DashboardPath) : (slug as DashboardPath);
 	};
 
-	afterNavigate(({ from }) => {
+	afterNavigate(({ from, to }) => {
 		previousPath.update((p) => from?.url.pathname ?? p);
+		if (!to) return;
+		selected = getSelected(to);
+		console.log(selected);
 	});
 
 	const goBack = () => {
@@ -75,8 +76,6 @@
 			goBack();
 		}
 	};
-
-	$: watchSelected($navigating);
 </script>
 
 <div class="header">
