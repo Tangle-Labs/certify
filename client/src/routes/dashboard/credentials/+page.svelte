@@ -2,10 +2,9 @@
 	import { goto } from "$app/navigation";
 	import { Button } from "$lib/components/ui";
 
-	function onClick() {
+	function goToNewCredentialsPage() {
 		goto("/dashboard/credentials/new");
 	}
 </script>
 
-<h1>Credentials</h1>
-<Button {onClick} variant="secondary" label="New Credential" />
+<Button onClick={goToNewCredentialsPage} variant="secondary" label="New Credential" />
