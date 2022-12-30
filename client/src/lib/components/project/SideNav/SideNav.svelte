@@ -27,9 +27,12 @@
 
 <script lang="ts">
 	import { NavButton } from "$lib/components/project";
+	import { Skeleton } from "$lib/components/ui";
+	import { user } from "$lib/stores";
 	import type { DashboardPath } from "./SideNav.types";
 
 	export let selected: DashboardPath;
+	export let loadPromise: Promise<any>;
 
 	const isSelected = (s: DashboardPath, path: DashboardPath) => {
 		return path === s;
@@ -47,42 +50,91 @@
 	<div class="buttons">
 		<h1>Welcome!</h1>
 		<div class="hr" />
-		<NavButton
-			label="Dashboard"
-			isSelected={isDashboardSelected}
-			redirect="/dashboard"
-		/>
-		<NavButton
-			label="Credentials"
-			isSelected={isCredentialsSelected}
-			redirect="/dashboard/credentials"
-		/>
-		<NavButton
-			label="Applications"
-			isSelected={isApplicationsSelected}
-			redirect="/dashboard/applications"
-		/>
-		<NavButton
-			label="Organization"
-			isSelected={isOrganizationSelected}
-			redirect="/dashboard/organization"
-		/>
-		<NavButton
-			label="Staff"
-			isSelected={isStaffSelected}
-			redirect="/dashboard/staff"
-		/>
-		<NavButton
-			label="Settings"
-			isSelected={isSettingsSelected}
-			redirect="/dashboard/settings"
-		/>
+		{#await loadPromise}
+			
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+		{:then}
+			{#if $user.isSuperUser}
+			<NavButton
+				label="Dashboard"
+				isSelected={isDashboardSelected}
+				redirect="/dashboard"
+			/>
+			<NavButton
+				label="Credentials"
+				isSelected={isCredentialsSelected}
+				redirect="/dashboard/credentials"
+			/>
+			<NavButton
+				label="Applications"
+				isSelected={isApplicationsSelected}
+				redirect="/dashboard/applications"
+			/>
+			<NavButton
+				label="Organization"
+				isSelected={isOrganizationSelected}
+				redirect="/dashboard/organization"
+			/>
+			<NavButton
+				label="Staff"
+				isSelected={isStaffSelected}
+				redirect="/dashboard/staff"
+			/>
+			<NavButton
+				label="Settings"
+				isSelected={isSettingsSelected}
+				redirect="/dashboard/settings"
+			/>
+			{:else}
+<NavButton
+				label="Profile"
+				isSelected={isDashboardSelected}
+				redirect="/dashboard"
+			/>
+			<NavButton
+				label="Credentials"
+				isSelected={isCredentialsSelected}
+				redirect="/dashboard/credentials"
+			/>
+			<NavButton
+				label="Settings"
+				isSelected={isSettingsSelected}
+				redirect="/dashboard/settings"
+			/>
+			{/if}
+		{/await}
 	</div>
 	<div class="bottom">
-		<NavButton
+
+		{#await loadPromise}
+			<NavButton isSelected={false} >
+				<Skeleton />
+			</NavButton>
+		{:then} 
+			{#if $user.isSuperUser} 
+
+<NavButton
 			label="Issue Credential"
 			variant="highlight"
 			isSelected={false}
 		/>
+			{:else} 
+<NavButton
+			label="View Registry"
+			variant="highlight"
+			isSelected={false}
+		/>
+			{/if}
+		{/await}
+
+		
 	</div>
 </div>

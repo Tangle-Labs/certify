@@ -50,8 +50,12 @@
 	import { goto, afterNavigate } from "$app/navigation";
 	import { Header, SideNav } from "$lib/components/project";
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
-	import { previousPath } from "$lib/stores";
+	import { previousPath, user } from "$lib/stores";
 	import type { NavigationTarget } from "@sveltejs/kit";
+	import type { AxiosError, AxiosResponse } from "axios";
+	import { onMount } from "svelte";
+	import { axios } from "$lib/utils";
+	import Skeleton from "$lib/components/ui/Skeleton/Skeleton.svelte";
 
 	let selected: DashboardPath;
 
@@ -64,8 +68,16 @@
 		previousPath.update((p) => from?.url.pathname ?? p);
 		if (!to) return;
 		selected = getSelected(to);
-		console.log(selected);
 	});
+
+	const getUserData = async () => {
+		const { data } = (await axios.get("/users").catch((e: AxiosError) => {
+			if (e.code === "401") {
+				goto("/login");
+			}
+		})) as AxiosResponse;
+		user.set(data);
+	};
 
 	const goBack = () => {
 		goto($previousPath);
@@ -76,19 +88,25 @@
 			goBack();
 		}
 	};
+
+	const loadUserData = getUserData();
 </script>
 
 <div class="header">
 	<Header />
 </div>
 <div class="content-section">
-	<SideNav bind:selected />
+	<SideNav bind:selected loadPromise={loadUserData} />
 	<div class="body-content">
 		<div class="bread-crumb">
 			<div on:click={goBack} on:keydown={escapeHandler}>
 				<div class="back-group">
 					<img class="back-icon" src="/imgs/back-arrow.svg" alt="back" />
-					<div class="crumb">{selected}</div>
+					{#await loadUserData}
+						<Skeleton />
+					{:then}
+						<div class="crumb">{selected}</div>
+					{/await}
 				</div>
 			</div>
 		</div>

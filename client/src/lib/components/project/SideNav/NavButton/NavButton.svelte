@@ -38,7 +38,7 @@
 </style>
 
 <script lang="ts">
-	export let label: string;
+	export let label = "";
 	export let onClick: (...args: any[]) => any = () => null;
 	export let isSelected: boolean;
 	export let variant: "primary" | "highlight" = "primary";
@@ -54,5 +54,6 @@
 		on:click={onClick}
 	>
 		{label}
+		<slot />
 	</button>
 </a>
