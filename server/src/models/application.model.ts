@@ -46,7 +46,7 @@ export const applicationModel = (db: Sequelize) => {
 		},
 		{
 			sequelize: db,
-			modelName: "Credential"
+			modelName: "Application"
 		}
 	);
 

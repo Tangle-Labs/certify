@@ -3,6 +3,6 @@ import { Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 
 export const createNewApplication = asyncHandler(async (req: Request, res: Response) => {
-	const application = await ApplicationsService.create({ ...req.body });
+	const application = await ApplicationsService.create({ ...req.body, userId: req.user.id });
 	res.json(application);
 });

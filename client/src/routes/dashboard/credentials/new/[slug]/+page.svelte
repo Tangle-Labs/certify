@@ -34,7 +34,8 @@
 			// @ts-ignore
 			body[field.fieldName] = field.value;
 		}
-		console.log(body);
+        const { slug: credentialId} = $page.params;
+        const { data } = await apiClient.post("/applications", { body, credentialId})
 	};
 
 	const loadCredential = getCredential();

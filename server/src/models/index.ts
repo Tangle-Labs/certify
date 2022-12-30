@@ -31,7 +31,8 @@ Session.belongsTo(User, { foreignKey: "userId" });
 // credentials, application and user
 Credential.hasMany(Application, { foreignKey: "credentialId" });
 Application.belongsTo(Credential, { foreignKey: "credentialId" });
+
+User.hasMany(Application, { foreignKey: "userId" });
 Application.hasOne(User, { foreignKey: "userId" });
-User.belongsTo(Application, { foreignKey: "userId" });
 
 export { db };
