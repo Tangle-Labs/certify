@@ -4,7 +4,7 @@ export interface ICredential {
 	referenceCode: string;
 	type: "ticket" | "license" | "certificate";
 	duration: number;
-	customFields: Record<string, unknown>;
+	customFields: Record<string, unknown>[];
 	createdAt: Date;
 	updatedAt: Date;
 }
