@@ -115,7 +115,9 @@
 			</div>
 		</div>
 		<div class="body-slot">
-			<slot />
+			{#if $user}
+				<slot />
+			{/if}
 		</div>
 	</div>
 </div>
