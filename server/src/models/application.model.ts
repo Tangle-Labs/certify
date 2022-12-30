@@ -34,8 +34,7 @@ export const applicationModel = (db: Sequelize) => {
 				allowNull: false
 			},
 			status: {
-				type: DataTypes.ENUM,
-				values: ["pending", "approved", "rejected"],
+				type: DataTypes.STRING,
 				defaultValue: "pending",
 				allowNull: false
 			},
