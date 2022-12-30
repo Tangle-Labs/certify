@@ -1,16 +1,12 @@
-<style>
-	.loading {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: 100%;
-		width: 100%;
-	}
-</style>
-
 <script lang="ts">
 	import { axios } from "$lib/utils/axios.utils";
-	import { Table, TableRow, TableHeader, TableData } from "$lib/components/ui/";
+	import {
+		Table,
+		TableRow,
+		TableHeader,
+		TableData,
+		Skeleton
+	} from "$lib/components/ui/";
 
 	async function loadPage() {
 		const { data } = await axios.get("/users");
@@ -63,19 +59,24 @@
 	const load = loadPage();
 </script>
 
-{#await load}
-	<div class="loading">
-		<h1>Loading...</h1>
-	</div>
-{:then data}
-	<Table>
-		<TableRow isHeader={true}>
-			<TableHeader>Business Name</TableHeader>
-			<TableHeader>Credential</TableHeader>
-			<TableHeader>Created</TableHeader>
-			<TableHeader>Type</TableHeader>
-			<TableHeader>Status</TableHeader>
+<Table>
+	<TableRow isHeader={true}>
+		<TableHeader>Business Name</TableHeader>
+		<TableHeader>Credential</TableHeader>
+		<TableHeader>Created</TableHeader>
+		<TableHeader>Type</TableHeader>
+		<TableHeader>Status</TableHeader>
+	</TableRow>
+
+	{#await load}
+		<TableRow>
+			<TableData><Skeleton /></TableData>
+			<TableData><Skeleton /></TableData>
+			<TableData><Skeleton /></TableData>
+			<TableData><Skeleton /></TableData>
+			<TableData><Skeleton /></TableData>
 		</TableRow>
+	{:then data}
 		{#each applications as application, i (application.id)}
 			<TableRow {i}>
 				<TableData>{application.name}</TableData>
@@ -85,5 +86,5 @@
 				<TableData>{application.status}</TableData>
 			</TableRow>
 		{/each}
-	</Table>
-{/await}
+	{/await}
+</Table>

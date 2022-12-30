@@ -61,12 +61,12 @@
 		Table,
 		TableData,
 		TableHeader,
-		TableRow
+		TableRow,
+		Skeleton
 	} from "$lib/components/ui";
 	import { CardWithHeader } from "$lib/components/project";
 	import { axios } from "$lib/utils";
 	import type { ICredential } from "./credentials.types";
-	import Skeleton from "svelte-skeleton/Skeleton.svelte";
 
 	let credentials: ICredential[];
 	let selectedCred: ICredential | null = null;
@@ -102,56 +102,16 @@
 			{#await load}
 				<TableRow>
 					<TableData>
-						<Skeleton
-							width={150}
-							height={10}
-							secondaryColor="#ffffff"
-							primaryColor="#7d7d7d"
-							animate={true}
-							speed={10}
-							secondaryColorPercentWidth={50}
-						>
-							<rect width="150" height="10" x="0" y="0" rx="5" ry="5" />
-						</Skeleton>
+						<Skeleton />
 					</TableData>
 					<TableData>
-						<Skeleton
-							width={150}
-							height={10}
-							secondaryColor="#ffffff"
-							primaryColor="#7d7d7d"
-							animate={true}
-							speed={10}
-							secondaryColorPercentWidth={50}
-						>
-							<rect width="150" height="10" x="0" y="0" rx="5" ry="5" />
-						</Skeleton>
+						<Skeleton />
 					</TableData>
 					<TableData>
-						<Skeleton
-							width={150}
-							height={10}
-							secondaryColor="#ffffff"
-							primaryColor="#7d7d7d"
-							animate={true}
-							speed={10}
-							secondaryColorPercentWidth={50}
-						>
-							<rect width="150" height="10" x="0" y="0" rx="5" ry="5" />
-						</Skeleton>
+						<Skeleton />
 					</TableData>
 					<TableData>
-						<Skeleton
-							width={150}
-							height={10}
-							secondaryColor="#ffffff"
-							primaryColor="#7d7d7d"
-							animate={true}
-							speed={10}
-							secondaryColorPercentWidth={50}
-						>
-							<rect width="150" height="10" x="0" y="0" rx="5" ry="5" />
-						</Skeleton>
+						<Skeleton />
 					</TableData>
 				</TableRow>
 			{:then data}
