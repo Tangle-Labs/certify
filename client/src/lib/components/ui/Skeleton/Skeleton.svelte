@@ -1,4 +1,6 @@
 <script lang="ts">
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	import Skeleton from "svelte-skeleton/Skeleton.svelte";
 	export let width = 150;
 	export let height = 10;
