@@ -45,8 +45,6 @@
 		return goto("/login");
 	};
 
-	$: console.log($user);
-
 	$: isDashboardSelected = isSelected(selected, "dashboard");
 	$: isCredentialsSelected = isSelected(selected, "credentials");
 	$: isApplicationsSelected = isSelected(selected, "applications");
