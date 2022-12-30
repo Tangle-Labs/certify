@@ -1,3 +1,18 @@
+<style lang="scss">
+	.card-content {
+		padding: 30px;
+
+		.input-container {
+			padding: 10px 0;
+		}
+
+		.button-container {
+			margin-top: 30px;
+			width: 400px;
+		}
+	}
+</style>
+
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { Card, Skeleton, Button, Input } from "$lib/components/ui";
@@ -32,14 +47,22 @@
 		{:then}
 			<h2>{credential.name}</h2>
 			{#each credential.customFields as field, i (field.id)}
-				<Input
-					label={field.fieldName}
-					placeholder={`Enter ${field.fieldName}`}
-					bind:value={credential.customFields[i].value}
-				/>
+				<div class="input-container">
+					<Input
+						label={field.fieldName}
+						placeholder={`Enter ${field.fieldName}`}
+						bind:value={credential.customFields[i].value}
+					/>
+				</div>
 			{/each}
 
-			<Button label="Submit Application" onClick={handleSubmit} />
+			<div class="button-container">
+				<Button
+					size="large"
+					label="Submit Application"
+					onClick={handleSubmit}
+				/>
+			</div>
 		{/await}
 	</div>
 </Card>
