@@ -65,7 +65,7 @@
 		Skeleton
 	} from "$lib/components/ui";
 	import { CardWithHeader } from "$lib/components/project";
-	import { axios } from "$lib/utils";
+	import { apiClient } from "$lib/utils";
 	import type { ICredential } from "./credentials.types";
 
 	let credentials: ICredential[];
@@ -76,7 +76,7 @@
 	};
 
 	const loadCredentials = async () => {
-		const { data } = await axios.get("/credentials");
+		const { data } = await apiClient.get("/credentials");
 		credentials = data;
 	};
 

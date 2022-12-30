@@ -37,7 +37,7 @@
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
 	import { Input, Button } from "$lib/components/ui";
-	import { axios } from "$lib/utils/axios.utils";
+	import { apiClient } from "$lib/utils";
 
 	let email: string;
 	let password: string;
@@ -46,7 +46,7 @@
 	const onClick = async () => {
 		if (email && password) {
 			error = null;
-			const { data } = await axios
+			const { data } = await apiClient
 				.post("/users/login", { email, password })
 				.then(() => {
 					window.location.pathname = "/dashboard";

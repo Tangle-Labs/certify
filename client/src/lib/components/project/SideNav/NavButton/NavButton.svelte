@@ -21,6 +21,14 @@
 			}
 		}
 
+		&.secondary {
+			color: var(--label-text);
+
+			&:hover {
+				background: var(--body-background);
+			}
+		}
+
 		&.is-selected {
 			background: var(--table-header);
 		}
@@ -41,7 +49,7 @@
 	export let label = "";
 	export let onClick: (...args: any[]) => any = () => null;
 	export let isSelected: boolean;
-	export let variant: "primary" | "highlight" = "primary";
+	export let variant: "primary" | "highlight" | "secondary" = "primary";
 	export let redirect = "#";
 </script>
 
@@ -51,6 +59,7 @@
 		class:is-selected={isSelected}
 		class:primary={variant === "primary"}
 		class:highlight={variant === "highlight"}
+		class:secondary={variant === "secondary"}
 		on:click={onClick}
 	>
 		{label}

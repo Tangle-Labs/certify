@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { axios } from "$lib/utils/axios.utils";
+	import { apiClient } from "$lib/utils";
 	import {
 		Table,
 		TableRow,
@@ -9,7 +9,7 @@
 	} from "$lib/components/ui/";
 
 	async function loadPage() {
-		const { data } = await axios.get("/users");
+		const { data } = await apiClient.get("/users");
 		return data;
 	}
 

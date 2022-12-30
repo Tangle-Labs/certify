@@ -54,7 +54,7 @@
 	import type { NavigationTarget } from "@sveltejs/kit";
 	import type { AxiosError, AxiosResponse } from "axios";
 	import { onMount } from "svelte";
-	import { axios } from "$lib/utils";
+	import { apiClient } from "$lib/utils";
 	import Skeleton from "$lib/components/ui/Skeleton/Skeleton.svelte";
 
 	let selected: DashboardPath;
@@ -71,12 +71,16 @@
 	});
 
 	const getUserData = async () => {
-		const { data } = (await axios.get("/users").catch((e: AxiosError) => {
-			if (e.code === "401") {
-				goto("/login");
-			}
-		})) as AxiosResponse;
-		user.set(data);
+		apiClient
+			.get("/users")
+			.then(({ data }) => {
+				user.set(data);
+			})
+			.catch((e: AxiosError) => {
+				if (e.response && e.response?.status === 401) {
+					goto("/login");
+				}
+			});
 	};
 
 	const goBack = () => {

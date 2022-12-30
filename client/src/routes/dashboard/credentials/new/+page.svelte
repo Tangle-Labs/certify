@@ -66,7 +66,7 @@
 	import { Card, Input, ComboInput, Button } from "$lib/components/ui/";
 	import { CardWithHeader } from "$lib/components/project";
 	import { goto } from "$app/navigation";
-	import { axios } from "$lib/utils/axios.utils";
+	import { apiClient } from "$lib/utils";
 
 	let name: string;
 	let referenceCode: string;
@@ -108,7 +108,7 @@
 
 	const handleSubmit = async () => {
 		const duration = getDuration();
-		const { data } = await axios.post("/credentials", {
+		const { data } = await apiClient.post("/credentials", {
 			name,
 			referenceCode,
 			type,

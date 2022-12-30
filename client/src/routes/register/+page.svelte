@@ -37,7 +37,7 @@
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
 	import { Input, Button } from "$lib/components/ui";
-	import { axios } from "$lib/utils/axios.utils";
+	import { apiClient } from "$lib/utils";
 
 	let name: string;
 	let email: string;
@@ -49,7 +49,7 @@
 		if (email && name && password && confirmPassword) {
 			if (password === confirmPassword) {
 				error = null;
-				await axios
+				await apiClient
 					.post("/users", { name, email, password })
 					.then(() => {
 						window.location.pathname = "/login";
