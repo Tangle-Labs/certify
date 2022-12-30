@@ -3,6 +3,7 @@ import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME } from "../config";
 import { userModel } from "./user.model";
 import { sessionModel } from "./session.model";
 import { credentialModel } from "./credential.model";
+import { applicationModel } from "./application.model";
 
 const db = new Sequelize({
 	dialect: "postgres",
@@ -17,9 +18,20 @@ const db = new Sequelize({
 export const User = userModel(db);
 export const Session = sessionModel(db);
 export const Credential = credentialModel(db);
+export const Application = applicationModel(db);
 
-// relations
+/**
+ *  ----------- Relations ------------
+ */
+
+// user and session
 User.hasOne(Session, { foreignKey: "userId" });
 Session.belongsTo(User, { foreignKey: "userId" });
+
+// credentials, application and user
+Credential.hasMany(Application, { foreignKey: "credentialId" });
+Application.belongsTo(Credential, { foreignKey: "credentialId" });
+Application.hasOne(User, { foreignKey: "userId" });
+User.belongsTo(Application, { foreignKey: "userId" });
 
 export { db };
