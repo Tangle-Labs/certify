@@ -1,4 +1,4 @@
-import { IdentityService, UsersService } from "@/services";
+import { ApplicationsService, IdentityService, UsersService } from "@/services";
 import asyncHandler from "express-async-handler";
 import { Request, Response } from "express";
 import { Types } from "@tanglelabs/identity-manager";
@@ -16,6 +16,11 @@ const getSettingsJson = async () => {
 	const buffer = await readFile(configPath);
 	return JSON.parse(buffer.toString());
 };
+
+export const getAllApplications = asyncHandler(async (req: Request, res: Response) => {
+	const applications = await ApplicationsService.findMany({});
+	res.json(applications);
+});
 
 export const setupOrganization = asyncHandler(async (req: Request, res: Response) => {
 	await getSettingsJson()
