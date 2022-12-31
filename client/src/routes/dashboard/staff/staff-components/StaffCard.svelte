@@ -32,7 +32,6 @@
 	import { CardWithHeader } from "$lib/components/project";
 	import { Input, Skeleton } from "$lib/components/ui";
 	import type { IRole, IUser } from "$lib/types";
-	import { apiClient } from "$lib/utils";
 
 	export let selected: IUser;
 
