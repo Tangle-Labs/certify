@@ -14,10 +14,11 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 	import { Card, Skeleton, Button, Input } from "$lib/components/ui";
 	import { apiClient } from "$lib/utils";
-	import type { ICredential } from "../../credentials.types";
+	import type { ICredential } from "../../../../../lib/types/credentials.types";
 
 	let credential: ICredential;
 
@@ -39,6 +40,7 @@
 			body,
 			credentialId
 		});
+		goto("/dashboard/credentials");
 	};
 
 	const loadCredential = getCredential();
