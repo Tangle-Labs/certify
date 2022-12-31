@@ -19,6 +19,10 @@ class _IdentityService {
 	async newDid(props: ICreateDidProps) {
 		return this.manager.createDid({ ...props });
 	}
+
+	getAdminDid() {
+		return this.manager.getIdentityByAlias("admin-did");
+	}
 }
 
 export const IdentityService = new _IdentityService({

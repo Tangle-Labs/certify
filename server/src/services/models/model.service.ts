@@ -120,7 +120,7 @@ export class ModelService<T extends Model<InferAttributes<T>, InferCreationAttri
 	 * @param {Identifier} id
 	 * @returns Promise<T>
 	 */
-	async findByIdAndUpdate(id: Identifier, updateParams: Attributes<T>): Promise<T> {
+	async findByIdAndUpdate(id: Identifier, updateParams: Partial<Attributes<T>>): Promise<T> {
 		const timer = databaseResponseTimeHistogram.startTimer();
 		const entity = await this.model.findByPk(id).catch((e) => {
 			timer({ operation: `findById ${this.context}`, success: 0 });

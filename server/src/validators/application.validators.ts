@@ -9,3 +9,12 @@ export const CreateApplicationDto = {
 	},
 	mandatory: ["credentialId", "body"]
 };
+
+export const ModifyAdminApplicationDto = {
+	fields: {
+		approve: function (approve: boolean) {
+			return approve;
+		}
+	},
+	mandatory: ["approve"]
+};

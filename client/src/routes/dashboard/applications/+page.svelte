@@ -72,6 +72,11 @@
 		applications = data;
 	}
 
+    const modifyStatus = async (approve:boolean) => {
+        const { data } = await apiClient.patch(`/admin/applications/${selected.id}`, {approve});
+        console.log(data)
+    }
+
 	const load = loadPage();
 </script>
 
@@ -152,11 +157,11 @@
 					{/each}
 					<div class="buttons">
 						<div class="button-container">
-							<Button onClick={() => null} label="Issue Credential" />
+							<Button onClick={() => modifyStatus(true)} label="Issue Credential" />
 						</div>
 						<div class="button-container">
 							<Button
-								onClick={() => null}
+								onClick={() => modifyStatus(false)}
 								variant="tertiary"
 								label="Reject Credential"
 							/>
