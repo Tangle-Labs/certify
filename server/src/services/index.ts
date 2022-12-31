@@ -1,4 +1,4 @@
-import { ModelService } from "./model.service";
+import { ModelService } from "./models/model.service";
 import { Application, Credential, Session, User } from "@/models";
 
 export const UsersService = new ModelService(User);
