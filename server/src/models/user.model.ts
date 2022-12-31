@@ -17,6 +17,7 @@ export class UserModel extends Model<
 	declare name: string;
 	declare email: string;
 	declare isSuperUser: CreationOptional<boolean>;
+	declare isBanned: CreationOptional<boolean>;
 
 	async validateCredentials(password: string) {
 		return await bcrypt.compare(password, this.password);
@@ -47,6 +48,11 @@ export const userModel = (db: Sequelize) => {
 				allowNull: false
 			},
 			isSuperUser: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: false,
+				allowNull: false
+			},
+			isBanned: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
 				allowNull: false
