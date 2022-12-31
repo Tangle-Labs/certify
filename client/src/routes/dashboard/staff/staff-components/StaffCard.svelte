@@ -38,15 +38,9 @@
 
 	export let email: string;
 	export let roleId: string;
+	export let roles: IRole[];
 	export let name: string;
-
-	let roles: IRole[];
-
-	const getRoles = async () => {
-		const { data } = await apiClient.get("/roles");
-		roles = data;
-	};
-	const load = getRoles();
+	export let load: Promise<any>;
 </script>
 
 <CardWithHeader header="Preview Staff">

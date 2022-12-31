@@ -4,25 +4,24 @@ export const CreateRoleDto = {
 			return n;
 		},
 		manageCredentials: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageOrganization: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageApplications: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageStaff: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageRoles: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		}
 	},
 	mandatory: [
 		"name",
 		"manageCredentials",
-		"manageOrganization",
 		"manageOrganization",
 		"manageApplications",
 		"manageStaff",
@@ -36,19 +35,19 @@ export const UpdateRoteDto = {
 			return n;
 		},
 		manageCredentials: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageOrganization: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageApplications: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageStaff: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		},
 		manageRoles: function (p: boolean) {
-			return typeof p == "boolean";
+			return [true, false].includes(p);
 		}
 	},
 	mandatory: []

@@ -1,5 +1,5 @@
 export interface IRole {
-	id: string;
+	id?: string;
 	name: string;
 	manageCredentials: boolean;
 	manageOrganization: boolean;
