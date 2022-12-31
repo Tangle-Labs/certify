@@ -12,6 +12,7 @@ export class RoleModel extends Model<
 	InferCreationAttributes<RoleModel>
 > {
 	declare id: CreationOptional<string>;
+	declare name: string;
 	declare manageCredentials: boolean;
 	declare manageOrganization: boolean;
 	declare manageApplications: boolean;
@@ -27,6 +28,10 @@ export const roleModel = (db: Sequelize) => {
 				primaryKey: true,
 				defaultValue: DataTypes.UUIDV4,
 				unique: true,
+				allowNull: false
+			},
+			name: {
+				type: DataTypes.STRING,
 				allowNull: false
 			},
 			manageCredentials: {
