@@ -5,7 +5,7 @@ export const isAuthenticated = (req: Request, res: Response, next: NextFunction)
 	return next();
 };
 
-export const isAdministrator = (req: Request, res: Response, next: NextFunction) => {
+export const isStaff = (req: Request, res: Response, next: NextFunction) => {
 	if (!req.user.isSuperUser) throw new Error("404::Resource not found");
 	next();
 };

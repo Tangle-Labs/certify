@@ -26,13 +26,23 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { NavButton } from "$lib/components/project";
+	import { Skeleton } from "$lib/components/ui";
+	import { user } from "$lib/stores";
+	import { apiClient } from "$lib/utils";
 	import type { DashboardPath } from "./SideNav.types";
 
 	export let selected: DashboardPath;
+	export let loadPromise: Promise<any>;
 
 	const isSelected = (s: DashboardPath, path: DashboardPath) => {
 		return path === s;
+	};
+
+	const logOutHandler = async () => {
+		const { data } = await apiClient.get("/users/logout");
+		return goto("/login");
 	};
 
 	$: isDashboardSelected = isSelected(selected, "dashboard");
@@ -47,42 +57,102 @@
 	<div class="buttons">
 		<h1>Welcome!</h1>
 		<div class="hr" />
-		<NavButton
-			label="Dashboard"
-			isSelected={isDashboardSelected}
-			redirect="/dashboard"
-		/>
-		<NavButton
-			label="Credentials"
-			isSelected={isCredentialsSelected}
-			redirect="/dashboard/credentials"
-		/>
-		<NavButton
-			label="Applications"
-			isSelected={isApplicationsSelected}
-			redirect="/dashboard/applications"
-		/>
-		<NavButton
-			label="Organization"
-			isSelected={isOrganizationSelected}
-			redirect="/dashboard/organization"
-		/>
-		<NavButton
-			label="Staff"
-			isSelected={isStaffSelected}
-			redirect="/dashboard/staff"
-		/>
-		<NavButton
-			label="Settings"
-			isSelected={isSettingsSelected}
-			redirect="/dashboard/settings"
-		/>
+		{#await loadPromise}
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+			<NavButton isSelected={false} redirect="#">
+				<Skeleton />
+			</NavButton>
+		{:then}
+			{#if $user}
+				{#if $user.isSuperUser}
+					<NavButton
+						label="Dashboard"
+						isSelected={isDashboardSelected}
+						redirect="/dashboard"
+					/>
+					<NavButton
+						label="Credentials"
+						isSelected={isCredentialsSelected}
+						redirect="/dashboard/credentials"
+					/>
+					<NavButton
+						label="Applications"
+						isSelected={isApplicationsSelected}
+						redirect="/dashboard/applications"
+					/>
+					<NavButton
+						label="Organization"
+						isSelected={isOrganizationSelected}
+						redirect="/dashboard/organization"
+					/>
+					<NavButton
+						label="Staff"
+						isSelected={isStaffSelected}
+						redirect="/dashboard/staff"
+					/>
+					<NavButton
+						label="Settings"
+						isSelected={isSettingsSelected}
+						redirect="/dashboard/settings"
+					/>
+					<NavButton
+						label="Log Out"
+						isSelected={false}
+						variant="secondary"
+						onClick={logOutHandler}
+					/>
+				{:else}
+					<NavButton
+						label="Profile"
+						isSelected={isDashboardSelected}
+						redirect="/dashboard"
+					/>
+					<NavButton
+						label="Credentials"
+						isSelected={isCredentialsSelected}
+						redirect="/dashboard/credentials"
+					/>
+					<NavButton
+						label="Settings"
+						isSelected={isSettingsSelected}
+						redirect="/dashboard/settings"
+					/>
+					<NavButton
+						label="Log Out"
+						isSelected={false}
+						variant="secondary"
+						onClick={logOutHandler}
+					/>
+				{/if}
+			{/if}
+		{/await}
 	</div>
 	<div class="bottom">
-		<NavButton
-			label="Issue Credential"
-			variant="highlight"
-			isSelected={false}
-		/>
+		{#await loadPromise}
+			<NavButton isSelected={false}>
+				<Skeleton />
+			</NavButton>
+		{:then}
+			{#if $user}
+				{#if $user.isSuperUser}
+					<NavButton
+						label="Issue Credential"
+						variant="highlight"
+						isSelected={false}
+					/>
+				{:else}
+					<NavButton
+						label="View Registry"
+						variant="highlight"
+						isSelected={false}
+					/>
+				{/if}
+			{/if}
+		{/await}
 	</div>
 </div>

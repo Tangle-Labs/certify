@@ -40,8 +40,7 @@ export const credentialModel = (db: Sequelize) => {
 				allowNull: false
 			},
 			type: {
-				type: DataTypes.ENUM,
-				values: ["ticket", "certificate", "license"],
+				type: DataTypes.STRING,
 				allowNull: false
 			},
 			duration: {

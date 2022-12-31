@@ -48,8 +48,9 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { CardWithHeader } from "$lib/components/project";
-	import { axios } from "$lib/utils/axios.utils";
+	import { apiClient } from "$lib/utils";
 	import Step1 from "./steps/step1.svelte";
 	import Step2 from "./steps/step2.svelte";
 	import Step3 from "./steps/step3.svelte";
@@ -87,7 +88,7 @@
 	const stepTwoHandler = async () => {
 		if (password && password === confirmPassword) {
 			step++;
-			const { data } = await axios.post("/admin/setup", {
+			const { data } = await apiClient.post("/admin/setup", {
 				orgName,
 				orgEmail,
 				password
@@ -100,7 +101,7 @@
 	};
 
 	const stepThreeHandler = async () => {
-		window.location.href = "/login";
+		goto("/login");
 	};
 </script>
 

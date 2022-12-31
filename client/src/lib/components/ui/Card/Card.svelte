@@ -11,15 +11,23 @@
 
 		.body {
 			padding: 15px;
+
+			&.no-border {
+				padding: 0px;
+			}
 		}
 	}
 </style>
+
+<script lang="ts">
+	export let noBorder = false;
+</script>
 
 <div class="card">
 	<div class="header">
 		<slot name="header" />
 	</div>
-	<div class="body">
+	<div class="body" class:no-border={noBorder}>
 		<slot />
 	</div>
 </div>

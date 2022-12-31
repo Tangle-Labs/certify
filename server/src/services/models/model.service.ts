@@ -2,6 +2,8 @@ import { databaseResponseTimeHistogram, Logger } from "@/utils";
 import {
 	Attributes,
 	Identifier,
+	Includeable,
+	IncludeOptions,
 	InferAttributes,
 	InferCreationAttributes,
 	Model,
@@ -50,11 +52,15 @@ export class ModelService<T extends Model<InferAttributes<T>, InferCreationAttri
 	 * @param {WhereOptions<Attributes<T>>} findOpts
 	 * @returns Promise<T>
 	 */
-	async findOne(findOpts: WhereOptions<Attributes<T>>): Promise<T> {
+	async findOne(
+		findOpts: WhereOptions<Attributes<T>>,
+		include: Includeable | Includeable[] = []
+	): Promise<T> {
 		const timer = databaseResponseTimeHistogram.startTimer();
 		const entity = this.model
 			.findOne({
-				where: { ...findOpts }
+				where: { ...findOpts },
+				include
 			})
 			.catch((e) => {
 				timer({ operation: `findOne ${this.context}`, success: 0 });
@@ -71,11 +77,15 @@ export class ModelService<T extends Model<InferAttributes<T>, InferCreationAttri
 	 * @param {WhereOptions<Attributes<T>>} findOpts
 	 * @returns Promise<T[]>
 	 */
-	async findMany(findOpts: WhereOptions<Attributes<T>>): Promise<T[]> {
+	async findMany(
+		findOpts: WhereOptions<Attributes<T>>,
+		include: Includeable | Includeable[] = []
+	): Promise<T[]> {
 		const timer = databaseResponseTimeHistogram.startTimer();
 		const entities = this.model
 			.findAll({
-				where: { ...findOpts }
+				where: { ...findOpts },
+				include
 			})
 			.catch((e) => {
 				timer({ operation: `findMany ${this.context}`, success: 0 });
@@ -92,9 +102,9 @@ export class ModelService<T extends Model<InferAttributes<T>, InferCreationAttri
 	 * @param {Identifier} id
 	 * @returns Promise<T>
 	 */
-	async findById(id: Identifier): Promise<T> {
+	async findById(id: Identifier, include: Includeable | Includeable[] = []): Promise<T> {
 		const timer = databaseResponseTimeHistogram.startTimer();
-		const entity = this.model.findByPk(id).catch((e) => {
+		const entity = this.model.findByPk(id, { include }).catch((e) => {
 			timer({ operation: `findById ${this.context}`, success: 0 });
 			Logger.error(e);
 			throw new Error(`500::Unable find ${this.context}`);
@@ -110,7 +120,7 @@ export class ModelService<T extends Model<InferAttributes<T>, InferCreationAttri
 	 * @param {Identifier} id
 	 * @returns Promise<T>
 	 */
-	async findByIdAndUpdate(id: Identifier, updateParams: Attributes<T>): Promise<T> {
+	async findByIdAndUpdate(id: Identifier, updateParams: Partial<Attributes<T>>): Promise<T> {
 		const timer = databaseResponseTimeHistogram.startTimer();
 		const entity = await this.model.findByPk(id).catch((e) => {
 			timer({ operation: `findById ${this.context}`, success: 0 });
