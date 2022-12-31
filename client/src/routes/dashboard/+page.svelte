@@ -8,53 +8,14 @@
 		Skeleton
 	} from "$lib/components/ui/";
 
+	let applications: Record<string, any>;
+
 	async function loadPage() {
-		const { data } = await apiClient.get("/users");
-		return data;
+		const { data } = await apiClient.get("/admin/applications");
+		applications = data;
 	}
 
-	const applications = [
-		{
-			id: 0,
-			name: "Big Dick NRG LLC",
-			credential: "P0GG3R5",
-			created: new Date(),
-			type: "License",
-			status: "Pending"
-		},
-		{
-			id: 1,
-			name: "Big Dick NRG LLC",
-			credential: "P0GG3R5",
-			created: new Date(),
-			type: "License",
-			status: "Pending"
-		},
-		{
-			id: 2,
-			name: "Big Dick NRG LLC",
-			credential: "P0GG3R5",
-			created: new Date(),
-			type: "License",
-			status: "Pending"
-		},
-		{
-			id: 3,
-			name: "Big Dick NRG LLC",
-			credential: "P0GG3R5",
-			created: new Date(),
-			type: "License",
-			status: "Pending"
-		},
-		{
-			id: 4,
-			name: "Big Dick NRG LLC",
-			credential: "P0GG3R5",
-			created: new Date(),
-			type: "License",
-			status: "Pending"
-		}
-	];
+	
 
 	const load = loadPage();
 </script>

@@ -33,6 +33,6 @@ Credential.hasMany(Application, { foreignKey: "credentialId" });
 Application.belongsTo(Credential, { foreignKey: "credentialId" });
 
 User.hasMany(Application, { foreignKey: "userId" });
-Application.hasOne(User, { foreignKey: "userId" });
+Application.belongsTo(User, { foreignKey: "userId" });
 
 export { db };
