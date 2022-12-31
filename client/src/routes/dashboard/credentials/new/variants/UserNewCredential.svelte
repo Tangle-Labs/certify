@@ -82,7 +82,7 @@
 	import { Card, Button, Skeleton } from "$lib/components/ui";
 	import { CardWithHeader } from "$lib/components/project";
 	import { apiClient, secondsToStr } from "$lib/utils";
-	import type { ICredential } from "../../credentials.types";
+	import type { ICredential } from "$lib/types";
 	import { goto } from "$app/navigation";
 
 	let credentials: ICredential[] = [];

@@ -66,7 +66,7 @@
 	} from "$lib/components/ui";
 	import { CardWithHeader } from "$lib/components/project";
 	import { apiClient } from "$lib/utils";
-	import type { ICredential } from "../credentials.types";
+	import type { ICredential } from "$lib/types";
 
 	let credentials: ICredential[];
 	let selectedCred: ICredential | null = null;

@@ -7,25 +7,24 @@
 		TableData,
 		Skeleton
 	} from "$lib/components/ui/";
+	import type { IApplication } from "$lib/types";
 
-	let applications: Record<string, any>;
+	let applications: IApplication[];
 
 	async function loadPage() {
 		const { data } = await apiClient.get("/admin/applications");
 		applications = data;
 	}
 
-	
-
 	const load = loadPage();
 </script>
 
 <Table>
 	<TableRow isHeader={true}>
-		<TableHeader>Business Name</TableHeader>
+		<TableHeader>Credential Name</TableHeader>
+		<TableHeader>User's Name</TableHeader>
+		<TableHeader>Created At</TableHeader>
 		<TableHeader>Credential</TableHeader>
-		<TableHeader>Created</TableHeader>
-		<TableHeader>Type</TableHeader>
 		<TableHeader>Status</TableHeader>
 	</TableRow>
 
@@ -40,10 +39,10 @@
 	{:then data}
 		{#each applications as application, i (application.id)}
 			<TableRow {i}>
-				<TableData>{application.name}</TableData>
-				<TableData>{application.credential}</TableData>
-				<TableData>{application.created}</TableData>
-				<TableData>{application.type}</TableData>
+				<TableData>{application.Credential?.name}</TableData>
+				<TableData>{application.User?.name}</TableData>
+				<TableData>{application.createdAt}</TableData>
+				<TableData>{application.Credential?.type}</TableData>
 				<TableData>{application.status}</TableData>
 			</TableRow>
 		{/each}
