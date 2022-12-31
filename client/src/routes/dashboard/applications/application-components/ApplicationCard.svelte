@@ -1,42 +1,34 @@
 <style lang="scss">
-	.application-card {
-		width: 35%;
+	.warn {
+		padding-bottom: 20px;
+		text-align: center;
+	}
 
-		.card-body {
-			padding: 30px;
+	.info-block {
+		padding: 10px;
+		border-bottom: 2px solid var(--alt-background);
 
-			.warn {
-				padding-bottom: 20px;
-				text-align: center;
-			}
+		.header {
+			color: var(--label-text);
+			font-weight: 600;
+			font-size: 1.1rem;
+		}
 
-			.info-block {
-				padding: 10px;
-				border-bottom: 2px solid var(--alt-background);
+		.data {
+			padding: 7.5px 0;
+			font-size: 1rem;
+		}
 
-				.header {
-					color: var(--label-text);
-					font-weight: 600;
-					font-size: 1.1rem;
-				}
+		&:last-of-type {
+			border-bottom: none;
+		}
+	}
 
-				.data {
-					padding: 7.5px 0;
-					font-size: 1rem;
-				}
+	.buttons {
+		padding: 15px 0;
 
-				&:last-of-type {
-					border-bottom: none;
-				}
-			}
-
-			.buttons {
-				padding: 15px 0;
-
-				.button-container {
-					padding: 5px 0;
-				}
-			}
+		.button-container {
+			padding: 5px 0;
 		}
 	}
 </style>
@@ -55,7 +47,6 @@
 	import type { IApplication } from "$lib/types";
 
 	export let selected: IApplication;
-	export let load: Promise<any>;
 
 	const modifyStatus = async (approve: boolean) => {
 		const { data } = await apiClient.patch(
