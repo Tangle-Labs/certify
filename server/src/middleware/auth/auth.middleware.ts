@@ -1,4 +1,4 @@
-import { SessionsService, UsersService } from "@/services";
+import { RolesService, SessionsService, UsersService } from "@/services";
 import { createJsonWebToken, validateJsonWebToken } from "@/utils";
 import { NextFunction, Request, Response } from "express";
 
@@ -11,7 +11,7 @@ export const userDeserializer = async (req: Request, res: Response, next: NextFu
 
 	if (payload) {
 		req.session = payload;
-		req.user = await UsersService.findById(payload.userId);
+		req.user = await UsersService.findById(payload.userId, [RolesService.model]);
 		return next();
 	}
 
