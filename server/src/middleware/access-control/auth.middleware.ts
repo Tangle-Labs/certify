@@ -17,7 +17,7 @@ export const hasPermission = (permissionProp: string) => {
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		if (req.user.Role[permissionProp] || req.user.id === owner) return next();
+		if ((req.user.Role && req.user.Role[permissionProp]) || req.user.id === owner) return next();
 		throw new Error("403::Forbidden");
 	};
 };
