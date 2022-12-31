@@ -58,9 +58,10 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 		});
 	}
 	const updatedApplication = await ApplicationsService.findByIdAndUpdate(req.params.id, {
-		status
+		status,
+		vc: verifiableCredential
 	});
-	res.json({ ...updatedApplication.toJSON(), verifiableCredential });
+	res.json(updatedApplication);
 });
 
 export const setupOrganization = asyncHandler(async (req: Request, res: Response) => {

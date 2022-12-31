@@ -21,6 +21,7 @@ export class ApplicationModel extends Model<
 	declare userId: ForeignKey<UserModel["id"]>;
 	declare status: ApplicationStatus;
 	declare body: Record<string, any>;
+	declare vc: CreationOptional<Record<string, any>>;
 }
 
 export const applicationModel = (db: Sequelize) => {
@@ -41,6 +42,10 @@ export const applicationModel = (db: Sequelize) => {
 			body: {
 				type: DataTypes.JSON,
 				allowNull: false
+			},
+			vc: {
+				allowNull: true,
+				type: DataTypes.JSON
 			}
 		},
 		{
