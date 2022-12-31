@@ -4,6 +4,7 @@ import { userModel } from "./user.model";
 import { sessionModel } from "./session.model";
 import { credentialModel } from "./credential.model";
 import { applicationModel } from "./application.model";
+import { roleModel } from "./role.model";
 
 const db = new Sequelize({
 	dialect: "postgres",
@@ -19,6 +20,7 @@ export const User = userModel(db);
 export const Session = sessionModel(db);
 export const Credential = credentialModel(db);
 export const Application = applicationModel(db);
+export const Role = roleModel(db);
 
 /**
  *  ----------- Relations ------------
@@ -34,5 +36,8 @@ Application.belongsTo(Credential, { foreignKey: "credentialId" });
 
 User.hasMany(Application, { foreignKey: "userId" });
 Application.belongsTo(User, { foreignKey: "userId" });
+
+Role.hasMany(User, { foreignKey: "roleId" });
+User.belongsTo(Role, { foreignKey: "roleId" });
 
 export { db };
