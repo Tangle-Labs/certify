@@ -38,7 +38,7 @@
 	import { CardWithHeader } from "$lib/components/project";
 	import type { ICredential } from "$lib/types";
 
-	export let selectedCred: ICredential | null;
+	export let selectedCred: ICredential | null = null;
 </script>
 
 <CardWithHeader header="View Credential">

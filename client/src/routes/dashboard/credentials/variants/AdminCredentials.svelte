@@ -46,7 +46,7 @@
 
 <div class="page-body">
 	<div class="credentials-table">
-		<CredentialsTable bind:selectedCred {credentials} {load} />
+		<CredentialsTable bind:selectedCred {credentials} {load} variant="admin" />
 	</div>
 	<div class="sidebar">
 		<div class="new-cred">

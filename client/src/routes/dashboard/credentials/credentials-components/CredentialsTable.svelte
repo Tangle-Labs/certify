@@ -1,32 +1,49 @@
+<style lang="scss">
+	.status {
+		color: var(--primary);
+		font-weight: 600;
+
+		&.approved {
+			color: var(--secondary);
+		}
+
+		&.rejected {
+			color: var(--error-text);
+		}
+	}
+</style>
+
 <script lang="ts">
-	import { goto } from "$app/navigation";
 	import {
-		Button,
 		Table,
 		TableData,
 		TableHeader,
 		TableRow,
 		Skeleton
 	} from "$lib/components/ui";
-	import type { ICredential } from "$lib/types";
+	import type { IApplication, ICredential } from "$lib/types";
 
-	export let credentials: ICredential[];
+	export let credentials: ICredential[] = [];
+	export let applications: IApplication[] = [];
 	export let selectedCred: ICredential | null = null;
+	export let selectedApplication: IApplication | null = null;
+	export let variant: "admin" | "user";
 	export let load: Promise<any>;
-
-	const setSelectedCred = (id: string) => {
-		const match = credentials.find((c) => id === c.id);
-		console.log(match);
-		selectedCred = match ?? null;
-	};
 </script>
 
 <Table>
 	<TableRow isHeader={true}>
-		<TableHeader>Credential Name</TableHeader>
-		<TableHeader>Reference Code</TableHeader>
-		<TableHeader>Credential Type</TableHeader>
-		<TableHeader>Created On</TableHeader>
+		{#if variant === "admin"}
+			<TableHeader>Credential Name</TableHeader>
+			<TableHeader>Reference Code</TableHeader>
+			<TableHeader>Credential Type</TableHeader>
+			<TableHeader>Created On</TableHeader>
+		{:else}
+			<TableHeader>Credential Name</TableHeader>
+			<TableHeader>Credential Type</TableHeader>
+			<TableHeader>Created On</TableHeader>
+			<TableHeader>Status</TableHeader>
+		{/if}
 	</TableRow>
 
 	{#await load}
@@ -45,21 +62,46 @@
 			</TableData>
 		</TableRow>
 	{:then data}
-		{#each credentials as credential, i (credential.id)}
-			<TableRow {i}>
-				<TableData onClick={() => setSelectedCred(credential.id)}
-					>{credential.name}</TableData
-				>
-				<TableData onClick={() => setSelectedCred(credential.id)}
-					>{credential.referenceCode}</TableData
-				>
-				<TableData onClick={() => setSelectedCred(credential.id)}
-					>{credential.type}</TableData
-				>
-				<TableData onClick={() => setSelectedCred(credential.id)}
-					>{new Date(credential.createdAt).toDateString()}</TableData
-				>
-			</TableRow>
-		{/each}
+		{#if variant === "admin"}
+			{#each credentials as credential, i (credential.id)}
+				<TableRow {i}>
+					<TableData onClick={() => (selectedCred = credential)}
+						>{credential.name}</TableData
+					>
+					<TableData onClick={() => (selectedCred = credential)}
+						>{credential.referenceCode}</TableData
+					>
+					<TableData onClick={() => (selectedCred = credential)}
+						>{credential.type}</TableData
+					>
+					<TableData onClick={() => (selectedCred = credential)}
+						>{new Date(credential.createdAt).toDateString()}</TableData
+					>
+				</TableRow>
+			{/each}
+		{:else}
+			{#each applications as application, i (application.id)}
+				<TableRow {i}>
+					<TableData onClick={() => (selectedApplication = application)}
+						>{application.Credential.name}</TableData
+					>
+					<TableData onClick={() => (selectedApplication = application)}
+						>{application.Credential.type}</TableData
+					>
+					<TableData onClick={() => (selectedApplication = application)}
+						>{new Date(application.createdAt).toDateString()}</TableData
+					>
+					<TableData onClick={() => (selectedApplication = application)}>
+						<div
+							class="status"
+							class:approved={application.status === "approved"}
+							class:rejected={application.status === "rejected"}
+						>
+							{application.status.toUpperCase()}
+						</div>
+					</TableData>
+				</TableRow>
+			{/each}
+		{/if}
 	{/await}
 </Table>

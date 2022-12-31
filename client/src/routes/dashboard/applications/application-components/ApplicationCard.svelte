@@ -35,18 +35,12 @@
 
 <script lang="ts">
 	import { apiClient, secondsToStr } from "$lib/utils";
-	import {
-		Table,
-		TableRow,
-		TableHeader,
-		TableData,
-		Skeleton,
-		Button
-	} from "$lib/components/ui/";
+	import { Button } from "$lib/components/ui/";
 	import { CardWithHeader } from "$lib/components/project";
 	import type { IApplication } from "$lib/types";
 
 	export let selected: IApplication;
+	export let variant: "user" | "admin";
 
 	const modifyStatus = async (approve: boolean) => {
 		const { data } = await apiClient.patch(
@@ -55,19 +49,23 @@
 		);
 		console.log(data);
 	};
+
+	const header = variant === "admin" ? "View Application" : "View Credential";
 </script>
 
-<CardWithHeader header="View Application">
+<CardWithHeader {header}>
 	<div class="card-body">
 		{#if selected}
-			<div class="info-block">
-				<div class="header">User's Name</div>
-				<div class="data">{selected.User?.name}</div>
-			</div>
-			<div class="info-block">
-				<div class="header">User's E-Mail</div>
-				<div class="data">{selected.User?.email}</div>
-			</div>
+			{#if variant === "admin"}
+				<div class="info-block">
+					<div class="header">User's Name</div>
+					<div class="data">{selected.User?.name}</div>
+				</div>
+				<div class="info-block">
+					<div class="header">User's E-Mail</div>
+					<div class="data">{selected.User?.email}</div>
+				</div>
+			{/if}
 			<div class="info-block">
 				<div class="header">Credential Name</div>
 				<div class="data">{selected.Credential?.name}</div>
@@ -88,7 +86,7 @@
 					<div class="data">{selected.body[key]}</div>
 				</div>
 			{/each}
-			{#if selected.status === "pending"}
+			{#if variant === "admin" && selected.status === "pending"}
 				<div class="buttons">
 					<div class="button-container">
 						<Button
