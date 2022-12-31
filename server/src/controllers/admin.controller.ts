@@ -25,6 +25,18 @@ export const getAllApplications = asyncHandler(async (req: Request, res: Respons
 	res.json(applications);
 });
 
+export const getAdminStats = asyncHandler(async (req: Request, res: Response) => {
+	const applications = await ApplicationsService.model.count();
+	const credentials = await CredentialsService.model.count();
+	const users = await UsersService.model.count();
+
+	res.json({
+		credentials,
+		users,
+		applications
+	});
+});
+
 export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Response) => {
 	const status = req.body.approve ? "approved" : "rejected";
 	let verifiableCredential = {};
