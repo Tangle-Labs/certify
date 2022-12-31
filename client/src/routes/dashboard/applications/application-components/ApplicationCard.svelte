@@ -1,34 +1,38 @@
 <style lang="scss">
-	.warn {
-		padding-bottom: 20px;
-		text-align: center;
-	}
+	.card-body {
+		padding: 30px;
 
-	.info-block {
-		padding: 10px;
-		border-bottom: 2px solid var(--alt-background);
-
-		.header {
-			color: var(--label-text);
-			font-weight: 600;
-			font-size: 1.1rem;
+		.warn {
+			padding-bottom: 20px;
+			text-align: center;
 		}
 
-		.data {
-			padding: 7.5px 0;
-			font-size: 1rem;
+		.info-block {
+			padding: 10px;
+			border-bottom: 2px solid var(--alt-background);
+
+			.header {
+				color: var(--label-text);
+				font-weight: 600;
+				font-size: 1.1rem;
+			}
+
+			.data {
+				padding: 7.5px 0;
+				font-size: 1rem;
+			}
+
+			&:last-of-type {
+				border-bottom: none;
+			}
 		}
 
-		&:last-of-type {
-			border-bottom: none;
-		}
-	}
+		.buttons {
+			padding: 15px 0;
 
-	.buttons {
-		padding: 15px 0;
-
-		.button-container {
-			padding: 5px 0;
+			.button-container {
+				padding: 5px 0;
+			}
 		}
 	}
 </style>
