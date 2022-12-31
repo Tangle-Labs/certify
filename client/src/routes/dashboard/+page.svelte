@@ -8,6 +8,19 @@
 			margin-right: 40px;
 		}
 
+		.status {
+			color: var(--primary);
+			font-weight: 600;
+
+			&.approved {
+				color: var(--secondary);
+			}
+
+			&.rejected {
+				color: var(--error-text);
+			}
+		}
+
 		.application-card {
 			width: 35%;
 
@@ -72,6 +85,14 @@
 		applications = data;
 	}
 
+	const modifyStatus = async (approve: boolean) => {
+		const { data } = await apiClient.patch(
+			`/admin/applications/${selected.id}`,
+			{ approve }
+		);
+		console.log(data);
+	};
+
 	const load = loadPage();
 </script>
 
@@ -109,9 +130,15 @@
 						<TableData onClick={() => (selected = application)}
 							>{application.Credential?.type}</TableData
 						>
-						<TableData onClick={() => (selected = application)}
-							>{application.status}</TableData
-						>
+						<TableData onClick={() => (selected = application)}>
+							<div
+								class="status"
+								class:approved={application.status === "approved"}
+								class:rejected={application.status === "rejected"}
+							>
+								{application.status.toUpperCase()}
+							</div>
+						</TableData>
 					</TableRow>
 				{/each}
 			{/await}
@@ -150,18 +177,23 @@
 							<div class="data">{selected.body[key]}</div>
 						</div>
 					{/each}
-					<div class="buttons">
-						<div class="button-container">
-							<Button onClick={() => null} label="Issue Credential" />
+					{#if selected.status === "pending"}
+						<div class="buttons">
+							<div class="button-container">
+								<Button
+									onClick={() => modifyStatus(true)}
+									label="Issue Credential"
+								/>
+							</div>
+							<div class="button-container">
+								<Button
+									onClick={() => modifyStatus(false)}
+									variant="tertiary"
+									label="Reject Credential"
+								/>
+							</div>
 						</div>
-						<div class="button-container">
-							<Button
-								onClick={() => null}
-								variant="tertiary"
-								label="Reject Credential"
-							/>
-						</div>
-					</div>
+					{/if}
 				{:else}
 					<div class="warn">Please select an application</div>
 				{/if}
