@@ -105,6 +105,7 @@ textarea {
 	--border: rgb(172, 172, 172);
 	--border-hover: rgb(120, 120, 120);
 	--error-background: rgba(255, 70, 70, 0.399);
+	--error-text: rgba(250, 142, 94, 1);
 }
 
 html {

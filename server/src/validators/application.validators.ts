@@ -13,7 +13,7 @@ export const CreateApplicationDto = {
 export const ModifyAdminApplicationDto = {
 	fields: {
 		approve: function (approve: boolean) {
-			return approve;
+			return [true, false].includes(approve);
 		}
 	},
 	mandatory: ["approve"]

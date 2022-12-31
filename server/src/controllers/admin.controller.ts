@@ -27,19 +27,24 @@ export const getAllApplications = asyncHandler(async (req: Request, res: Respons
 
 export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Response) => {
 	const status = req.body.approve ? "approved" : "rejected";
-	const adminDid = await IdentityService.getAdminDid();
-	const application = await ApplicationsService.findById(req.params.id, [CredentialsService.model]);
-	const count = await ApplicationsService.model.count();
-	const verifiableCredential = await adminDid.credentials.create({
-		recipientDid: "did:iota:E6uuJ4zh1g76b2MQRpJdPaMG39eqTCruimm168Rwj2hB",
-		fragment: "#signing-method",
-		body: application.body,
-		id: `http://admin.com/credentials/verify/${application.id}`,
-		keyIndex: count,
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		type: application.Credential.name
-	});
+	let verifiableCredential = {};
+	if (req.body.approve) {
+		const adminDid = await IdentityService.getAdminDid();
+		const application = await ApplicationsService.findById(req.params.id, [
+			CredentialsService.model
+		]);
+		const count = await ApplicationsService.model.count();
+		verifiableCredential = await adminDid.credentials.create({
+			recipientDid: "did:iota:E6uuJ4zh1g76b2MQRpJdPaMG39eqTCruimm168Rwj2hB",
+			fragment: "#signing-method",
+			body: application.body,
+			id: `http://admin.com/credentials/verify/${application.id}`,
+			keyIndex: count,
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			type: application.Credential.name
+		});
+	}
 	const updatedApplication = await ApplicationsService.findByIdAndUpdate(req.params.id, {
 		status
 	});
