@@ -112,22 +112,24 @@
 						class:active={selected.isActive}
 						class:inactive={!selected.isActive}
 					>
-						{selected.isActive ? "ACTIVE" : "INACTIVE"}
+						{selected.isActive ? "ACTIVE" : "REMOVED"}
 					</div>
 				</div>
 
-				<div class="buttons">
-					<div class="button">
-						<Button label="Save User" onClick={handleUserUpdate} />
+				{#if selected.isActive}
+					<div class="buttons">
+						<div class="button">
+							<Button label="Save User" onClick={handleUserUpdate} />
+						</div>
+						<div class="button">
+							<Button
+								label="Remove User"
+								variant="tertiary"
+								onClick={handleRemoveUser}
+							/>
+						</div>
 					</div>
-					<div class="button">
-						<Button
-							label="Remove User"
-							variant="tertiary"
-							onClick={handleRemoveUser}
-						/>
-					</div>
-				</div>
+				{/if}
 			{/await}
 		{:else}
 			<div class="warn">Please select a user</div>

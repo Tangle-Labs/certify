@@ -1,3 +1,15 @@
+<style lang="scss">
+	.active,
+	.inactive {
+		color: var(--secondary);
+		font-weight: 600;
+	}
+
+	.inactive {
+		color: var(--error-text);
+	}
+</style>
+
 <script lang="ts">
 	import {
 		Table,
@@ -18,11 +30,15 @@
 		<TableHeader>User Name</TableHeader>
 		<TableHeader>User Email</TableHeader>
 		<TableHeader>Role</TableHeader>
+		<TableHeader>Status</TableHeader>
 		<TableHeader>Created On</TableHeader>
 	</TableRow>
 
 	{#await load}
 		<TableRow>
+			<TableData>
+				<Skeleton />
+			</TableData>
 			<TableData>
 				<Skeleton />
 			</TableData>
@@ -44,6 +60,11 @@
 				<TableData onClick={() => setSelected(user)}
 					>{user.Role?.name ?? "None"}</TableData
 				>
+				<TableData onClick={() => setSelected(user)}>
+					<div class:active={user.isActive} class:inactive={!user.isActive}>
+						{user.isActive ? "ACTIVE" : "REMOVED"}
+					</div>
+				</TableData>
 				<TableData onClick={() => setSelected(user)}>
 					{new Date(user.createdAt).toDateString()}
 				</TableData>
