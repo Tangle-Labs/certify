@@ -33,6 +33,14 @@
 				border-top: none;
 			}
 		}
+
+		.buttons {
+			margin-top: 15px;
+
+			.button {
+				padding: 5px 0;
+			}
+		}
 	}
 </style>
 
