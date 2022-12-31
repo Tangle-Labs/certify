@@ -1,4 +1,4 @@
-import { createNewRole } from "@/controllers";
+import { createNewRole, getAllRoles } from "@/controllers";
 import { hasPermission, isAuthenticated, isStaff, useDto } from "@/middleware";
 import { CreateRoleDto } from "@/validators";
 import { Router } from "express";
@@ -13,4 +13,7 @@ router
 		hasPermission("manageRoles"),
 		useDto(CreateRoleDto),
 		createNewRole
-	);
+	)
+	.get(isAuthenticated, isStaff, getAllRoles);
+
+export default router;
