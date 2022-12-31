@@ -20,8 +20,9 @@ class _IdentityService {
 		return this.manager.createDid({ ...props });
 	}
 
-	getAdminDid() {
-		return this.manager.getIdentityByAlias("admin-did");
+	async getAdminDid() {
+		const account = await this.manager.getIdentityByAlias("admin-did");
+		return account;
 	}
 }
 

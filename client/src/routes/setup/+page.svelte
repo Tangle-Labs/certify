@@ -48,6 +48,7 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { CardWithHeader } from "$lib/components/project";
 	import { apiClient } from "$lib/utils";
 	import Step1 from "./steps/step1.svelte";
@@ -100,7 +101,7 @@
 	};
 
 	const stepThreeHandler = async () => {
-		window.location.href = "/login";
+		goto("/login");
 	};
 </script>
 
