@@ -1,9 +1,10 @@
 import { OrganizationService } from "@/services/organization.service";
 import { NextFunction, Request, Response } from "express";
 
-export const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
 	if (!req.user) throw new Error("401::Bad session / missing token");
-	if (!req.user.isActive) throw new Error("401::User has been banned");
+	const { owner } = await OrganizationService.loadConfig();
+	if (!req.user.isActive && req.user.id !== owner) throw new Error("403::User has been banned");
 	return next();
 };
 

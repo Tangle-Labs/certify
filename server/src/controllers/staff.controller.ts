@@ -16,3 +16,8 @@ export const editStaffUser = asyncHandler(async (req: Request, res: Response) =>
 	const user = await UsersService.findByIdAndUpdate(req.params.id, { ...req.body });
 	res.json(user);
 });
+
+export const disableStaffUser = asyncHandler(async (req: Request, res: Response) => {
+	const user = await UsersService.findByIdAndUpdate(req.params.id, { isActive: false });
+	res.json(user);
+});

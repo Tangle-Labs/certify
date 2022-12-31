@@ -8,6 +8,7 @@ export interface IUser {
 	isSuperUser: boolean;
 	roleId?: string;
 	Role?: IRole;
+	isActive: boolean;
 	createdAt: Date;
 	updatedAt: Date;
 }

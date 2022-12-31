@@ -1,4 +1,4 @@
-import { createStaffUser, editStaffUser, getAllStaffUsers } from "@/controllers";
+import { createStaffUser, disableStaffUser, editStaffUser, getAllStaffUsers } from "@/controllers";
 import { hasPermission, isAuthenticated, isStaff, useDto } from "@/middleware";
 import { CreateUserDto, UpdateStaffDto } from "@/validators";
 import { Router } from "express";
@@ -24,6 +24,7 @@ router
 		hasPermission("manageStaff"),
 		useDto(UpdateStaffDto),
 		editStaffUser
-	);
+	)
+	.delete(isAuthenticated, isStaff, hasPermission("manageStaff"), disableStaffUser);
 
 export default router;

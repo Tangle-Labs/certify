@@ -48,6 +48,7 @@
 	const getStaff = async () => {
 		const { data } = await apiClient.get("/staff");
 		users = data;
+		return users;
 	};
 
 	const handleSaveRole = async () => {
@@ -100,6 +101,14 @@
 				<Button label="+ New Staff" size="large" onClick={() => null} />
 			</div>
 		</div>
-		<StaffCard {selected} {email} {roleId} {name} {roles} load={loadRoleData} />
+		<StaffCard
+			bind:selected
+			{email}
+			{roleId}
+			{name}
+			{roles}
+			load={loadRoleData}
+			loadMethod={getStaff}
+		/>
 	</div>
 </div>

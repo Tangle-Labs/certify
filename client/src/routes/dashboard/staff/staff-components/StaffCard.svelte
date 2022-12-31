@@ -9,7 +9,7 @@
 
 		.input-block {
 			padding: 20px 0;
-			border-bottom: 2px solid var(--alt-background);
+			border-top: 2px solid var(--alt-background);
 
 			.header {
 				font-size: 0.9rem;
@@ -21,8 +21,16 @@
 				font-weight: 600;
 			}
 
-			&:last-of-type {
-				border-bottom: none;
+			.active {
+				color: var(--secondary);
+			}
+
+			.inactive {
+				color: var(--error-text);
+			}
+
+			&:first-of-type {
+				border-top: none;
 			}
 		}
 	}
@@ -30,8 +38,9 @@
 
 <script lang="ts">
 	import { CardWithHeader } from "$lib/components/project";
-	import { Input, Skeleton } from "$lib/components/ui";
+	import { Input, Skeleton, Button } from "$lib/components/ui";
 	import type { IRole, IUser } from "$lib/types";
+	import { apiClient } from "$lib/utils";
 
 	export let selected: IUser;
 
@@ -40,6 +49,19 @@
 	export let roles: IRole[];
 	export let name: string;
 	export let load: Promise<any>;
+	export let loadMethod: () => Promise<any>;
+
+	const handleUserUpdate = async () => {
+		await apiClient.patch(`/staff/${selected.id}`, { email, roleId, name });
+		const users = await loadMethod();
+		selected = users.find((u: IUser) => u.id === selected.id);
+	};
+
+	const handleRemoveUser = async () => {
+		await apiClient.delete(`/staff/${selected.id}`);
+		const users = await loadMethod();
+		selected = users.find((u: IUser) => u.id === selected.id);
+	};
 </script>
 
 <CardWithHeader header="Preview Staff">
@@ -77,7 +99,26 @@
 
 				<div class="input-block">
 					<div class="header">User Status</div>
-					<div class="text">ACTIVE</div>
+					<div
+						class="text"
+						class:active={selected.isActive}
+						class:inactive={!selected.isActive}
+					>
+						{selected.isActive ? "ACTIVE" : "INACTIVE"}
+					</div>
+				</div>
+
+				<div class="buttons">
+					<div class="button">
+						<Button label="Save User" onClick={handleUserUpdate} />
+					</div>
+					<div class="button">
+						<Button
+							label="Remove User"
+							variant="tertiary"
+							onClick={handleRemoveUser}
+						/>
+					</div>
 				</div>
 			{/await}
 		{:else}
