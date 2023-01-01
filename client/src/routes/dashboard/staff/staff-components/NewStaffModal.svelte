@@ -81,7 +81,7 @@
 
 		<div class="buttons">
 			<div class="button">
-				<Button label="Save Role" size="large" onClick={handleSaveStaff} />
+				<Button label="Save Staff" size="large" onClick={handleSaveStaff} />
 			</div>
 			<div class="button">
 				<Button

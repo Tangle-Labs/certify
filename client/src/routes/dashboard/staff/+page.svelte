@@ -65,10 +65,9 @@
 	};
 
 	const handleSaveStaff = async () => {
-		console.log(user);
-		// await apiClient.post("/staff", { ...user });
-		// getStaff();
-		// showNewStaffModal = false;
+		await apiClient.post("/staff", { ...user });
+		getStaff();
+		showNewStaffModal = false;
 	};
 
 	let email: string;
