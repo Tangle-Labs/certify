@@ -1,6 +1,6 @@
 import { createStaffUser, disableStaffUser, editStaffUser, getAllStaffUsers } from "@/controllers";
 import { hasPermission, isAuthenticated, isStaff, useDto } from "@/middleware";
-import { CreateUserDto, UpdateStaffDto } from "@/validators";
+import { CreateStaffDto, UpdateStaffDto } from "@/validators";
 import { Router } from "express";
 
 const router = Router();
@@ -11,7 +11,7 @@ router
 		isAuthenticated,
 		isStaff,
 		hasPermission("manageStaff"),
-		useDto(CreateUserDto),
+		useDto(CreateStaffDto),
 		createStaffUser
 	)
 	.get(isAuthenticated, isStaff, hasPermission("manageStaff"), getAllStaffUsers);

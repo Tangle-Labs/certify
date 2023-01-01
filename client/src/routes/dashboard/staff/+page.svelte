@@ -65,9 +65,10 @@
 	};
 
 	const handleSaveStaff = async () => {
-		await apiClient.post("/staff", { ...user });
-		getStaff();
-		showNewRoleModal = false;
+		console.log(user);
+		// await apiClient.post("/staff", { ...user });
+		// getStaff();
+		// showNewStaffModal = false;
 	};
 
 	let email: string;

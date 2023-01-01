@@ -119,3 +119,21 @@ export const UpdateStaffDto = {
 	},
 	mandatory: []
 };
+
+export const CreateStaffDto = {
+	fields: {
+		name: function (name: string) {
+			return name;
+		},
+		email: function (email: string) {
+			return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+		},
+		password: function (password: string) {
+			return password;
+		},
+		roleId: function (id: string) {
+			return id;
+		}
+	},
+	mandatory: ["name", "email", "password", "roleId"]
+};
