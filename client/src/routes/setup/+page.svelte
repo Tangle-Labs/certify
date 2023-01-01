@@ -65,6 +65,8 @@
 	let step = 1;
 	let error: string | null = null;
 	let orgName: string;
+	let username: string;
+	let orgDomain: string;
 	let orgEmail: string;
 	let confirmEmail: string;
 	let password: string;
@@ -91,7 +93,9 @@
 			const { data } = await apiClient.post("/admin/setup", {
 				orgName,
 				orgEmail,
-				password
+				password,
+				username,
+				orgDomain
 			});
 			didInfo = data;
 			isDisabled = false;
@@ -119,6 +123,8 @@
 						bind:orgName
 						bind:orgEmail
 						bind:confirmEmail
+						bind:username
+						bind:orgDomain
 						stepHandler={stepOneHandler}
 					/>
 				{:else if step === 2}

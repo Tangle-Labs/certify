@@ -71,13 +71,12 @@ export const setupOrganization = asyncHandler(async (req: Request, res: Response
 		})
 		.catch(async (e) => {
 			if (e.code !== "ENOENT") throw new Error("400::Config already exists");
-			const { orgName, password, orgEmail } = req.body;
+			const { orgName, username, orgDomain, password, orgEmail } = req.body;
 
 			const did = await IdentityService.newDid({
 				alias: "admin-did",
 				store: {
 					type: Types.Mongo,
-
 					options: {
 						mongouri: IDENTITY_DB_URI
 					}
@@ -88,12 +87,17 @@ export const setupOrganization = asyncHandler(async (req: Request, res: Response
 			await did.attachEncryptionMethod();
 
 			const user = await UsersService.create({
-				name: orgName,
+				name: username,
 				email: orgEmail,
 				password,
 				isSuperUser: true
 			});
-			await createSettingsJson({ owner: user.id, did: did.getDid().toString() });
+			await createSettingsJson({
+				owner: user.id,
+				did: did.getDid().toString(),
+				orgName,
+				orgWebsite: orgDomain
+			});
 
 			res.json({ user, did: did.getDocument() });
 		});

@@ -53,7 +53,7 @@ const router = Router();
  *   get:
  *     tags:
  *       - Credentials
- *     summary: Edit a specific role
+ *     summary: get a specific credential
  *     parameters:
  *       - in: path
  *         name: id

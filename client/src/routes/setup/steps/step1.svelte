@@ -18,6 +18,8 @@
 	export let orgName: string;
 	export let orgEmail: string;
 	export let confirmEmail: string;
+	export let username: string;
+	export let orgDomain: string;
 
 	export let stepHandler: (...args: any[]) => any;
 </script>
@@ -28,6 +30,20 @@
 			label="Organization Name"
 			placeholder="Enter Organization Name"
 			bind:value={orgName}
+		/>
+	</div>
+	<div class="text-block">
+		<Input
+			label="Admin Username"
+			placeholder="Enter Admin User Name"
+			bind:value={username}
+		/>
+	</div>
+	<div class="text-block">
+		<Input
+			label="Website Domain"
+			placeholder="https://organization.org"
+			bind:value={orgDomain}
 		/>
 	</div>
 	<div class="text-block">
