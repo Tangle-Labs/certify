@@ -60,6 +60,7 @@
 
 	const getSelected = (url: string) => {
 		const [_, slug] = url.toString().split("/settings/");
+		if (!slug) return goto("/dashboard/settings/general");
 		const tab = slug.replace(" ", "-");
 		settingsTab = tab as SettingsTab;
 	};

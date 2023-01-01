@@ -24,8 +24,7 @@ export const userDeserializer = async (req: Request, res: Response, next: NextFu
 	const token = createJsonWebToken({ userId, id });
 
 	res.cookie("accessToken", token, {
-		// maxAge: 60 * 60 * 1000,
-		maxAge: 5 * 1000,
+		maxAge: 60 * 60 * 1000,
 		httpOnly: true
 	});
 

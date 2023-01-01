@@ -30,7 +30,10 @@
 
 <header>
 	<div class="logo-block">
-		<img src="/imgs/certify-dark.svg" alt="certify logo" class="logo" />
-		<h1>CERTIFY</h1>
+		<img
+			src="/imgs/CertifyLogoHorizontal.svg"
+			alt="certify logo"
+			class="logo"
+		/>
 	</div>
 </header>
