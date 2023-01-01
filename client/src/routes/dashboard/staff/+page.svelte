@@ -32,6 +32,7 @@
 	import type { IRole, IUser } from "$lib/types";
 	import { apiClient } from "$lib/utils";
 	import { Button } from "$lib/components/ui";
+	import { ConfirmActionModal } from "$lib/components/project";
 	import StaffTable from "./staff-components/StaffTable.svelte";
 	import StaffCard from "./staff-components/StaffCard.svelte";
 	import NewRoleModal from "./staff-components/NewRoleModal.svelte";
@@ -45,6 +46,14 @@
 		password: "",
 		email: "",
 		roleId: "none"
+	};
+	let showRemoveUserConfirmation: boolean;
+
+	const handleRemoveUser = async () => {
+		await apiClient.delete(`/staff/${selected.id}`);
+		const users = await getStaff();
+		selected = users.find((u: IUser) => u.id === selected.id) ?? selected;
+		showRemoveUserConfirmation = false;
 	};
 
 	const loadRoles = async () => {
@@ -99,6 +108,11 @@
 <div class="page-body">
 	<NewRoleModal bind:showNewRoleModal bind:roleConfig {handleSaveRole} />
 	<NewStaffModal bind:showNewStaffModal bind:user {handleSaveStaff} {roles} />
+	<ConfirmActionModal
+		bind:showConfirmation={showRemoveUserConfirmation}
+		confirmationPrompt="Remove User"
+		confirmAction={handleRemoveUser}
+	/>
 	<div class="users-table">
 		<StaffTable {load} {users} {setSelected} />
 	</div>
@@ -126,6 +140,7 @@
 			{roleId}
 			{name}
 			{roles}
+			bind:showRemoveUserConfirmation
 			load={loadRoleData}
 			loadMethod={getStaff}
 		/>

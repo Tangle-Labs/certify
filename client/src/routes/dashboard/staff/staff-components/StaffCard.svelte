@@ -45,7 +45,7 @@
 </style>
 
 <script lang="ts">
-	import { CardWithHeader } from "$lib/components/project";
+	import { CardWithHeader, ConfirmActionModal } from "$lib/components/project";
 	import { Input, Skeleton, Button } from "$lib/components/ui";
 	import type { IRole, IUser } from "$lib/types";
 	import { apiClient } from "$lib/utils";
@@ -58,15 +58,10 @@
 	export let name: string;
 	export let load: Promise<any>;
 	export let loadMethod: () => Promise<any>;
+	export let showRemoveUserConfirmation: boolean;
 
 	const handleUserUpdate = async () => {
 		await apiClient.patch(`/staff/${selected.id}`, { email, roleId, name });
-		const users = await loadMethod();
-		selected = users.find((u: IUser) => u.id === selected.id);
-	};
-
-	const handleRemoveUser = async () => {
-		await apiClient.delete(`/staff/${selected.id}`);
 		const users = await loadMethod();
 		selected = users.find((u: IUser) => u.id === selected.id);
 	};
@@ -125,7 +120,7 @@
 							<Button
 								label="Remove User"
 								variant="tertiary"
-								onClick={handleRemoveUser}
+								onClick={() => (showRemoveUserConfirmation = true)}
 							/>
 						</div>
 					</div>
