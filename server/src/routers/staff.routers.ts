@@ -12,6 +12,12 @@ const router = Router();
  *     tags:
  *       - Staff
  *     summary: create a new staff user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/CreateStaffDto"
  *     responses:
  *       201:
  *         description: Success, creates a new staff user
