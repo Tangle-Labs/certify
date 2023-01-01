@@ -52,8 +52,7 @@
 	import type { DashboardPath } from "$lib/components/project/SideNav/SideNav.types";
 	import { previousPath, user } from "$lib/stores";
 	import type { NavigationTarget } from "@sveltejs/kit";
-	import type { AxiosError, AxiosResponse } from "axios";
-	import { onMount } from "svelte";
+	import type { AxiosError } from "axios";
 	import { apiClient } from "$lib/utils";
 	import Skeleton from "$lib/components/ui/Skeleton/Skeleton.svelte";
 

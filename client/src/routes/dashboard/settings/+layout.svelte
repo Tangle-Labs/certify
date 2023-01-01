@@ -45,49 +45,62 @@
 </style>
 
 <script lang="ts">
-	import { goto } from "$app/navigation";
+	import { afterNavigate, goto } from "$app/navigation";
 	import { Card } from "$lib/components/ui";
 	import type { SettingsTab } from "$lib/types";
 
-	let settingsTab: SettingsTab = "General";
+	let settingsTab: SettingsTab = "general";
 
 	const navigateTo = (tab: SettingsTab) => {
 		const tabUrl = tab.replace(" ", "-").toLowerCase();
 		goto(`/dashboard/settings/${tabUrl}`);
 		settingsTab = tab;
 	};
+
+	const getSelected = (url: string) => {
+		const [_, slug] = url.toString().split("/settings/");
+		const tab = slug.replace(" ", "-");
+		settingsTab = tab as SettingsTab;
+	};
+
+	afterNavigate(({ to }) => {
+		if (!to) return;
+		getSelected(to.url.toString());
+	});
+
+	getSelected(window.location.href);
 </script>
 
 <Card>
 	<div class="card-body">
 		<div class="sidebar">
 			<button
-				class:is-selected={settingsTab === "General"}
-				on:click={() => navigateTo("General")}
+				class:is-selected={settingsTab === "general"}
+				on:click={() => navigateTo("general")}
 			>
 				General
 			</button>
 			<button
-				class:is-selected={settingsTab === "Organization"}
-				on:click={() => navigateTo("Organization")}
+				class:is-selected={settingsTab === "organization"}
+				on:click={() => navigateTo("organization")}
 			>
 				Organization
 			</button>
 			<button
-				class:is-selected={settingsTab === "Roles"}
-				on:click={() => navigateTo("Roles")}
+				class:is-selected={settingsTab === "roles"}
+				on:click={() => navigateTo("roles")}
 			>
 				Roles
 			</button>
 			<button
-				class:is-selected={settingsTab === "DNS"}
-				on:click={() => navigateTo("DNS")}
+				class:is-selected={settingsTab === "dns"}
+				on:click={() => navigateTo("dns")}
 			>
 				DNS
 			</button>
 			<button
-				class:is-selected={settingsTab === "App Info"}
-				on:click={() => navigateTo("App Info")}
+				class:is-selected={settingsTab === "app info"}
+				on:click={() => navigateTo("app info")}
 			>
 				App Info
 			</button>
