@@ -8,6 +8,21 @@ const router = Router();
 /**
  * @openapi
  * "/api/staff":
+ *   post:
+ *     tags:
+ *       - Staff
+ *     summary: create a new staff user
+ *     responses:
+ *       201:
+ *         description: Success, creates a new staff user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UserResponse"
+ *       400:
+ *         description: Bad Request
+ *       500:
+ *         description: Internal server error
  *
  *   get:
  *     tags:
@@ -28,6 +43,57 @@ const router = Router();
  *         description: Unauthorized, happens when the user is not signed in
  *       500:
  *         description: Internal server error occurred
+ *
+ * "/api/staff/{id}":
+ *   patch:
+ *     tags:
+ *       - Staff
+ *     summary: Edit a specific staff user
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *              $ref: "#/components/schemas/CreateStaffDto"
+ *     responses:
+ *       202:
+ *         description: Success, updated the user
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UserResponse"
+ *       400:
+ *         description: Bad Request
+ *       500:
+ *         description: Internal Server Error
+ *
+ *
+ *   delete:
+ *     tags:
+ *       - Staff
+ *     summary: Ban a specific user
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *     responses:
+ *       202:
+ *         description: Success user banned
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/UserResponse"
+ *       400:
+ *         description: Bad Request
+ *       500:
+ *         description: Internal Server Error
+ *
  */
 
 router
