@@ -20,22 +20,6 @@
 		border-radius: 5px;
 		max-width: 90vw;
 		min-width: 600px;
-
-		.modal-header {
-			padding-bottom: 10px;
-			border-bottom: 1px solid var(--border);
-		}
-
-		.modal-content {
-			position: relative;
-		}
-
-		.close-button {
-			position: absolute;
-			top: 0;
-			right: 0;
-			background-color: back;
-		}
 	}
 
 	@media only screen and (max-width: 700px) {
@@ -46,33 +30,19 @@
 </style>
 
 <script lang="ts">
-	import { Card, Button } from "../";
 	import { fade, fly } from "svelte/transition";
+	import { CardWithHeader } from "$lib/components/project";
 
-	export let isOpen = false;
-	export let setIsOpen: (isOpen: boolean) => void;
+	export let isOpen: boolean;
+	export let header: string;
 </script>
 
 {#if isOpen}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="backdrop" on:click={() => setIsOpen(false)} transition:fade />
+	<div class="backdrop" on:click={() => (isOpen = false)} transition:fade />
 	<div class="modal" transition:fly={{ y: 50, duration: 400 }}>
-		<Card>
-			<div class="modal-content">
-				<slot name="buttons">
-					<div class="close-button">
-						<Button
-							label="x"
-							size="circular"
-							onClick={() => setIsOpen(false)}
-						/>
-					</div>
-				</slot>
-				<div class="modal-header">
-					<slot name="header" />
-				</div>
-				<slot />
-			</div>
-		</Card>
+		<CardWithHeader {header}>
+			<slot />
+		</CardWithHeader>
 	</div>
 {/if}

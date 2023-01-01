@@ -4,18 +4,13 @@
 	import Modal from "./Modal.svelte";
 
 	let isOpen = false;
-
-	function setIsOpen(state: boolean) {
-		isOpen = state;
-	}
 </script>
 
 <Meta title="Modal" component={Modal} />
 
 <Template>
-	<Button label="show modal" onClick={() => setIsOpen(true)} />
-	<Modal {isOpen} {setIsOpen}>
-		<h1 slot="header">A very normal title</h1>
+	<Button label="show modal" onClick={() => (isOpen = false)} />
+	<Modal {isOpen} header="A Very Normal Title">
 		<div class="modal-body">
 			<p>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur
@@ -30,7 +25,7 @@
 				consequuntur. Dolore?
 			</p>
 		</div>
-		<Button label="Okay Bro 👍🏻" onClick={() => setIsOpen(false)} />
+		<Button label="Okay Bro 👍🏻" onClick={() => (isOpen = false)} />
 	</Modal>
 </Template>
 

@@ -16,10 +16,11 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
 	if (!passwordsMatch) throw new Error("400::Bad credentials");
 	const session = await SessionsService.create({ userId: user.id });
 
-	const accessToken = createJsonWebToken({ id: session.id, userId: session.userId });
+	const accessToken = createJsonWebToken({ id: session.id, userId: session.userId }, "5s");
 	const refreshToken = createJsonWebToken({ sessionId: session.id }, "1y");
 	res.cookie("accessToken", accessToken, {
-		maxAge: 60 * 60 * 1000,
+		// maxAge: 60 * 60 * 1000,
+		maxAge: 5 * 1000,
 		httpOnly: true
 	});
 	res.cookie("refreshToken", refreshToken, {

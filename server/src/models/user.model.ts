@@ -17,6 +17,7 @@ export class UserModel extends Model<
 	declare name: string;
 	declare email: string;
 	declare isSuperUser: CreationOptional<boolean>;
+	declare isActive: CreationOptional<boolean>;
 
 	async validateCredentials(password: string) {
 		return await bcrypt.compare(password, this.password);
@@ -49,6 +50,11 @@ export const userModel = (db: Sequelize) => {
 			isSuperUser: {
 				type: DataTypes.BOOLEAN,
 				defaultValue: false,
+				allowNull: false
+			},
+			isActive: {
+				type: DataTypes.BOOLEAN,
+				defaultValue: true,
 				allowNull: false
 			}
 		},
