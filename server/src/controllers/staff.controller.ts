@@ -9,15 +9,15 @@ export const getAllStaffUsers = asyncHandler(async (req: Request, res: Response)
 
 export const createStaffUser = asyncHandler(async (req: Request, res: Response) => {
 	const user = await UsersService.create({ ...req.body, isSuperUser: true });
-	res.json(user);
+	res.status(201).json(user);
 });
 
 export const editStaffUser = asyncHandler(async (req: Request, res: Response) => {
 	const user = await UsersService.findByIdAndUpdate(req.params.id, { ...req.body });
-	res.json(user);
+	res.status(202).json(user);
 });
 
 export const disableStaffUser = asyncHandler(async (req: Request, res: Response) => {
 	const user = await UsersService.findByIdAndUpdate(req.params.id, { isActive: false });
-	res.json(user);
+	res.status(202).json(user);
 });

@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler";
 
 export const createNewApplication = asyncHandler(async (req: Request, res: Response) => {
 	const application = await ApplicationsService.create({ ...req.body, userId: req.user.id });
-	res.json(application);
+	res.status(201).json(application);
 });
 
 export const getAllUserApplications = asyncHandler(async (req: Request, res: Response) => {

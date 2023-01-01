@@ -4,7 +4,7 @@ import asyncHandler from "express-async-handler";
 
 export const createNewRole = asyncHandler(async (req: Request, res: Response) => {
 	const role = await RolesService.create({ ...req.body });
-	res.json(role);
+	res.status(201).json(role);
 });
 
 export const getAllRoles = asyncHandler(async (req: Request, res: Response) => {
@@ -14,5 +14,5 @@ export const getAllRoles = asyncHandler(async (req: Request, res: Response) => {
 
 export const updateRole = asyncHandler(async (req: Request, res: Response) => {
 	const role = await RolesService.findByIdAndUpdate(req.params.id, { ...req.body });
-	res.json(role);
+	res.status(202).json(role);
 });

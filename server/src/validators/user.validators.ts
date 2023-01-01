@@ -19,6 +19,26 @@
  *          type: string
  *          default: foopass
  *
+ *    CreateStaffDto:
+ *      type: object
+ *      required:
+ *        - name
+ *        - email
+ *        - password
+ *        - roleId
+ *      properties:
+ *        name:
+ *          type: string
+ *          default: Jane Doe
+ *        email:
+ *          type: string
+ *          default: jane.doe@example.com
+ *        password:
+ *          type: string
+ *          default: foopass
+ *        roleId:
+ *          type: string
+ *
  *    LoginUserDto:
  *      type: object
  *      required:

@@ -9,5 +9,5 @@ export const getOrganizationProfile = asyncHandler(async (req: Request, res: Res
 
 export const updateOrganizationProfile = asyncHandler(async (req: Request, res: Response) => {
 	const config = await OrganizationService.saveConfig({ ...req.body });
-	res.json(config);
+	res.status(202).json(config);
 });
