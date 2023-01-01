@@ -34,6 +34,7 @@ services:
             - ./server:/app
             - ./logs:/app/logs
             - ./identity:/identity
+        restart: always
         depends_on:
             - postgres
         networks:
