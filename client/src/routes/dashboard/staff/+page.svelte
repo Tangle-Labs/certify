@@ -31,14 +31,21 @@
 <script lang="ts">
 	import type { IRole, IUser } from "$lib/types";
 	import { apiClient } from "$lib/utils";
-	import { Button, Modal, Input, Switch } from "$lib/components/ui";
+	import { Button } from "$lib/components/ui";
 	import StaffTable from "./staff-components/StaffTable.svelte";
 	import StaffCard from "./staff-components/StaffCard.svelte";
 	import NewRoleModal from "./staff-components/NewRoleModal.svelte";
+	import NewStaffModal from "./staff-components/NewStaffModal.svelte";
 
 	let users: IUser[];
 	let selected: IUser;
 	let roles: IRole[];
+	let user = {
+		name: "",
+		password: "",
+		email: "",
+		roleId: "none"
+	};
 
 	const loadRoles = async () => {
 		const { data } = await apiClient.get("/roles");
@@ -57,10 +64,17 @@
 		showNewRoleModal = false;
 	};
 
+	const handleSaveStaff = async () => {
+		await apiClient.post("/staff", { ...user });
+		getStaff();
+		showNewRoleModal = false;
+	};
+
 	let email: string;
 	let roleId: string;
 	let name: string;
 	let showNewRoleModal = false;
+	let showNewStaffModal = false;
 
 	let roleConfig: IRole = {
 		name: "",
@@ -84,6 +98,7 @@
 
 <div class="page-body">
 	<NewRoleModal bind:showNewRoleModal bind:roleConfig {handleSaveRole} />
+	<NewStaffModal bind:showNewStaffModal bind:user {handleSaveStaff} {roles} />
 	<div class="users-table">
 		<StaffTable {load} {users} {setSelected} />
 	</div>
@@ -98,7 +113,11 @@
 				/>
 			</div>
 			<div class="button">
-				<Button label="+ New Staff" size="large" onClick={() => null} />
+				<Button
+					label="+ New Staff"
+					size="large"
+					onClick={() => (showNewStaffModal = true)}
+				/>
 			</div>
 		</div>
 		<StaffCard
