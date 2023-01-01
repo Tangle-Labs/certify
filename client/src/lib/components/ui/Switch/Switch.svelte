@@ -79,6 +79,6 @@
 </script>
 
 <label class="switch">
-	<input type="checkbox" on:change={onChange} />
+	<input type="checkbox" checked={value} on:change={onChange} />
 	<i />
 </label>

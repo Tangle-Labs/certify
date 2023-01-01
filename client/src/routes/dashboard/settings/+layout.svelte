@@ -40,6 +40,7 @@
 
 		.settings-body {
 			padding: 0px 40px;
+			width: 100%;
 		}
 	}
 </style>
