@@ -61,7 +61,7 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 		status,
 		vc: verifiableCredential
 	});
-	res.json(updatedApplication);
+	res.status(202).json(updatedApplication);
 });
 
 export const setupOrganization = asyncHandler(async (req: Request, res: Response) => {
