@@ -1,3 +1,43 @@
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    CreateCredentialDto:
+ *      type: object
+ *      required:
+ *        - body
+ *        - credentialId
+ *      properties:
+ *        credentialId:
+ *          type: string
+ *        body:
+ *          type: object
+ *
+ *    ModifyApplicationStatusDto:
+ *      type: object
+ *      required:
+ *        - approve
+ *      properties:
+ *        approve:
+ *          type: boolean
+ *          default: true
+ *
+ *    ApplicationResponse:
+ *      type: object
+ *      required:
+ *      properties:
+ *        userId:
+ *          type: string
+ *        credentialId:
+ *          type: string
+ *        body:
+ *          type: object
+ *        createdAt:
+ *          type: string
+ *        updatedAt:
+ *          type: string
+ */
+
 export const CreateApplicationDto = {
 	fields: {
 		credentialId: function (id: string) {
