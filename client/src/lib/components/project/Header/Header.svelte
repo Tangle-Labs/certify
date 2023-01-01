@@ -15,15 +15,6 @@
 			.logo {
 				height: 50px;
 			}
-
-			h1 {
-				padding: 0 15px;
-				color: var(--alt-background);
-				font-weight: 400;
-				font-size: 32px;
-				letter-spacing: 0.5rem;
-				margin: 0;
-			}
 		}
 	}
 </style>
