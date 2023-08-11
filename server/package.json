@@ -13,6 +13,7 @@
 	"dependencies": {
 		"@iota/identity-stronghold-nodejs": "^0.6.0",
 		"@tanglelabs/identity-manager": "^0.2.3",
+		"@tanglelabs/oid4vc": "^0.1.7",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "1.4.6",
 		"cors": "^2.8.5",
