@@ -40,9 +40,11 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { CardWithHeader } from "$lib/components/project";
 	import { Input, Button, Qr } from "$lib/components/ui";
 	import { apiClient } from "$lib/utils";
+	import { createWebsocket } from "$lib/utils/ws.util";
 	import { onMount } from "svelte";
 
 	let email: string;
@@ -54,6 +56,14 @@
 	onMount(async () => {
 		const { data } = await apiClient.get("/oid4vc/siop");
 		qr = data.uri;
+
+		const ws = createWebsocket();
+		ws.onmessage = (event) => {
+			const data = JSON.parse(event.data);
+			if (data.login) {
+				goto("/dashboard");
+			}
+		};
 	});
 
 	const onClick = async () => {

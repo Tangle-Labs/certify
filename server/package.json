@@ -18,6 +18,7 @@
 		"@tanglelabs/iota-identity-adapter": "^0.2.1",
 		"@tanglelabs/oid4vc": "^0.1.7",
 		"@tanglelabs/ssimon": "^0.5.0",
+		"@types/ws": "^8.5.5",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "1.4.6",
 		"cors": "^2.8.5",
@@ -35,7 +36,8 @@
 		"sequelize": "^6.25.7",
 		"swagger-jsdoc": "^6.2.5",
 		"swagger-ui-express": "^4.6.0",
-		"ts-transformer-keys": "^0.4.3"
+		"ts-transformer-keys": "^0.4.3",
+		"ws": "^8.13.0"
 	},
 	"devDependencies": {
 		"@tsconfig/node-lts-strictest-esm": "^18.12.1",

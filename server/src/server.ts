@@ -6,6 +6,8 @@ import { Logger, initRestMetrics, initMetricsServer } from "@/utils";
 import { db } from "@/models";
 import { router } from "@/routers";
 import { AppInterceptor, ExpressErrorHandler, corsConfig, userDeserializer } from "@/middleware";
+import http from "http";
+import { initWebSocketManager } from "./services/ws";
 
 const app = express();
 
@@ -20,7 +22,10 @@ app.use("/api", router);
 
 app.use(ExpressErrorHandler);
 
-app.listen(PORT, async () => {
+const server = http.createServer(app);
+export const wsServer = initWebSocketManager(server);
+
+server.listen(PORT, async () => {
 	await db.authenticate();
 	/**
 	 * Do not for fuck's sake set force to true, EVER,

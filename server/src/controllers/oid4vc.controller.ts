@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import type { Request, Response } from "express";
 import { IdentityService, SessionsService, SiopOfferService, UsersService } from "@/services";
 import { PUBLIC_BASE_URI } from "@/config";
+import { wsServer } from "@/server";
 
 export const newSiopRequest = asyncHandler(async (req: Request, res: Response) => {
 	const siopRequest = await IdentityService.rp.createRequest({
@@ -32,5 +33,6 @@ export const verifyAuthResponse = asyncHandler(async (req: Request, res: Respons
 	let user = await UsersService.findOne({ did: iss });
 	if (!user) user = await UsersService.create({ did: iss });
 	await SessionsService.findByIdAndUpdate(state, { isValid: true, did: iss, userId: user.id });
+	wsServer.broadcast(state, { login: true });
 	res.status(204).send();
 });
