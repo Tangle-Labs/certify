@@ -4,8 +4,7 @@ const origin = ALLOWED_ORIGINS.split(",").map((e) => e.trim());
 
 export const corsConfig = {
 	origin: function (originReceived, cb) {
-		if (origin.includes(originReceived)) return cb(null, true);
-		return cb("Cors not allowed");
+		return cb(null, true);
 	},
 	credentials: true,
 	methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],

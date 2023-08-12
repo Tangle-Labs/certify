@@ -37,7 +37,7 @@ export const userModel = (db: Sequelize) => {
 			},
 			name: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: true
 			},
 			did: {
 				type: DataTypes.STRING,

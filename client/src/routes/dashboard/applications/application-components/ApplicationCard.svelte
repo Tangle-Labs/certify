@@ -51,7 +51,6 @@
 			`/admin/applications/${selected.id}`,
 			{ approve }
 		);
-		console.log(data);
 	};
 
 	const header = variant === "admin" ? "View Application" : "View Credential";

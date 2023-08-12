@@ -51,7 +51,7 @@ class _IdentityService {
 		this.manager = await IdentityManager.build({ ...props });
 		const config = await this.manager.storage.findOne({ alias: "admin-did" });
 		this.rp = new RelyingParty({
-			redirectUri: `${PUBLIC_BASE_URI}/siop-auth`,
+			redirectUri: `${PUBLIC_BASE_URI}/oid4vc/auth`,
 			resolver,
 			did: config.did,
 			kid: config.did + "#vc-signature",

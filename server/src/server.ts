@@ -26,7 +26,7 @@ app.listen(PORT, async () => {
 	 * Do not for fuck's sake set force to true, EVER,
 	 * this is the `$ sudo rm -rf /*` equivalent to SQL
 	 */
-	await db.sync({ force: false });
+	await db.sync({ force: false, alter: true });
 	initMetricsServer(METRICS_PORT);
 
 	Logger.info(`📝: Serving docs on http://localhost:${PORT}/api/docs`);
