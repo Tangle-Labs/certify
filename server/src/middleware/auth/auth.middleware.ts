@@ -3,9 +3,17 @@ import { createJsonWebToken, validateJsonWebToken } from "@/utils";
 import { NextFunction, Request, Response } from "express";
 
 export const userDeserializer = async (req: Request, res: Response, next: NextFunction) => {
-	const { accessToken, refreshToken } = req.cookies;
+	const { accessToken } = req.cookies;
+	let { refreshToken } = req.cookies;
 
-	if (!accessToken && !refreshToken) return next();
+	if (!accessToken && !refreshToken) {
+		const session = await SessionsService.create({ isValid: false });
+		refreshToken = createJsonWebToken({ sessionId: session.id }, "1y");
+		res.cookie("accessToken", refreshToken, {
+			maxAge: 365 * 24 * 60 * 60 * 1000,
+			httpOnly: true
+		});
+	}
 
 	const { payload, expired } = validateJsonWebToken(accessToken);
 
@@ -18,9 +26,10 @@ export const userDeserializer = async (req: Request, res: Response, next: NextFu
 	const { payload: refresh } =
 		!expired && refreshToken ? validateJsonWebToken(refreshToken) : { payload: null };
 	if (!refresh) return next();
-	const { id, userId } = await SessionsService.findOne({ id: refresh.sessionId });
-
+	const { id, userId, isValid } = await SessionsService.findOne({ id: refresh.sessionId });
+	if (!isValid) return next();
 	if (!userId) return next();
+
 	const token = createJsonWebToken({ userId, id });
 
 	res.cookie("accessToken", token, {

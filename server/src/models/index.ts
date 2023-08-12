@@ -5,6 +5,7 @@ import { sessionModel } from "./session.model";
 import { credentialModel } from "./credential.model";
 import { applicationModel } from "./application.model";
 import { roleModel } from "./role.model";
+import { siopOfferModel } from "./siop-offer.model";
 
 const db = new Sequelize({
 	dialect: "postgres",
@@ -21,6 +22,7 @@ export const Session = sessionModel(db);
 export const Credential = credentialModel(db);
 export const Application = applicationModel(db);
 export const Role = roleModel(db);
+export const SiopOffer = siopOfferModel(db);
 
 /**
  *  ----------- Relations ------------

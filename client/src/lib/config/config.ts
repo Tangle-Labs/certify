@@ -1,1 +1,3 @@
-export const BASE_URL = `http://127.0.0.1:4269/api/`;
+import { PUBLIC_BASE_URI } from "$env/static/public";
+
+export const BASE_URL = PUBLIC_BASE_URI;
