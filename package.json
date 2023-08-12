@@ -12,9 +12,16 @@
     "prepare": "husky install",
     "dev:server": "yarn workspace server dev",
     "dev:client": "yarn workspace client dev",
-    "storybook": "yarn workspace client storybook"
+    "build:client": "yarn workspace client build",
+    "build:server": "yarn workspace server build",
+    "storybook": "yarn workspace client storybook",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "husky": "^8.0.2"
+  },
+  "dependencies": {
+    "patch-package": "^8.0.0",
+    "postinstall-postinstall": "^2.1.0"
   }
 }

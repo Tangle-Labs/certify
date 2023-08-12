@@ -3,20 +3,25 @@
 	"version": "0.1.0",
 	"main": "index.js",
 	"license": "MIT",
+	"type": "module",
 	"scripts": {
-		"dev": "nodemon ./src/server.ts | pino-pretty",
+		"dev": "tsx watch ./src/server.ts | pino-pretty",
 		"lint": "prettier --plugin-search-dir . --check . && eslint \"src/**/*.{ts,json}\"",
 		"format": "prettier --plugin-search-dir . --write .",
 		"format-check": "prettier -c \"**/*.{ts,js,json}\"",
-		"build": "echo set me up dude"
+		"build": "tsc"
+	},
+	"imports": {
+		"#package": "./package.json"
 	},
 	"dependencies": {
-		"@iota/identity-stronghold-nodejs": "^0.6.0",
-		"@tanglelabs/identity-manager": "^0.2.3",
+		"@tanglelabs/iota-identity-adapter": "^0.2.1",
 		"@tanglelabs/oid4vc": "^0.1.7",
+		"@tanglelabs/ssimon": "^0.5.0",
 		"bcryptjs": "^2.4.3",
 		"cookie-parser": "1.4.6",
 		"cors": "^2.8.5",
+		"did-resolver": "^4.1.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",
 		"express-async-handler": "^1.2.0",
@@ -32,6 +37,7 @@
 		"ts-transformer-keys": "^0.4.3"
 	},
 	"devDependencies": {
+		"@tsconfig/node-lts-strictest-esm": "^18.12.1",
 		"@types/bcryptjs": "^2.4.2",
 		"@types/cookie-parser": "1.4.3",
 		"@types/cors": "^2.8.12",
@@ -49,6 +55,7 @@
 		"pino-pretty": "^9.1.1",
 		"ts-node": "^10.9.1",
 		"tsconfig-paths": "^4.1.0",
+		"tsx": "^3.12.7",
 		"typescript": "^4.9.3"
 	}
 }

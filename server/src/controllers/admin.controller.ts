@@ -1,12 +1,17 @@
-import { ApplicationsService, CredentialsService, IdentityService, UsersService } from "@/services";
+import {
+	ApplicationsService,
+	CredentialsService,
+	IdentityService,
+	UsersService,
+	constructFileStore
+} from "@/services";
 import asyncHandler from "express-async-handler";
-import { Request, Response } from "express";
-import { Types } from "@tanglelabs/identity-manager";
-import { IDENTITY_DB_URI, IDENTITY_PATH } from "@/config";
+import type { Request, Response } from "express";
+import { IDENTITY_PATH, IDENTITY_SECRET } from "@/config";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
 
-const configPath = path.resolve(IDENTITY_PATH, "is-config.json");
+const configPath = path.resolve(IDENTITY_PATH as string, "is-config.json");
 
 const createSettingsJson = async (settings: Record<string, unknown>) => {
 	await writeFile(configPath, JSON.stringify(settings));
@@ -48,7 +53,6 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 		const count = await ApplicationsService.model.count();
 		verifiableCredential = await adminDid.credentials.create({
 			recipientDid: "did:iota:E6uuJ4zh1g76b2MQRpJdPaMG39eqTCruimm168Rwj2hB",
-			fragment: "#signing-method",
 			body: application.body,
 			id: `http://admin.com/credentials/verify/${application.id}`,
 			keyIndex: count,
@@ -57,10 +61,13 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 			type: application.Credential.name
 		});
 	}
-	const updatedApplication = await ApplicationsService.findByIdAndUpdate(req.params.id, {
-		status,
-		vc: verifiableCredential
-	});
+	const updatedApplication = await ApplicationsService.findByIdAndUpdate(
+		req.params["id"] as string,
+		{
+			status,
+			vc: verifiableCredential
+		}
+	);
 	res.status(202).json(updatedApplication);
 });
 
@@ -75,17 +82,15 @@ export const setupOrganization = asyncHandler(async (req: Request, res: Response
 
 			const did = await IdentityService.newDid({
 				alias: "admin-did",
-				store: {
-					type: Types.Mongo,
-
-					options: {
-						mongouri: IDENTITY_DB_URI
-					}
-				}
+				store: constructFileStore({
+					path: path.join(IDENTITY_PATH as string, "account-store"),
+					password: IDENTITY_SECRET as string
+				})
+			}).catch((e) => {
+				console.error(e);
 			});
 
-			await did.attachSigningMethod("#signing-method");
-			await did.attachEncryptionMethod();
+			if (!did) return;
 
 			const user = await UsersService.create({
 				name: orgName,
