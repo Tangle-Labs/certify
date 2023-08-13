@@ -8,7 +8,7 @@ class WebSocketManager {
 	private channels: Map<string, WebSocket>;
 
 	private constructor(server: any) {
-		this.wss = new WebSocketServer({ server });
+		this.wss = new WebSocketServer({ server, path: "/api/ws" });
 		this.channels = new Map<string, WebSocket>();
 
 		this.wss.on("connection", async (ws: WebSocket, req) => {
