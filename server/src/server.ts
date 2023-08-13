@@ -6,6 +6,8 @@ import { Logger, initRestMetrics, initMetricsServer } from "@/utils";
 import { db } from "@/models";
 import { router } from "@/routers";
 import { AppInterceptor, ExpressErrorHandler, corsConfig, userDeserializer } from "@/middleware";
+import http from "http";
+import { initWebSocketManager } from "./services/ws";
 
 const app = express();
 
@@ -20,13 +22,16 @@ app.use("/api", router);
 
 app.use(ExpressErrorHandler);
 
-app.listen(PORT, async () => {
+const server = http.createServer(app);
+export const wsServer = initWebSocketManager(server);
+
+server.listen(PORT, async () => {
 	await db.authenticate();
 	/**
 	 * Do not for fuck's sake set force to true, EVER,
 	 * this is the `$ sudo rm -rf /*` equivalent to SQL
 	 */
-	await db.sync({ force: false });
+	await db.sync({ force: false, alter: true });
 	initMetricsServer(METRICS_PORT);
 
 	Logger.info(`📝: Serving docs on http://localhost:${PORT}/api/docs`);

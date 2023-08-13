@@ -6,4 +6,6 @@ export { default as Avatar } from "./Avatar/Avatar.svelte";
 export { default as ComboInput } from "./ComboInput/ComboInput.svelte";
 export { default as Skeleton } from "./Skeleton/Skeleton.svelte";
 export { default as Switch } from "./Switch/Switch.svelte";
+export { default as Qr } from "./Qr/Qr.svelte";
+export { default as LibLoader } from "./LibLoader/LibLoader.svelte";
 export * from "./Table";

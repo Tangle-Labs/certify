@@ -1,6 +1,8 @@
 import { IDENTITY_PATH } from "@/config";
 import path from "path";
 import fs from "fs/promises";
+import { RelyingParty } from "@tanglelabs/oid4vc";
+import { IdentityService } from "./identity.service";
 
 export interface IOrganizationConfig {
 	owner: string;

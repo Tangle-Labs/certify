@@ -151,6 +151,6 @@
 	</div>
 
 	<div class="application-card">
-		<ApplicationCard {selected} variant="admin" />
+		<ApplicationCard {selected} variant="admin" {loadPage} />
 	</div>
 </div>

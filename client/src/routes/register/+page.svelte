@@ -55,7 +55,6 @@
 						window.location.pathname = "/login";
 					})
 					.catch((e) => {
-						console.log(e);
 						error = e.response.data.error.message;
 					});
 			} else {

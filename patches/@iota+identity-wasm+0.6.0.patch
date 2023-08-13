@@ -1,0 +1,34 @@
+diff --git a/node_modules/@iota/identity-wasm/package.json b/node_modules/@iota/identity-wasm/package.json
+index 88e3ce2..bb5fd41 100644
+--- a/node_modules/@iota/identity-wasm/package.json
++++ b/node_modules/@iota/identity-wasm/package.json
+@@ -47,10 +47,25 @@
+   "publishConfig": {
+     "access": "public"
+   },
+-  "files": [
+-    "web/*",
+-    "node/*"
+-  ],
++  "exports": {
++    "./node": {
++      "require": "./node/identity_wasm.js",
++      "import": {
++        "types": "./node/identity_wasm.d.ts",
++        "default": "./node/identity_wasm.js"
++      },
++      "default": "./node/identity_wasm.js"
++    },
++    "./package.json": "./package.json",
++    "./web": {
++      "require": "./web/identity_wasm.js",
++      "import": {
++        "types": "./web/identity_wasm.d.ts",
++        "default": "./web/identity_wasm.js"
++      },
++      "default": "./web/identity_wasm.js"
++    }
++  },
+   "devDependencies": {
+     "@types/mocha": "^9.1.0",
+     "concurrently": "^7.0.0",

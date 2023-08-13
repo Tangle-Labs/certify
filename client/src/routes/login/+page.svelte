@@ -16,6 +16,11 @@
 				border-radius: 5px;
 			}
 
+			.qr {
+				display: flex;
+				justify-content: center;
+			}
+
 			.text-block,
 			.button-block {
 				padding: 10px 30px;
@@ -35,13 +40,31 @@
 </style>
 
 <script lang="ts">
+	import { goto } from "$app/navigation";
 	import { CardWithHeader } from "$lib/components/project";
-	import { Input, Button } from "$lib/components/ui";
+	import { Input, Button, Qr } from "$lib/components/ui";
 	import { apiClient } from "$lib/utils";
+	import { createWebsocket } from "$lib/utils/ws.util";
+	import { onMount } from "svelte";
 
 	let email: string;
 	let password: string;
 	let error: string | null;
+	let loginWithEmail = false;
+	let qr: string;
+
+	onMount(async () => {
+		const { data } = await apiClient.get("/oid4vc/siop");
+		qr = data.uri;
+
+		const ws = createWebsocket();
+		ws.onmessage = (event) => {
+			const data = JSON.parse(event.data);
+			if (data.login) {
+				goto("/dashboard");
+			}
+		};
+	});
 
 	const onClick = async () => {
 		if (email && password) {
@@ -64,27 +87,47 @@
 			{#if error}
 				<div class="error">{error}</div>
 			{/if}
-			<div class="text-block">
-				<Input
-					label="Email Address"
-					bind:value={email}
-					placeholder="severus@hogwarts.edu"
-					variant="email"
-				/>
-			</div>
-			<div class="text-block">
-				<Input
-					label="Password"
-					bind:value={password}
-					variant="password"
-					placeholder="password"
-				/>
-			</div>
-			<div class="button-block">
-				<Button {onClick} label="Login" size="large" />
+			{#if loginWithEmail}
+				<div class="text-block">
+					<Input
+						label="Email Address"
+						bind:value={email}
+						placeholder="severus@hogwarts.edu"
+						variant="email"
+					/>
+				</div>
+				<div class="text-block">
+					<Input
+						label="Password"
+						bind:value={password}
+						variant="password"
+						placeholder="password"
+					/>
+				</div>
+				<div class="button-block">
+					<Button {onClick} label="Login" size="large" />
 
-				<p>Need an account? <a href="/register">Register</a> instead</p>
-			</div>
+					<p>Need an account? <a href="/register">Register</a> instead</p>
+					<p>
+						<a href="#" on:click={() => (loginWithEmail = false)}
+							>Login with DID</a
+						> instead
+					</p>
+				</div>
+			{:else}
+				{#if qr}
+					<div class="qr">
+						<Qr data={qr} />
+					</div>
+				{/if}
+				<div class="button-block">
+					<p>
+						<a href="#" on:click={() => (loginWithEmail = true)}
+							>Login with Email</a
+						> instead
+					</p>
+				</div>
+			{/if}
 		</CardWithHeader>
 	</div>
 </div>

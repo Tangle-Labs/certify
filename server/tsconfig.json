@@ -3,16 +3,18 @@
 		"require": ["tsconfig-paths/register"]
 	},
 	"compilerOptions": {
-		"rootDir": "./",
-		"module": "CommonJS",
-		"target": "ES2021",
+		"rootDir": "./src",
+		"module": "ESNext",
+		"target": "ESNext",
 		"outDir": "./dist",
+		"moduleResolution": "node",
 		"baseUrl": "src/",
-		"resolveJsonModule": true,
 		"paths": {
 			"@/*": ["./*"]
 		},
+		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
 		"typeRoots": ["./@types/", "./node_modules/@types/"]
 	},
 	"include": ["src/**/*.ts"]

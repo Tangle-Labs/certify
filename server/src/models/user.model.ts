@@ -13,9 +13,10 @@ export class UserModel extends Model<
 	InferCreationAttributes<UserModel>
 > {
 	declare id: CreationOptional<string>;
-	declare password: string;
+	declare password: CreationOptional<string>;
 	declare name: string;
-	declare email: string;
+	declare did: CreationOptional<string>;
+	declare email: CreationOptional<string>;
 	declare isSuperUser: CreationOptional<boolean>;
 	declare isActive: CreationOptional<boolean>;
 
@@ -36,16 +37,20 @@ export const userModel = (db: Sequelize) => {
 			},
 			name: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: true
+			},
+			did: {
+				type: DataTypes.STRING,
+				allowNull: true
 			},
 			email: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 				unique: true
 			},
 			password: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: true
 			},
 			isSuperUser: {
 				type: DataTypes.BOOLEAN,

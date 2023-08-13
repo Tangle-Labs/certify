@@ -37,6 +37,6 @@
 	</div>
 
 	<div class="application-card">
-		<ApplicationCard {selected} variant="admin" />
+		<ApplicationCard {selected} {loadPage} variant="admin" />
 	</div>
 </div>

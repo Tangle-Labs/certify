@@ -55,6 +55,7 @@
 	import type { AxiosError } from "axios";
 	import { apiClient } from "$lib/utils";
 	import Skeleton from "$lib/components/ui/Skeleton/Skeleton.svelte";
+	import { browser } from "$app/environment";
 
 	let selected: DashboardPath;
 
@@ -77,7 +78,9 @@
 			})
 			.catch((e: AxiosError) => {
 				if (e.response && e.response?.status === 401) {
-					goto("/login");
+					if (browser) {
+						goto("/login");
+					}
 				}
 			});
 	};

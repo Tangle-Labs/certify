@@ -1,16 +1,15 @@
 import { databaseResponseTimeHistogram, Logger } from "@/utils";
-import {
+import type {
 	Attributes,
 	Identifier,
 	Includeable,
-	IncludeOptions,
 	InferAttributes,
 	InferCreationAttributes,
 	Model,
 	ModelStatic,
 	WhereOptions
 } from "sequelize";
-import { MakeNullishOptional } from "sequelize/types/utils";
+import type { MakeNullishOptional } from "sequelize/types/utils";
 
 /**
  * Class to generate services UwU
