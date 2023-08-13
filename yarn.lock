@@ -3570,10 +3570,10 @@
     magic-string "^0.26.7"
     svelte-hmr "^0.15.0"
 
-"@tanglelabs/iota-identity-adapter@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@tanglelabs/iota-identity-adapter/-/iota-identity-adapter-0.2.1.tgz#a7dbfa18b4960623f04c0d4496c58d486f56a7f0"
-  integrity sha512-zyBsFFCMSauDWhbCMlZTXvQB8RlU6yXuarZ+q1s2JsnKWEZnf8hwlS1EZzxjqefr6L8pVN+cMpOpO0+Q4F4NGA==
+"@tanglelabs/iota-identity-adapter@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@tanglelabs/iota-identity-adapter/-/iota-identity-adapter-0.2.2.tgz#8c5cba83216fd47aa37ad150b970c6ca85486e9a"
+  integrity sha512-gXnkkeJMOlSRDTlRNWqHOgm5WT3ZI6zOClUFPigoo+RubxPdchAZbggGNIL7UcY8/QGbLKQWqBRVRytGdBuQFA==
   dependencies:
     "@iota/identity-wasm" "^0.6.0"
     "@tanglelabs/ssimon" "^0.5.0"

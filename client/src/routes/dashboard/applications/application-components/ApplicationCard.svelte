@@ -40,13 +40,15 @@
 
 <script lang="ts">
 	import { apiClient, secondsToStr } from "$lib/utils";
-	import { Button } from "$lib/components/ui/";
+	import { Button, Qr } from "$lib/components/ui/";
 	import { CardWithHeader } from "$lib/components/project";
 	import type { IApplication } from "$lib/types";
+	import axios from "axios";
 
 	export let selected: IApplication;
 	export let variant: "user" | "admin";
 	let modified = false;
+	let qr: string;
 
 	const modifyStatus = async (approve: boolean) => {
 		modified = true;
@@ -57,6 +59,19 @@
 		loadPage();
 	};
 
+	async function onApplicationChange(application: IApplication) {
+		if (!application || variant === "admin") return;
+		if (selected.status === "approved") {
+			const { data } = await apiClient.get(
+				"/oid4vc/credentials/" + application.id
+			);
+			const { uri } = data;
+			qr = uri;
+		}
+	}
+
+	$: onApplicationChange(selected);
+
 	export let loadPage: () => Promise<void>;
 	const header = variant === "admin" ? "View Application" : "View Credential";
 </script>
@@ -64,6 +79,9 @@
 <CardWithHeader {header}>
 	<div class="card-body">
 		{#if selected}
+			{#if qr}
+				<Qr data={qr} />
+			{/if}
 			{#if variant === "admin"}
 				<div class="info-block">
 					<div class="header">User's Name</div>

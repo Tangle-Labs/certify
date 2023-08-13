@@ -57,7 +57,7 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 			// @ts-ignore
 			recipientDid: application.User.did,
 			body: application.body,
-			id: `http://admin.com/credentials/verify/${application.id}`,
+			id: `http://certify.tanglelabs.io/credentials/verify/${application.id}`,
 			keyIndex: count,
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore

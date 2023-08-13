@@ -15,7 +15,7 @@
 		"#package": "./package.json"
 	},
 	"dependencies": {
-		"@tanglelabs/iota-identity-adapter": "^0.2.1",
+		"@tanglelabs/iota-identity-adapter": "^0.2.2",
 		"@tanglelabs/oid4vc": "^0.1.7",
 		"@tanglelabs/ssimon": "^0.5.0",
 		"@types/ws": "^8.5.5",

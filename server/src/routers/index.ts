@@ -10,6 +10,7 @@ import organizationRouter from "./organization.routers";
 import staffRouter from "./staff.routers";
 import rootRouter from "./root.router";
 import oid4vcRouter from "./oid4vc.router";
+import { sendMetadata } from "@/controllers";
 
 const router = Router();
 
@@ -24,5 +25,6 @@ router.use("/oid4vc", oid4vcRouter);
 router.use("/roles", rolesRouter);
 router.use("/docs", swaggerUi.serve);
 router.use("/docs", swaggerUi.setup(swaggerSpecification));
+router.route("/.well-known/openid-credential-issuer").get(sendMetadata);
 
 export { router };
