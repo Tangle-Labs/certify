@@ -15,7 +15,13 @@ import {
 import { IotaAccount, IotaAdapter } from "@tanglelabs/iota-identity-adapter";
 import { readFile, writeFile } from "fs/promises";
 import path from "path";
-import { RelyingParty, SigningAlgs } from "@tanglelabs/oid4vc";
+import {
+	IssuerStoreData,
+	RelyingParty,
+	SigningAlgs,
+	SimpleStore,
+	VcIssuer
+} from "@tanglelabs/oid4vc";
 import { resolver } from "@/utils";
 
 export const constructFileStore = ({ path, password }: { path: string; password: string }) => {
@@ -39,9 +45,27 @@ export const constructFileStore = ({ path, password }: { path: string; password:
 	return store;
 };
 
+function constructSimpleStore() {
+	const reader = async () => {
+		const raw = await readFile(path.join(IDENTITY_PATH, "./simple-store"));
+		try {
+			return JSON.parse(raw.toString());
+		} catch {
+			return [];
+		}
+	};
+
+	const writer = async (data: IssuerStoreData[]) => {
+		await writeFile(path.join(IDENTITY_PATH, "./simple-store"), JSON.stringify(data));
+	};
+
+	return { reader, writer };
+}
+
 class _IdentityService {
 	manager: IdentityManager<IotaAccount<any>>;
 	rp: RelyingParty;
+	issuer: VcIssuer;
 
 	constructor(props: IdentityManagerOptions<any>) {
 		this.build(props);
@@ -63,6 +87,23 @@ class _IdentityService {
 				clientName: "Certify",
 				logoUri: `${PUBLIC_CLIENT_URI}/imgs/certify-logo.png`
 			}
+		});
+		const { reader, writer } = constructSimpleStore();
+		this.issuer = new VcIssuer({
+			batchCredentialEndpoint: new URL("/api/oid4vc/credentials", PUBLIC_BASE_URI).toString(),
+			clientName: "Certify",
+			credentialEndpoint: new URL("/api/oid4vc/credential", PUBLIC_BASE_URI).toString(),
+			cryptographicBindingMethodsSupported: ["did:iota"],
+			cryptographicSuitesSupported: ["EdDSA"],
+			did: config.did,
+			privKeyHex: config.seed,
+			kid: config.did + "#vc-signature",
+			resolver,
+			tokenEndpoint: new URL("/api/oid4vc/token", PUBLIC_BASE_URI).toString(),
+			logoUri: new URL("/imgs/certify-logo.png", PUBLIC_CLIENT_URI).toString(),
+			credentialIssuer: new URL("/api", PUBLIC_BASE_URI).toString(),
+			proofTypesSupported: ["jwt"],
+			store: new SimpleStore({ reader, writer })
 		});
 	}
 
