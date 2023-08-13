@@ -48,11 +48,14 @@ export const modifyApplicationStatus = asyncHandler(async (req: Request, res: Re
 	if (req.body.approve) {
 		const adminDid = await IdentityService.getAdminDid();
 		const application = await ApplicationsService.findById(req.params.id, [
-			CredentialsService.model
+			CredentialsService.model,
+			UsersService.model
 		]);
 		const count = await ApplicationsService.model.count();
 		verifiableCredential = await adminDid.credentials.create({
-			recipientDid: "did:iota:E6uuJ4zh1g76b2MQRpJdPaMG39eqTCruimm168Rwj2hB",
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			recipientDid: application.User.did,
 			body: application.body,
 			id: `http://admin.com/credentials/verify/${application.id}`,
 			keyIndex: count,

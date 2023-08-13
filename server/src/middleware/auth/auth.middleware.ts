@@ -19,7 +19,6 @@ export const userDeserializer = async (req: Request, res: Response, next: NextFu
 	const { payload, expired } = validateJsonWebToken(accessToken);
 
 	if (payload) {
-		console.log(payload);
 		req.session = await SessionsService.findById(payload.id);
 		req.user = await UsersService.findById(payload.userId, [RolesService.model]);
 		return next();
