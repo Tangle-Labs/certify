@@ -24,6 +24,7 @@
 		Button
 	} from "$lib/components/ui/";
 	import type { IApplication } from "$lib/types";
+	import { user } from "$lib/stores";
 
 	export let applications: IApplication[];
 	export let selected: IApplication;
@@ -33,7 +34,9 @@
 <Table>
 	<TableRow isHeader={true}>
 		<TableHeader>Credential Name</TableHeader>
-		<TableHeader>User's Name</TableHeader>
+		{#if $user.isSuperUser}
+			<TableHeader>User's Name</TableHeader>
+		{/if}
 		<TableHeader>Created At</TableHeader>
 		<TableHeader>Credential</TableHeader>
 		<TableHeader>Status</TableHeader>
@@ -42,7 +45,9 @@
 	{#await load}
 		<TableRow>
 			<TableData><Skeleton /></TableData>
-			<TableData><Skeleton /></TableData>
+			{#if $user.isSuperUser}
+				<TableData><Skeleton /></TableData>
+			{/if}
 			<TableData><Skeleton /></TableData>
 			<TableData><Skeleton /></TableData>
 			<TableData><Skeleton /></TableData>
@@ -51,23 +56,21 @@
 		{#each applications as application, i (application.id)}
 			<TableRow {i}>
 				<TableData onClick={() => (selected = application)}
-					>{application.Credential?.name}</TableData
-				>
+					>{application.Credential?.name}</TableData>
+
+				{#if $user.isSuperUser}
+					<TableData onClick={() => (selected = application)}
+						>{application.User?.name}</TableData>
+				{/if}
 				<TableData onClick={() => (selected = application)}
-					>{application.User?.name}</TableData
-				>
+					>{new Date(application.createdAt).toDateString()}</TableData>
 				<TableData onClick={() => (selected = application)}
-					>{new Date(application.createdAt).toDateString()}</TableData
-				>
-				<TableData onClick={() => (selected = application)}
-					>{application.Credential?.type}</TableData
-				>
+					>{application.Credential?.type}</TableData>
 				<TableData onClick={() => (selected = application)}>
 					<div
 						class="status"
 						class:approved={application.status === "approved"}
-						class:rejected={application.status === "rejected"}
-					>
+						class:rejected={application.status === "rejected"}>
 						{application.status.toUpperCase()}
 					</div>
 				</TableData>

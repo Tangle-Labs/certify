@@ -59,23 +59,30 @@
 
 <script lang="ts">
 	import { apiClient } from "$lib/utils";
-	import type { IApplication } from "$lib/types";
+	import type { IApplication, IUserStats } from "$lib/types";
 	import ApplicationTable from "./applications/application-components/ApplicationTable.svelte";
 	import ApplicationCard from "./applications/application-components/ApplicationCard.svelte";
 	import { Card, Skeleton } from "$lib/components/ui";
 	import type { IAdminStats } from "$lib/types";
+	import { user } from "$lib/stores";
 
 	let applications: IApplication[];
 	let adminStats: IAdminStats;
+	let userStats: IUserStats;
 	let selected: IApplication;
 
 	async function loadPage() {
 		const { data: applicationsData } = await apiClient.get(
-			"/admin/applications"
+			$user.isSuperUser ? "/admin/applications" : "/applications"
 		);
 		applications = applicationsData;
-		const { data: adminStatsData } = await apiClient.get("/admin/stats");
-		adminStats = adminStatsData;
+		if ($user.isSuperUser) {
+			const { data: adminStatsData } = await apiClient.get("/admin/stats");
+			adminStats = adminStatsData;
+		} else {
+			const { data: userStatsData } = await apiClient.get("/stats");
+			userStats = userStatsData;
+		}
 	}
 
 	const load = loadPage();
@@ -96,8 +103,12 @@
 									<Skeleton width={150} />
 								</div>
 							{:then}
-								<h1 class="count">{adminStats.users}</h1>
-								<div class="info">Unique Users</div>
+								<h1 class="count">
+									{$user.isSuperUser ? adminStats.users : userStats.pending}
+								</h1>
+								<div class="info">
+									{$user.isSuperUser ? "Unique Users" : "Pending"}
+								</div>
 							{/await}
 						</div>
 					</div>
@@ -116,8 +127,14 @@
 									<Skeleton width={150} />
 								</div>
 							{:then}
-								<h1 class="count">{adminStats.credentials}</h1>
-								<div class="info">Credentials</div>
+								<h1 class="count">
+									{$user.isSuperUser
+										? adminStats.credentials
+										: userStats.approved}
+								</h1>
+								<div class="info">
+									{$user.isSuperUser ? "Credentials" : "Approved"}
+								</div>
 							{/await}
 						</div>
 					</div>
@@ -136,8 +153,14 @@
 									<Skeleton width={150} />
 								</div>
 							{:then}
-								<h1 class="count">{adminStats.applications}</h1>
-								<div class="info">Applications</div>
+								<h1 class="count">
+									{$user.isSuperUser
+										? adminStats.applications
+										: userStats.rejected}
+								</h1>
+								<div class="info">
+									{$user.isSuperUser ? "Applications" : "Rejected"}
+								</div>
 							{/await}
 						</div>
 					</div>
@@ -151,6 +174,9 @@
 	</div>
 
 	<div class="application-card">
-		<ApplicationCard {selected} variant="admin" {loadPage} />
+		<ApplicationCard
+			{selected}
+			variant={$user.isSuperUser ? "admin" : "user"}
+			{loadPage} />
 	</div>
 </div>

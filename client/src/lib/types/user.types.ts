@@ -1,5 +1,11 @@
 import type { IRole } from "./role.types";
 
+export interface IUserStats {
+	approved: number;
+	pending: number;
+	rejected: number;
+}
+
 export interface IUser {
 	id: string;
 	did?: string;
