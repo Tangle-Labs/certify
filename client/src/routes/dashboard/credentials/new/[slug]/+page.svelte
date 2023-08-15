@@ -46,7 +46,7 @@
 	const loadCredential = getCredential();
 </script>
 
-<Card>
+<Card sideCard>
 	<div class="card-content">
 		{#await loadCredential}
 			<Skeleton />
@@ -57,8 +57,7 @@
 					<Input
 						label={field.fieldName}
 						placeholder={`Enter ${field.fieldName}`}
-						bind:value={credential.customFields[i].value}
-					/>
+						bind:value={credential.customFields[i].value} />
 				</div>
 			{/each}
 
@@ -66,8 +65,7 @@
 				<Button
 					size="large"
 					label="Submit Application"
-					onClick={handleSubmit}
-				/>
+					onClick={handleSubmit} />
 			</div>
 		{/await}
 	</div>

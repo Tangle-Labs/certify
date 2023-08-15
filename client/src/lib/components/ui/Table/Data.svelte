@@ -1,6 +1,8 @@
 <style lang="scss">
 	td {
 		padding: 15px 20px;
+		display: block;
+		width: 100%;
 
 		&:hover {
 			cursor: pointer;

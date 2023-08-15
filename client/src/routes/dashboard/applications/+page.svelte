@@ -33,7 +33,7 @@
 
 <div class="page-body">
 	<div class="card-container">
-		<ApplicationTable {applications} bind:selected {load} />
+		<ApplicationTable pageTable {applications} bind:selected {load} />
 	</div>
 
 	<div class="application-card">

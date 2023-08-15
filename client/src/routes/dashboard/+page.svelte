@@ -170,7 +170,7 @@
 		<Card noBorder={true}>
 			<h1>Applications</h1>
 		</Card>
-		<ApplicationTable {applications} bind:selected {load} />
+		<ApplicationTable dashboardTable {applications} bind:selected {load} />
 	</div>
 
 	<div class="application-card">
