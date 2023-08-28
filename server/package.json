@@ -16,7 +16,7 @@
 	},
 	"dependencies": {
 		"@tanglelabs/iota-identity-adapter": "^0.2.2",
-		"@tanglelabs/oid4vc": "^0.1.7",
+		"@tanglelabs/oid4vc": "^0.1.9-unstable.1",
 		"@tanglelabs/ssimon": "^0.5.0",
 		"@types/ws": "^8.5.5",
 		"bcryptjs": "^2.4.3",
