@@ -65,6 +65,8 @@
 	import { Card, Skeleton } from "$lib/components/ui";
 	import type { IAdminStats } from "$lib/types";
 	import { user } from "$lib/stores";
+	import UserDashboard from "./variants/UserDashboard.svelte";
+	import AdminDashboard from "./variants/AdminDashboard.svelte";
 
 	let applications: IApplication[];
 	let adminStats: IAdminStats;
@@ -88,95 +90,8 @@
 	const load = loadPage();
 </script>
 
-<div class="page-body">
-	<div class="card-container">
-		<div class="cards">
-			<div class="dash-card">
-				<Card>
-					<div class="dash-card-body">
-						<div class="content">
-							{#await load}
-								<div class="count">
-									<Skeleton height={20} width={50} />
-								</div>
-								<div class="info">
-									<Skeleton width={150} />
-								</div>
-							{:then}
-								<h1 class="count">
-									{$user.isSuperUser ? adminStats.users : userStats.pending}
-								</h1>
-								<div class="info">
-									{$user.isSuperUser ? "Unique Users" : "Pending"}
-								</div>
-							{/await}
-						</div>
-					</div>
-				</Card>
-			</div>
-
-			<div class="dash-card">
-				<Card>
-					<div class="dash-card-body">
-						<div class="content">
-							{#await load}
-								<div class="count">
-									<Skeleton height={20} width={50} />
-								</div>
-								<div class="info">
-									<Skeleton width={150} />
-								</div>
-							{:then}
-								<h1 class="count">
-									{$user.isSuperUser
-										? adminStats.credentials
-										: userStats.approved}
-								</h1>
-								<div class="info">
-									{$user.isSuperUser ? "Credentials" : "Approved"}
-								</div>
-							{/await}
-						</div>
-					</div>
-				</Card>
-			</div>
-
-			<div class="dash-card">
-				<Card>
-					<div class="dash-card-body">
-						<div class="content">
-							{#await load}
-								<div class="count">
-									<Skeleton height={20} width={50} />
-								</div>
-								<div class="info">
-									<Skeleton width={150} />
-								</div>
-							{:then}
-								<h1 class="count">
-									{$user.isSuperUser
-										? adminStats.applications
-										: userStats.rejected}
-								</h1>
-								<div class="info">
-									{$user.isSuperUser ? "Applications" : "Rejected"}
-								</div>
-							{/await}
-						</div>
-					</div>
-				</Card>
-			</div>
-		</div>
-		<Card noBorder={true}>
-			<h1>Applications</h1>
-		</Card>
-		<ApplicationTable dashboardTable {applications} bind:selected {load} />
-	</div>
-
-	<div class="application-card">
-		<ApplicationCard
-			{selected}
-			variant={$user.isSuperUser ? "admin" : "user"}
-			{loadPage} />
-	</div>
-</div>
+{#if $user.isSuperUser}
+	<AdminDashboard />
+{:else}
+	<UserDashboard />
+{/if}

@@ -59,6 +59,8 @@
 		loadPage();
 	};
 
+	$: ((app) => (modified = false))(selected);
+
 	async function onApplicationChange(application: IApplication) {
 		if (!application || variant === "admin") return;
 		if (selected.status === "approved") {
