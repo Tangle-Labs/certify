@@ -13,6 +13,12 @@
 				width: 100%;
 				height: calc(100vh - 220px);
 				border-radius: 5px;
+				overflow: scroll;
+				scrollbar-width: none;
+
+				&::-webkit-scrollbar {
+					display: none;
+				}
 			}
 
 			.bread-crumb {

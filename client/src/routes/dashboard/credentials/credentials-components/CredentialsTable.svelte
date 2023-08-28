@@ -31,7 +31,7 @@
 	export let load: Promise<any>;
 </script>
 
-<Table>
+<Table pageTable>
 	<TableRow isHeader={true}>
 		{#if variant === "admin"}
 			<TableHeader>Credential Name</TableHeader>
@@ -66,37 +66,29 @@
 			{#each credentials as credential, i (credential.id)}
 				<TableRow {i}>
 					<TableData onClick={() => (selectedCred = credential)}
-						>{credential.name}</TableData
-					>
+						>{credential.name}</TableData>
 					<TableData onClick={() => (selectedCred = credential)}
-						>{credential.referenceCode}</TableData
-					>
+						>{credential.referenceCode}</TableData>
 					<TableData onClick={() => (selectedCred = credential)}
-						>{credential.type}</TableData
-					>
+						>{credential.type}</TableData>
 					<TableData onClick={() => (selectedCred = credential)}
-						>{new Date(credential.createdAt).toDateString()}</TableData
-					>
+						>{new Date(credential.createdAt).toDateString()}</TableData>
 				</TableRow>
 			{/each}
 		{:else}
 			{#each applications as application, i (application.id)}
 				<TableRow {i}>
 					<TableData onClick={() => (selectedApplication = application)}
-						>{application.Credential.name}</TableData
-					>
+						>{application.Credential.name}</TableData>
 					<TableData onClick={() => (selectedApplication = application)}
-						>{application.Credential.type}</TableData
-					>
+						>{application.Credential.type}</TableData>
 					<TableData onClick={() => (selectedApplication = application)}
-						>{new Date(application.createdAt).toDateString()}</TableData
-					>
+						>{new Date(application.createdAt).toDateString()}</TableData>
 					<TableData onClick={() => (selectedApplication = application)}>
 						<div
 							class="status"
 							class:approved={application.status === "approved"}
-							class:rejected={application.status === "rejected"}
-						>
+							class:rejected={application.status === "rejected"}>
 							{application.status.toUpperCase()}
 						</div>
 					</TableData>

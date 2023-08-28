@@ -5,6 +5,8 @@
 		text-align: left;
 		font-size: 1.15rem;
 		font-weight: 600;
+		display: block;
+		width: 100%;
 	}
 </style>
 

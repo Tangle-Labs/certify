@@ -25,7 +25,7 @@
 	export let load: Promise<any>;
 </script>
 
-<Table>
+<Table pageTable>
 	<TableRow isHeader={true}>
 		<TableHeader>User Name</TableHeader>
 		<TableHeader>User Email</TableHeader>
@@ -58,8 +58,7 @@
 				<TableData onClick={() => setSelected(user)}>{user.name}</TableData>
 				<TableData onClick={() => setSelected(user)}>{user.email}</TableData>
 				<TableData onClick={() => setSelected(user)}
-					>{user.Role?.name ?? "None"}</TableData
-				>
+					>{user.Role?.name ?? "None"}</TableData>
 				<TableData onClick={() => setSelected(user)}>
 					<div class:active={user.isActive} class:inactive={!user.isActive}>
 						{user.isActive ? "ACTIVE" : "REMOVED"}

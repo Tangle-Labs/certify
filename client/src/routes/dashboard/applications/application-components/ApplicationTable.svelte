@@ -29,9 +29,11 @@
 	export let applications: IApplication[];
 	export let selected: IApplication;
 	export let load: Promise<any>;
+	export let dashboardTable = false;
+	export let pageTable = false;
 </script>
 
-<Table>
+<Table {dashboardTable} {pageTable}>
 	<TableRow isHeader={true}>
 		<TableHeader>Credential Name</TableHeader>
 		{#if $user.isSuperUser}

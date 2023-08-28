@@ -3582,10 +3582,10 @@
     patch-package "^8.0.0"
     postinstall-postinstall "^2.1.0"
 
-"@tanglelabs/oid4vc@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@tanglelabs/oid4vc/-/oid4vc-0.1.7.tgz#b89b456d9dcbe379ad3b1ffba5a6f2befb890a41"
-  integrity sha512-njTZ3+Hy9+/FvGHlz2iGdIBzfq2jOWlpXnEEKsMQtX3ms8A4x0ygfZ959keAIWm7If8/N4yF5Tcp4NRYzKWxAw==
+"@tanglelabs/oid4vc@^0.1.9-unstable.1":
+  version "0.1.9-unstable.1"
+  resolved "https://registry.yarnpkg.com/@tanglelabs/oid4vc/-/oid4vc-0.1.9-unstable.1.tgz#fadc9cc495b70e21afa219d16630194f680402f8"
+  integrity sha512-tpEfqcmhLECbZ+vPr0SzYodt3heVGrTLVyIuDuqh7gLpGXpKKLWpio5KnSnSzoyMiFliVzfrIQ5ZkXCuKIAyPg==
   dependencies:
     "@sphereon/pex" "^2.1.0"
     "@sphereon/pex-models" "^2.0.3"

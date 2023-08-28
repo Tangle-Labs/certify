@@ -46,17 +46,18 @@
 			bind:selectedApplication
 			{applications}
 			{load}
-			variant="user"
-		/>
+			variant="user" />
 	</div>
 	<div class="sidebar">
 		<div class="new-cred">
 			<Button
 				label="Apply for Credential"
 				onClick={() => goto("/dashboard/credentials/new")}
-				size="large"
-			/>
+				size="large" />
 		</div>
-		<ApplicationCard bind:selected={selectedApplication} variant="user" />
+		<ApplicationCard
+			loadPage={() => Promise.resolve()}
+			bind:selected={selectedApplication}
+			variant="user" />
 	</div>
 </div>

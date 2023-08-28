@@ -3,6 +3,8 @@
 		transition: 0.5s all;
 		background: var(--body-background);
 		user-select: none;
+		width: 100%;
+		display: flex;
 
 		&:hover {
 			background: var(--table-header-hover);

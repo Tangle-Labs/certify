@@ -12,7 +12,7 @@
 	export let header: string;
 </script>
 
-<Card>
+<Card sideCard withHeader>
 	<div class="header" slot="header">
 		<h1>{header}</h1>
 	</div>
